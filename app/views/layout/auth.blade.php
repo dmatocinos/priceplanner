@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dixie Philamerah Atay">
 
-    <title>Product Name</title>
+    <title>Price Planner Pro</title>
 
     <!-- Custom CSS for the 'Full' Template -->
     {{ Asset::container('header')->styles() }}
@@ -18,11 +18,11 @@
 
     <div class="container">
       <div class="row">
-		<div class="col-lg-7 col-sm-7 blob">
+		<div class="col-md-7 col-sm-7 blob">
 			<h1>The Next Big Thing in the Cloud</h1>
 		</div>
 
-		<div class="col-lg-5 pull-right">
+		<div class="col-md-4 pull-right">
 			<div class="main well">
 				@yield('content')
 			</div>
