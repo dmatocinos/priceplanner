@@ -55,6 +55,9 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
+                        <a href="index.html"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+                    </li>
+                    <li>
                         <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                 </ul>
@@ -64,25 +67,10 @@
         </nav>
         <!-- /.navbar-static-side -->
 
-	<nav id="app-nav" class="navbar navbar-default" role="navigation">
-	  <!-- Collect the nav links, forms, and other content for toggling -->
-	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Link</a></li>
-	      <li><a href="#">Link</a></li>
-	    </ul>
-	  </div><!-- /.navbar-collapse -->
-	</nav>
-
-
         <div id="page-wrapper">
-
-
-
-
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
+			@yield('content')
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

@@ -452,6 +452,7 @@ class AuthController extends BaseController {
 					'password' 	=> PracticeProUser::APP_PASSWORD,
 					'first_name'	=> $practicepro_user[0]->mh2_fname,
 					'last_name'	=> $practicepro_user[0]->mh2_lname,
+					'practicepro_user_id'	=> $practicepro_user[0]->mh2_id,
 				));
 				$user->attemptActivation($user->getActivationCode());
 				$user->save();

@@ -10,6 +10,7 @@ class BaseController extends Controller {
 	protected $messageBag = null;
 
 	protected $layout = 'layout.base';
+	protected $user = NULL;
 
 	/**
 	 * Initializer.
@@ -22,6 +23,7 @@ class BaseController extends Controller {
 		$this->view = App::make('view');
 		$this->request = App::make('request');
 		$this->validator = App::make('validator');
+		$this->user = Sentry::getUser();
 
 		// @todo: move this to config, start or global
 		$this->beforeFilter('csrf', array('on' => 'post'));

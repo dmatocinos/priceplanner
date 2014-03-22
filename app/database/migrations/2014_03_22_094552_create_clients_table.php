@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration {
 			$table->string('first_name');
 			$table->string('middle_name')->nullable();
 			$table->string('last_name');
+			$table->string('business_name');
 			$table->string('address');
 			$table->date('period_start_date');
 			$table->date('period_end_date');

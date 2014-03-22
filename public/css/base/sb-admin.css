@@ -18,7 +18,6 @@
     padding: 0 15px;
     background-color: #fff;
     overflow: hidden;
-    margin-top: -60px;
 }
 
 @media(min-width:768px) {
@@ -28,7 +27,6 @@
         padding: 0 30px;
         min-height: 885px;
         border-left: 1px solid #e7e7e7;
-        margin-top: -60px;
     }
 }
 
