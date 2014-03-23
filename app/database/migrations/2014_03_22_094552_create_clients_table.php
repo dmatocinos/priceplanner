@@ -22,8 +22,6 @@ class CreateClientsTable extends Migration {
 			$table->date('period_end_date');
 			$table->integer('user_id')->unsigned()->index();
 			$table->integer('accountant_id')->unsigned()->index();
-			$table->integer('business_type_id')->unsigned()->index();
-			$table->foreign('business_type_id')->references('id')->on('business_types')->onDelete('cascade');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->foreign('accountant_id')->references('id')->on('accountants')->onDelete('cascade');
 			$table->timestamps();

@@ -18,7 +18,22 @@ Setup
 @stop
 
 @section('content')
-	{{ Form::open(array('url' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
+@if ($errors->any())
+<div class="row">
+	<div class="alert alert-danger alert-block">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>Error</h4>
+		{{ Session::get('message') }}
+	</div>
+</div>
+@endif
+	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
+		@if ($edit)
+			{{  Form::hidden('client[id]', $client['id']) }}
+			{{  Form::hidden('client[user_id]', $user_id) }}
+			{{  Form::hidden('client[accountant_id]', $client['accountant_id']) }}
+			{{  Form::hidden('accountant[id]', $accountant['id']) }}
+		@endif	
 	<div class="well">
 		<fieldset>
 		  <legend>Client Information</legend>
@@ -62,7 +77,7 @@ Setup
 			<span class="col-sm-3">
 				{{ 
 					Form::text('client[period_start_date]', isset($client['period_start_date']) ? $client['period_start_date'] : '', array(
-						'class' => 'form-control', 
+						'class' => 'form-control period', 
 						'required' => 'required',
 						'placeholder' => 'Period Start'
 					)) 
@@ -74,7 +89,7 @@ Setup
 			<span class="col-sm-3">
 				{{ 
 					Form::text('client[period_end_date]', isset($client['period_end_date']) ? $client['period_end_date'] : '', array(
-						'class' => 'form-control', 
+						'class' => 'form-control period', 
 						'required' => 'required',
 						'placeholder' => 'Period End'
 					)) 
@@ -125,8 +140,8 @@ Setup
 	</div>
 	<div class="col-lg-12 pull-right well">
 		<div class="pull-right">
-			<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page" disabled="disabled">Save & Next </button>
-			<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page" disabled="disabled">Save </button>
+			<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
+			<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>
 		</div>
 	</div>
 	{{ Form::close() }}

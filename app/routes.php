@@ -51,10 +51,11 @@ Route::get('install/{key?}',  array('as' => 'install', function($key = null)
 
 Route::get('/', 'AuthController@getSignin');
 
-Route::group(array('before' => 'auth'), function(){
+Route::group(array('before' => 'auth'), function() {
 	Route::get("home", "HomeController@index");
-	Route::get("setup", "SetupController@index");
-	Route::put("setup", "SetupController@create");
+	Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
+	Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
+	Route::put("setup/edit/{client_id}", array('as' => 'setup.update', 'uses' => 'SetupController@edit'));
 });
 
 /*
