@@ -70,6 +70,27 @@
 	@yield('app_nav')
 
         <div id="page-wrapper">
+		@if (Session::get('message'))
+		<div class="row">
+                	<div class="col-lg-12">
+				<div class="alert alert-info alert-block">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<b>{{ Session::get('message') }}</b>
+				</div>
+			</div>
+		</div>
+		@endif
+		@if ($errors->any())
+		<div class="row">
+                	<div class="col-lg-12">
+				<div class="alert alert-danger alert-block">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<h4>Error</h4>
+					<b>{{ Session::get('message') }}</b>
+				</div>
+			</div>
+		</div>
+		@endif
             <div class="row">
                 <div class="col-lg-12">
 			@yield('content')

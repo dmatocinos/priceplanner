@@ -41,7 +41,6 @@ class Client extends \Eloquent {
 			"
 				SELECT *
 				FROM clients c
-				JOIN business_types bt ON c.business_type_id = bt.id
 				WHERE c.user_id = :user_id
 			", 
 			array('user_id' => $user_id)

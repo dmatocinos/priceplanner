@@ -22,13 +22,14 @@ class SetupController extends BaseController {
 		Asset::container('footer')->add('pages-index-js', 'js/pages/index.js');
 
 		$client = Client::find($client_id);
+
 		$form_data = [
-				'client' => $client->getAttributes()->toArray(),
-				'accountant' => $client->accountant()->toArray(),
+				'client' => $client->getAttributes(),
+				'accountant' => $client->accountant->toArray(),
 				'edit'	=> TRUE,
 				'route' => 'setup.update'
 		];
-		
+
 		$this->layout->content = View::make("pages.setup", $form_data);
 	}
 
@@ -43,46 +44,54 @@ class SetupController extends BaseController {
 			$accountant = $accountant->create($a_input);
 		}
 		else {
-
 			return Redirect::route('setup.create')
 				->withInput()
 				->withErrors($a_validation)
-				->with('message', 'There were validation errors.' . $c_validation->errors());
-
+				->with('message', 'There were validation errors.');
 		}
 		
 		$c_input = $input['client'];
 		$c_input['accountant_id'] = $accountant->id;
 		$c_input['user_id'] = $this->user->id;
+		$c_input['period_start_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_start_date']));
+		$c_input['period_end_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_end_date']));
 
 		$c_validation = Validator::make($c_input, Client::$rules);
 		if ($c_validation->passes()) {
 			$client = new Client;
-			$client->create($c_input);
+			$client = $client->create($c_input);
+		}
+		else {
+			return Redirect::route('setup.create')
+				->withInput()
+				->withErrors($c_validation)
+				->with('message', 'There were validation errors.');
 		}
 
-		return Redirect::route('setup.create')
+		$route = isset($input['save_next_page']) ? 'setup/edit/' : 'fee_planner/';
+
+		return Redirect::to($route . $client->id)
 			->withInput()
-			->withErrors($c_validation)
-			->with('message', 'There were validation errors.' . $c_validation->errors());
+			->with('message', 'You have successfully started setting up.');
+
 		
 	}
 
 	public function update()
 	{
 		$input = Input::all();
-		$client = $input['client']['id'];
 
+		$client = $input['client']['id'];
 		$a_input = $input['accountant'];
-		
+
 		$a_validation = Validator::make($a_input, Accountant::$rules);
 		if ($a_validation->passes()) {
-			$accountant = new Accountant;
-			$accountant->create($a_input);
+			$accountant = Accountant::find($a_input['id']);
+			$accountant->update($a_input);
 		}
 		else {
 
-			return Redirect::route('setup.update')
+			return Redirect::to('setup/edit/' . $client->id)
 				->withInput()
 				->withErrors($a_validation)
 				->with('message', 'There were validation errors.' . $a_validation->errors());
@@ -92,17 +101,26 @@ class SetupController extends BaseController {
 		$c_input = $input['client'];
 		$c_input['accountant_id'] = $accountant->id;
 		$c_input['user_id'] = $this->user->id;
+		$c_input['period_start_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_start_date']));
+		$c_input['period_end_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_end_date']));
 
 		$c_validation = Validator::make($c_input, Client::$rules);
 		if ($c_validation->passes()) {
-			$client = new Client;
-			$client->create($c_input);
+			$client = Client::find($c_input['id']);
+			$client->update($c_input);
 		}
+		else {
+			return Redirect::to('setup/edit/' . $client->id)
+				->withInput()
+				->withErrors($c_validation)
+				->with('message', 'There were validation errors.');
+		}
+		
+		$route = isset($input['save_next_page']) ? 'setup/edit/' : 'fee_planner/';
 
-		return Redirect::route('setup.update')
+		return Redirect::to($route . $client->id)
 			->withInput()
-			->withErrors($c_validation)
-			->with('message', 'There were validation errors.' . $a_validation->errors());
+			->with('message', 'You have successfully updated your setup.');
 	}
 
 }

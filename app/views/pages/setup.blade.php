@@ -12,25 +12,18 @@ Setup
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
+	      @if ($edit)
+	      <li class=""><a href="{{ url('fee_planner') }}">Fee Planner</a></li>
+	      @endif	
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
 @stop
 
 @section('content')
-@if ($errors->any())
-<div class="row">
-	<div class="alert alert-danger alert-block">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<h4>Error</h4>
-		{{ Session::get('message') }}
-	</div>
-</div>
-@endif
 	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
 		@if ($edit)
 			{{  Form::hidden('client[id]', $client['id']) }}
-			{{  Form::hidden('client[user_id]', $user_id) }}
 			{{  Form::hidden('client[accountant_id]', $client['accountant_id']) }}
 			{{  Form::hidden('accountant[id]', $accountant['id']) }}
 		@endif	
@@ -77,7 +70,8 @@ Setup
 			<span class="col-sm-3">
 				{{ 
 					Form::text('client[period_start_date]', isset($client['period_start_date']) ? $client['period_start_date'] : '', array(
-						'class' => 'form-control period', 
+						'class' => 'form-control', 
+						'id' => 'period_start_date',
 						'required' => 'required',
 						'placeholder' => 'Period Start'
 					)) 
@@ -89,7 +83,8 @@ Setup
 			<span class="col-sm-3">
 				{{ 
 					Form::text('client[period_end_date]', isset($client['period_end_date']) ? $client['period_end_date'] : '', array(
-						'class' => 'form-control period', 
+						'class' => 'form-control', 
+						'id' => 'period_end_date',
 						'required' => 'required',
 						'placeholder' => 'Period End'
 					)) 

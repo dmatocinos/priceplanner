@@ -53,9 +53,17 @@ Route::get('/', 'AuthController@getSignin');
 
 Route::group(array('before' => 'auth'), function() {
 	Route::get("home", "HomeController@index");
+	/* routes for setup pages */
 	Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
+	Route::get("setup/edit/{client_id}", array('as' => 'setup.edit', 'uses' => 'SetupController@edit'));
 	Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
-	Route::put("setup/edit/{client_id}", array('as' => 'setup.update', 'uses' => 'SetupController@edit'));
+	Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
+
+	/* routes for fee planner pages */
+	Route::get("fee_planner/{client_id}", array('as' => 'fee_planner.create', 'uses' => 'FeePlannerController@create'));
+	Route::get("fee_planner/edit/{client_id}", array('as' => 'fee_planner.edit', 'uses' => 'FeePlannerController@edit'));
+	Route::put("fee_planner/create/{client_id}", array('as' => 'fee_planner.store', 'uses' => 'FeePlannerController@store'));
+	Route::put("fee_planner/edit/{client_id}", array('as' => 'fee_planner.update', 'uses' => 'FeePlannerController@update'));
 });
 
 /*

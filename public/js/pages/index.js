@@ -1,4 +1,5 @@
 $(document).ready(function () {
 
-	$('.period').datepicker();
+	$('#period_end_date').datepicker();
+	$('#period_start_date').datepicker();
 });
