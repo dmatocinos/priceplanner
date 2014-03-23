@@ -1,11 +1,11 @@
 @section('content')
 <div style="">
 	<div class="panel-heading" style="margin-top: 10px;">
-		<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> My Price Plans</h3>
+		<h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> My Clients</h3>
 	 </div>
 	 <div class="panel-body">
-		<div class="pricings-list-div">
-			<table id="pricings-list" style="float: left; width: 100%; display: none;">
+		<div class="clients-list-div">
+			<table id="clients-list" style="float: left; width: 100%; display: none;">
 				<thead>
 					<tr>
 						<th>Client</th>
@@ -14,7 +14,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($pricings as $item)
+					@foreach ($clients as $item)
 						<tr style="">
 							<td>{{ $item->first_name . ' ' . $item->last_name . ':::' . url('/edit/' . $item->id) }}</td>
 							<td>{{ $item->business_name }}</td>

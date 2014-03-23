@@ -15,7 +15,6 @@ class CreatePricingsTable extends Migration {
 		Schema::create('pricings', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->unsigned()->index();
 			$table->integer('client_id')->unsigned()->index();
 			$table->integer('accountant_id')->unsigned()->index();
 			$table->integer('record_quality_id')->unsigned()->index();
@@ -29,7 +28,6 @@ class CreatePricingsTable extends Migration {
 			$table->double('bookkeeping_day_val');
 
 			/* foreign keys */
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 			$table->foreign('accountant_id')->references('id')->on('accountants')->onDelete('cascade');
 			$table->foreign('record_quality_id')->references('id')->on('record_qualities')->onDelete('cascade');

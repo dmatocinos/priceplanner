@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$("#pricings-list").dataTable({
+	$("#clients-list").dataTable({
 		"aaSorting": [[ 0, "asc" ]],
 		"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
 			/* Append the grade to the default row class name */
@@ -21,7 +21,7 @@ $(document).ready(function () {
 			"aTargets": [ -1, -2 ]
 		} ],
 			"fnFooterCallback": function() {
-				$("#pricings-list").show();
+				$("#clients-list").show();
 			}
 		});
 });

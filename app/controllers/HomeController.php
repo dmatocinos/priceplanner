@@ -8,7 +8,7 @@ class HomeController extends BaseController {
 		Asset::container('footer')->add('home-index-js', 'js/home/index.js');
 		
 		$form_data = array(
-			'pricings' => Pricing::getAll($this->user->id)
+			'clients' => Client::getAll($this->user->id)
 		);
 		
 		$this->layout->content = View::make("pages.list", $form_data);

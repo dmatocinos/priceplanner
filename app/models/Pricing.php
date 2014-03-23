@@ -25,18 +25,4 @@ class Pricing extends \Eloquent {
 	{
 		return $this->belongsTo('Accountant');
 	}
-	
-	public static function getAll($user_id) 
-	{
-		return DB::select(
-			"
-				SELECT p.id, p.created_at, c.first_name, c.last_name, business_name, bt.name
-				FROM pricings p 
-				JOIN clients c ON p.client_id = c.id
-				JOIN business_types bt ON c.business_type_id = bt.id
-				WHERE p.user_id = :user_id
-			", 
-			array('user_id' => $user_id)
-		);
-	}
 }
