@@ -15,9 +15,7 @@ class CreateAccountantsTable extends Migration {
 		Schema::create('accountants', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('first_name');
-			$table->string('middle_name')->nullable();
-			$table->string('last_name');
+			$table->string('accountant_name');
 			$table->string('accountancy_name')->nullable();
 			$table->string('address');
 			$table->string('logo_filename');

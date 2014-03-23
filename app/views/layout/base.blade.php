@@ -55,7 +55,7 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="index.html"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+                        <a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
                     </li>
                     <li>
                         <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -66,6 +66,8 @@
             <!-- /.sidebar-collapse -->
         </nav>
         <!-- /.navbar-static-side -->
+
+	@yield('app_nav')
 
         <div id="page-wrapper">
             <div class="row">

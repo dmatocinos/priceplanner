@@ -2,14 +2,13 @@
 
 class Client extends \Eloquent {
 	protected $fillable = [
-		'first_name',
-		'middle_name',
-		'last_name',
+		'person_name',
 		'business_name',
 		'address',
 		'period_start_date',
 		'period_end_date',
 		'user_id',
+		'accountant_id',
 		'business_type_id'	
 	];
 

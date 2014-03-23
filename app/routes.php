@@ -53,6 +53,8 @@ Route::get('/', 'AuthController@getSignin');
 
 Route::group(array('before' => 'auth'), function(){
 	Route::get("home", "HomeController@index");
+	Route::get("setup", "SetupController@index");
+	Route::put("setup", "SetupController@create");
 });
 
 /*
