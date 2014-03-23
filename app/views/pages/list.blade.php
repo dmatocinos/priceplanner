@@ -16,7 +16,7 @@
 				<tbody>
 					@foreach ($clients as $item)
 						<tr style="">
-							<td>{{ $item->first_name . ' ' . $item->last_name . ':::' . url('/edit/' . $item->id) }}</td>
+							<td>{{ $item->client_name . ':::' . url('setup/edit/' . $item->id) }}</td>
 							<td>{{ $item->business_name }}</td>
 							<td>{{ $item->created_at }}</td>
 						</tr>

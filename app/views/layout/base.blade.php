@@ -58,7 +58,7 @@
                         <a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                 </ul>
                 <!-- /#side-menu -->
