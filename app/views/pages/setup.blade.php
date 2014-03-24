@@ -13,7 +13,7 @@ Setup
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
 	      @if ($edit)
-	      <li class=""><a href="{{ url('fee_planner') }}">Fee Planner</a></li>
+	      <li class=""><a href="{{ url('feeplanner/' . $client['id']) }}">Fee Planner</a></li>
 	      @endif	
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
@@ -21,7 +21,7 @@ Setup
 @stop
 
 @section('content')
-	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
+	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl', 'files' => true)) }}
 		@if ($edit)
 			{{  Form::hidden('client[id]', $client['id']) }}
 			{{  Form::hidden('client[accountant_id]', $client['accountant_id']) }}
@@ -131,6 +131,15 @@ Setup
 				}}
 		    </div>
 		  </div>
+		  <div class="form-group">
+		    <label for="accountant[logo_filename]" class="col-lg-2 control-label">Logo (optional)</label>
+		    <div class="col-lg-4">
+				{{ 
+					Form::file('accountant[logo_filename]');
+				}}
+		    </div>
+		  </div>
+				
 		</fieldset>
 	</div>
 	<div class="col-lg-12 pull-right well">

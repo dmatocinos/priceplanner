@@ -70,7 +70,7 @@
 	@yield('app_nav')
 
         <div id="page-wrapper">
-		@if (Session::get('message'))
+		@if ( ! $errors->any() && Session::get('message'))
 		<div class="row">
                 	<div class="col-lg-12">
 				<div class="alert alert-info alert-block">
@@ -86,7 +86,7 @@
 				<div class="alert alert-danger alert-block">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<h4>Error</h4>
-					<b>{{ Session::get('message') }}</b>
+					{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 				</div>
 			</div>
 		</div>

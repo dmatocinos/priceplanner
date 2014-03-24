@@ -13,6 +13,7 @@ class Accountant extends \Eloquent {
 		'accountant_name' => 'required',
 		'accountancy_name' => 'required',
 		'address'	=> 'required',
+		'logo_filename'	=> 'image|max:1500|mimes:jpg,png'
 	);
 
 }

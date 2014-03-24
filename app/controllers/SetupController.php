@@ -40,6 +40,13 @@ class SetupController extends BaseController {
 		
 		$a_validation = Validator::make($a_input, Accountant::$rules);
 		if ($a_validation->passes()) {
+			if ($a_input['logo_filename']) { 
+				//Upload the file
+				$filename = $a_input['accountant_name'] . '_logo';
+				$a_input['logo_filename']->move(public_path() . '/uploads', $filename);
+				$a_input['logo_filename'] = $filename;
+			}
+
 			$accountant = new Accountant;
 			$accountant = $accountant->create($a_input);
 		}
@@ -83,11 +90,19 @@ class SetupController extends BaseController {
 	{
 		$input = Input::all();
 
-		$client = $input['client']['id'];
+		$client = Client::find($input['client']['id']);
 		$a_input = $input['accountant'];
 
 		$a_validation = Validator::make($a_input, Accountant::$rules);
 		if ($a_validation->passes()) {
+			
+			if ($a_input['logo_filename']) { 
+				//Upload the file
+				$filename = $a_input['accountant_name'] . '_logo';
+				$a_input['logo_filename']->move(public_path() . '/uploads', $filename);
+				$a_input['logo_filename'] = $filename;
+			}
+
 			$accountant = Accountant::find($a_input['id']);
 			$accountant->update($a_input);
 		}
@@ -108,7 +123,6 @@ class SetupController extends BaseController {
 
 		$c_validation = Validator::make($c_input, Client::$rules);
 		if ($c_validation->passes()) {
-			$client = Client::find($c_input['id']);
 			$client->update($c_input);
 		}
 		else {
