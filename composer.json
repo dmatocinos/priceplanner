@@ -10,7 +10,7 @@
 		"dragonfire1119/asset": "dev-master",
 		"way/generators": "dev-master",
 		"omnipay/paypal": "~2.0",
-		"ensepar/tcpdf": "dev-master"
+		"rearlabs/tcpdf-rl": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

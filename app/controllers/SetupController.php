@@ -68,7 +68,9 @@ class SetupController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 
-		$route = isset($input['save_next_page']) ? 'setup/edit/' : 'fee_planner/';
+		$route = isset($input['save_next_page']) 
+		       ? ($client->pricing()) ? 'feeplanner/edit/' : 'feeplanner/' 
+		       : 'setup/edit/';
 
 		return Redirect::to($route . $client->id)
 			->withInput()
@@ -115,8 +117,10 @@ class SetupController extends BaseController {
 				->withErrors($c_validation)
 				->with('message', 'There were validation errors.');
 		}
-		
-		$route = isset($input['save_next_page']) ? 'setup/edit/' : 'fee_planner/';
+
+		$route = isset($input['save_next_page']) 
+		       ? ($client->pricing()) ? 'feeplanner/edit/' : 'feeplanner/' 
+		       : 'setup/edit/';
 
 		return Redirect::to($route . $client->id)
 			->withInput()

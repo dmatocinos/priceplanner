@@ -30,9 +30,13 @@ class Client extends \Eloquent {
 		return $this->belongsTo('User');
 	}
 
-	public function business_type()
+	public function pricing()
 	{
-		return $this->belongsTo('BusinessType');
+		if ($this->hasOne('Pricing')->getResults()) {
+			return $this->belongsTo('User');
+		}
+		
+		return NULL;
 	}
 	
 	public static function getAll($user_id) 
