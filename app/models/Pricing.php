@@ -4,9 +4,8 @@ class Pricing extends \Eloquent {
 	protected $fillable = [
 		'user_id',
 		'client_id',
-		'accountant_id',
 		'accountanting_type_id',
-		'turnover_range_id',
+		'turnover',
 		'audit_requirement_id',
 		'audit_risk_id',
 		'vat_return',

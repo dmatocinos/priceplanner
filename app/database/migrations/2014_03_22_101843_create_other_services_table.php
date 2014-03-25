@@ -18,7 +18,6 @@ class CreateOtherServicesTable extends Migration {
 			$table->string('name');
 			$table->double('value');
 			$table->text('description');
-			$table->timestamps();
 		});
 	}
 

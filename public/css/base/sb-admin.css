@@ -411,3 +411,15 @@ table.dataTable thead .sorting:after {
 .col-legend {
 	width: 14%;
 }
+
+.col-extra {
+	width: 10%
+}
+
+.col-val {
+	width: 10%;
+}
+
+.col-total {
+	width: 30%
+}

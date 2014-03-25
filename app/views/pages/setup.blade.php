@@ -134,6 +134,10 @@ Setup
 		  <div class="form-group">
 		    <label for="accountant[logo_filename]" class="col-lg-2 control-label">Logo (optional)</label>
 		    <div class="col-lg-4">
+				@if (isset($accountant['logo_filename']) && ! is_null($accountant['logo_filename']))
+					<img src="{{asset('uploads/' . $accountant['logo_filename'])}}" width="100" alt="DRC Sports Race Management" id="DRCS-logo" />
+					<br>
+				@endif
 				{{ 
 					Form::file('accountant[logo_filename]');
 				}}

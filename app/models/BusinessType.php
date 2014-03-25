@@ -12,4 +12,16 @@ class BusinessType extends \Eloquent {
 		'base_fee' => 'required|numeric',
 	];
 
+	public static function getBusinessTypes()
+	{
+		$business_types = DB::table('business_types')->get();	
+		$data = [];
+		foreach ($business_types as $business_type)
+		{
+			$data[$business_type->id] = $business_type->name; 
+		}
+
+		return $data;
+	}
+
 }

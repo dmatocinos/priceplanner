@@ -32,77 +32,149 @@ Fee Planner
 				<td class="text-right col-legend emphasize">
 					Type of Business
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
+				{{   
+					Form::select(
+						'pricing[business_type_id]', $select_data['business_types'], $pricing['business_type_id'], [
+						'class' => 'form-control input-sm',
+						'required'	=> 'required'
+					]);
+				}}
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Turnover
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
+				{{   
+					Form::text('pricing[turnover]', $pricing['turnover'], array(
+						'class' => 'form-control input-sm', 
+						'required'	=> 'required'
+					));
+				}}
 				</td>
-				<td>
+				<td class="col-total">
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right col-legend emphasize">
+					Type of Records
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				{{   
+					Form::select(
+						'pricing[record_type_id]', $select_data['record_types'], $pricing['record_type_id'], [
+						'class' => 'form-control input-sm',
+						'required'	=> 'required'
+					]);
+				}}
+				</td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Quality of Records
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
+				{{   
+					Form::select(
+						'pricing[record_quality_id]', $select_data['record_qualities'], $pricing['record_quality_id'], [
+						'class' => 'form-control input-sm',
+						'required'	=> 'required'
+					]);
+				}}
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Audit Requirements
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
+				{{   
+					Form::select(
+						'pricing[audit_requirement_id]', $select_data['audit_requirements'], $pricing['audit_requirement_id'], [
+						'class' => 'form-control input-sm',
+						'required'	=> 'required'
+					]);
+				}}
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Audit Risk
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
+				{{   
+					Form::select(
+						'pricing[audit_risk_id]', $select_data['audit_risks'], $pricing['audit_risk_id'], [
+						'class' => 'form-control input-sm',
+						'required'	=> 'required'
+					]);
+				}}
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Tax Returns
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
+			@foreach($tax_returns as $id => $name)
+			<tr>
+				<td class="text-right col-legend">
+					{{ $name }}
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				{{   
+					Form::text('pricing[tax_return_pricing][$id]', $tax_return_pricing[$id], array(
+						'class' => 'form-control input-sm', 
+						'required'	=> 'required'
+					));
+				}}
+				</td>
+				<td class="col-total">
+				</td>
+			</tr>
+				
+			@endforeach
 			<tr>
 				<td class="text-right col-legend emphasize">
 					VAT Returns
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
@@ -110,42 +182,42 @@ Fee Planner
 					Book Keeping <br>
 					<em>if we do the book keeping don't forget to adjust the quality of records</em>
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Payroll
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend">
 					Employees
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Weekly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
 				<td>
 				</td>
@@ -153,34 +225,34 @@ Fee Planner
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Forthnightly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Four Weekly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Monthly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
@@ -189,7 +261,7 @@ Fee Planner
 				<td>
 					Annually
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
 				<td>
 				</td>
@@ -198,75 +270,75 @@ Fee Planner
 				<td class="text-right col-legend">
 					Subcontractors
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Weekly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 				</td>
-				<td>
+				<td class="col-extra">
 					Monthly
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Modules
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Other Services
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Annual Fee
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Monthly Cost
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
 				<td>
 				</td>
@@ -275,33 +347,33 @@ Fee Planner
 				<td class="text-right col-legend emphasize">
 					Discount
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Total Annual Fee
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Total Monthly Cost
 				</td>
-				<td>
+				<td class="col-extra">
 				</td>
-				<td>
+				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total">
 				</td>
 			</tr>
 		</table>
