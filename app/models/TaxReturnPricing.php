@@ -17,21 +17,26 @@ class TaxReturnPricing extends \Eloquent {
 		return $this->hasMany('Pricing');
 	}
 
-	public static function getTaxReturnPricing($pricing_id)
+	public static function getTaxReturnPricing($pricing_id = null)
 	{
-		$res = DB::table('audit_requirements')->get();	
+		$trs = DB::table('tax_returns')->get();	
 
 		$data = [];
-		foreach ($tax_returns as $tax_return) {
-			if ($tax_return['tax_return_id']) {
+		foreach($trs as $tr) {
+			$data[$tr->id] = NULL;
+		}
+		
+		if ($pricing_id) {
+			$res = DB::table('tax_return_pricings')->where('pricing_id', $pricing_id)->get();	
+
+			$data = [];
+			foreach ($res as $tax_return) {
 				$data[$tax_return['id']] = $tax_return['name'];
-			}
-			else {
-				$data[$tax_return['id']] = NULL;
 			}
 		}
 
 		return $data;
+		
 	}
 
 	

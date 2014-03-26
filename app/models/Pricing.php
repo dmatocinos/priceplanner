@@ -8,6 +8,9 @@ class Pricing extends \Eloquent {
 		'turnover',
 		'audit_requirement_id',
 		'audit_risk_id',
+		'corporate_tax_return',
+		'partnership_tax_return',
+		'self_assessment_tax_return',
 		'vat_return',
 		'bookkeeping_hours',
 		'bookkeeping_days',
@@ -23,5 +26,25 @@ class Pricing extends \Eloquent {
 	public function accountant()
 	{
 		return $this->belongsTo('Accountant');
+	}
+
+	public function employee_payroll_pricings()
+	{
+		return $this->hasMany('employee_payroll_pricings');
+	}
+
+	public function sc_payroll_pricings()
+	{
+		return $this->hasMany('sc_payroll_pricings');
+	}
+
+	public function module_pricings()
+	{
+		return $this->hasMany('module_pricings');
+	}
+
+	public function other_service_pricings()
+	{
+		return $this->hasMany('other_service_pricings');
 	}
 }

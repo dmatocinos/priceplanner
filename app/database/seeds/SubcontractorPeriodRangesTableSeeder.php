@@ -6,7 +6,7 @@ class SubcontractorPeriodRangesTableSeeder extends Seeder {
 	{
 		$periods = [
 			'weekly' => 1,
-			'monthly' => 2,
+			'monthly' => 4,
 		];
 
 		$ranges = [

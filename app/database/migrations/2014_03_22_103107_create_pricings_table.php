@@ -21,6 +21,9 @@ class CreatePricingsTable extends Migration {
 			$table->integer('turnovers');
 			$table->integer('audit_requirement_id')->unsigned()->index();
 			$table->integer('audit_risk_id')->unsigned()->index();
+			$table->integer('corporate_tax_return');
+			$table->integer('partnership_tax_return');
+			$table->integer('self_assessment_tax_return');
 			$table->integer('vat_return');
 			$table->integer('bookkeeping_hours');
 			$table->integer('bookkeeping_days');

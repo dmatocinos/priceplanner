@@ -15,13 +15,7 @@ class TaxReturn extends \Eloquent {
 	public static function getTaxReturns()
 	{
 		$res = DB::table('tax_returns')->get();	
-		$data = [];
-		foreach ($res as $row)
-		{
-			$data[$row->id] = $row->name; 
-		}
-
-		return $data;
+		return $res;
 	}
 
 }

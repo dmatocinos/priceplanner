@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PeriodsTableSeeder');
 		$this->call('RangesTableSeeder');
 		$this->call('RecordQualitiesTableSeeder');
-		$this->call('TaxReturnsTableSeeder');
 		$this->call('TurnoverRangesTableSeeder');
 		$this->call('EmployeePeriodRangesTableSeeder');
 		$this->call('SubcontractorPeriodRangesTableSeeder');
