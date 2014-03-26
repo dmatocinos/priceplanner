@@ -19,145 +19,137 @@ Fee Planner
 @stop
 
 @section('content')
-    <div class="panel panel-default">
-	<div class="panel-heading">
-		Fee Planner
-	</div>
-	<div class="panel-body" ng-app="PPApp">
+	<div ng-app="PPApp">
 	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
 		{{  Form::hidden('pricing[client_id]', $client_id) }}
 		@if ($edit)
 			{{  Form::hidden('pricing[id]', $pricing['id']) }}
 		@endif	
-		<table class="table table-striped">
+		<div class="well">
+			<legend>Business Details</legend>
+			<table class="table">
+				<tr>
+					<td class="text-right col-legend ">
+						Type of Business
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::select(
+							'pricing[business_type_id]', $select_data['business_types'], $pricing['business_type_id'], [
+							'class' => 'form-control input-sm',
+							//'ng-model' 	=> 'E5', 
+							//'ng-init' 	=> "E5='{$pricing['business_type_id']}'", 
+						]);
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend ">
+						Turnovers
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::text('pricing[turnovers]', $pricing['turnovers'], array(
+							'class' => 'form-control input-sm',
+							'required' => 'required',
+							'ng-model' 	=> 'E7', 
+							'ng-init' 	=> "E7='{$pricing['turnovers']}'", 
+							'numbers-only'	=> 'numbers-only',
+						));
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend ">
+						Type of Records
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::select(
+							'pricing[accounting_type_id]', $select_data['record_types'], $pricing['accounting_type_id'], [
+							'class' => 'form-control input-sm',
+							//'ng-model' 	=> 'E7', 
+							//'ng-init' 	=> "E7='{$pricing['turnover']}'", 
+						]);
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend ">
+						Quality of Records
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::select(
+							'pricing[record_quality_id]', $select_data['record_qualities'], $pricing['record_quality_id'], [
+							'class' => 'form-control input-sm',
+							//'ng-model' 	=> 'E9', 
+							//'ng-init' 	=> "E9='{$pricing['record_quality_id']}'", 
+						]);
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend ">
+						Audit Requirements
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::select(
+							'pricing[audit_requirement_id]', $select_data['audit_requirements'], $pricing['audit_requirement_id'], [
+							'class' => 'form-control input-sm',
+							//'ng-model' 	=> 'E13', 
+							//'ng-init' 	=> "E13='{$pricing['audit_requirement_id']}'", 
+						]);
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend ">
+						Audit Risk
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					{{   
+						Form::select(
+							'pricing[audit_risk_id]', $select_data['audit_risks'], $pricing['audit_risk_id'], [
+							'class' => 'form-control input-sm',
+							//'ng-model' 	=> 'E15', 
+							//'ng-init' 	=> "E15='{$pricing['audit_risk_id']}'", 
+						]);
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="well">
+			<legend>Tax Returns</legend>
+			<table class="table">
 			<tr>
-				<td class="text-right col-legend emphasize">
-					Type of Business
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::select(
-						'pricing[business_type_id]', $select_data['business_types'], $pricing['business_type_id'], [
-						'class' => 'form-control input-sm',
-						//'ng-model' 	=> 'E5', 
-						//'ng-init' 	=> "E5='{$pricing['business_type_id']}'", 
-					]);
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Turnover
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::text('pricing[turnovers]', $pricing['turnovers'], array(
-						'class' => 'form-control input-sm',
-						'required' => 'required',
-						'ng-model' 	=> 'E7', 
-						'ng-init' 	=> "E7='{$pricing['turnovers']}'", 
-						'numbers-only'	=> 'numbers-only',
-					));
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Type of Records
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::select(
-						'pricing[accounting_type_id]', $select_data['record_types'], $pricing['accounting_type_id'], [
-						'class' => 'form-control input-sm',
-						//'ng-model' 	=> 'E7', 
-						//'ng-init' 	=> "E7='{$pricing['turnover']}'", 
-					]);
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Quality of Records
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::select(
-						'pricing[record_quality_id]', $select_data['record_qualities'], $pricing['record_quality_id'], [
-						'class' => 'form-control input-sm',
-						//'ng-model' 	=> 'E9', 
-						//'ng-init' 	=> "E9='{$pricing['record_quality_id']}'", 
-					]);
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Audit Requirements
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::select(
-						'pricing[audit_requirement_id]', $select_data['audit_requirements'], $pricing['audit_requirement_id'], [
-						'class' => 'form-control input-sm',
-						//'ng-model' 	=> 'E13', 
-						//'ng-init' 	=> "E13='{$pricing['audit_requirement_id']}'", 
-					]);
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Audit Risk
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				{{   
-					Form::select(
-						'pricing[audit_risk_id]', $select_data['audit_risks'], $pricing['audit_risk_id'], [
-						'class' => 'form-control input-sm',
-						//'ng-model' 	=> 'E15', 
-						//'ng-init' 	=> "E15='{$pricing['audit_risk_id']}'", 
-					]);
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Tax Returns
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend">
+				<td class="text-right col-legend ">
 					Corporate Tax Returns
 				</td>
 				<td class="col-extra">
@@ -175,7 +167,7 @@ Fee Planner
 				</td>
 			</tr>
 			<tr>
-				<td class="text-right col-legend">
+				<td class="text-right col-legend ">
 					Partnership Tax Returns
 				</td>
 				<td class="col-extra">
@@ -193,7 +185,7 @@ Fee Planner
 				</td>
 			</tr>
 			<tr>
-				<td class="text-right col-legend">
+				<td class="text-right col-legend ">
 					Self-Assessment Tax Returns
 				</td>
 				<td class="col-extra">
@@ -214,7 +206,7 @@ Fee Planner
 				</td>
 			</tr>
 			<tr>
-				<td class="text-right col-legend emphasize">
+				<td class="text-right col-legend ">
 					VAT Returns
 				</td>
 				<td class="col-extra">
@@ -234,7 +226,7 @@ Fee Planner
 				</td>
 			</tr>
 			<tr>
-				<td class="text-right col-legend emphasize">
+				<td class="text-right col-legend ">
 					Book Keeping <br>
 					<em style="font-weight: normal;">if we do the book keeping don't forget to adjust the quality of records</em>
 				</td>
@@ -280,7 +272,7 @@ Fee Planner
 							'ng-init' 	=> "E24='{$pricing['bookkeeping_hour_val']}'", 
 							'numbers-only'	=> 'numbers-only',
 							'required'	=> 'required',
-							'placeholder' => 'amount'
+							'placeholder' => 'amount per hour'
 						));
 						
 					}}
@@ -293,7 +285,7 @@ Fee Planner
 							'ng-init' 	=> "E25='{$pricing['bookkeeping_day_val']}'", 
 							'numbers-only'	=> 'numbers-only',
 							'required'	=> 'required',
-							'placeholder' => 'amount'
+							'placeholder' => 'amount per day'
 						));
 						
 					}}
@@ -302,213 +294,141 @@ Fee Planner
 				<td class="col-total">
 				</td>
 			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Payroll
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Employee
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<?php $num = 30; ?>
-			@foreach($periods as $id => $period)
-			<tr>
-				<td class="text-right col-legend emphasize">
-				</td>
-				<td class="col-extra">
-					{{ $period }}
-				</td>
-				<td class="col-val">
-				<?php $num = $num + 1; ?>
-				{{   
-					Form::select("employee_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $employee_period_ranges[$id]['range_id'], array(
-						'class' => 'form-control input-sm', 
-						//'ng-model' 	=> 'E' . $num, 
-						//'ng-init' 	=> "E{$num}='{$employee_period_ranges[$id]['range_id']}'", 
-					));
-					
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Subcontractors
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<?php $num = 38; ?>
-			@foreach($periods as $id => $period)
-			@if ($period == 'Weekly' || $period == 'Monthly')
-			<tr>
-				<td class="text-right col-legend emphasize">
-				</td>
-				<td class="col-extra">
-					{{ $period }}
-				</td>
-				<td class="col-val">
-				<?php $num = $num + 1; ?>
-				{{   
-					
-					Form::select("sc_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $sc_period_ranges[$id]['range_id'], array(
-						'class' => 'form-control input-sm', 
-						//'ng-model' 	=> 'E' . $num, 
-						//'ng-init' 	=> "E{$num}='{$sc_period_ranges[$id]['range_id']}'", 
-					));
-					
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			@endif
-			@endforeach
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Modules
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<?php $num = 41; ?>
-			@foreach($modules as $id => $module)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $module }}
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				<?php $num = $num + 1; ?>
-				{{   
-					Form::select("module_pricings[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
-						'class' => 'form-control input-sm', 
-						//'ng-model' 	=> 'E' . $num, 
-						//'ng-init' 	=> "E{$num}=''", 
-					));
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Other Services
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<?php $num = 47; ?>
-			@foreach($other_services as $id => $other_service)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $other_service }}
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				<?php $num = $num + 1; ?>
-				{{   
-					Form::text("other_service_pricings[{$id}]", $other_service_pricings[$id], array(
-						'class' => 'form-control input-sm', 
-						'ng-model' 	=> 'E' . $num, 
-						'numbers-only'	=> 'numbers-only',
-						'required'	=> 'required',
-						'placeholder'	=> 'qty',
-
-					));
-				}}
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Annual Fee
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Monthly Cost
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Discount
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Total Annual Fee
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Total Monthly Cost
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
 		</table>
+		</div>
+		<div class="well">
+			<legend>Payroll</legend>
+			<table class="table">
+				<tr>
+					<td class="text-right col-legend emphasize">
+						Employee
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<?php $num = 30; ?>
+				@foreach($periods as $id => $period)
+				<tr>
+					<td class="text-right col-legend ">
+						{{ $period }}
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					<?php $num = $num + 1; ?>
+					{{   
+						Form::select("employee_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $employee_period_ranges[$id]['range_id'], array(
+							'class' => 'form-control input-sm', 
+							//'ng-model' 	=> 'E' . $num, 
+							//'ng-init' 	=> "E{$num}='{$employee_period_ranges[$id]['range_id']}'", 
+						));
+						
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				@endforeach
+				<tr>
+					<td class="text-right col-legend emphasize">
+						Subcontractors
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<?php $num = 38; ?>
+				@foreach($periods as $id => $period)
+				@if ($period == 'Weekly' || $period == 'Monthly')
+				<tr>
+					<td class="text-right col-legend ">
+						{{ $period }}
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					<?php $num = $num + 1; ?>
+					{{   
+						
+						Form::select("sc_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $sc_period_ranges[$id]['range_id'], array(
+							'class' => 'form-control input-sm', 
+							//'ng-model' 	=> 'E' . $num, 
+							//'ng-init' 	=> "E{$num}='{$sc_period_ranges[$id]['range_id']}'", 
+						));
+						
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				@endif
+				@endforeach
+			</table>
+		</div>
+		<div class="well">
+			<legend>Modules</legend>
+			<table class="table">
+				<?php $num = 41; ?>
+				@foreach($modules as $id => $module)
+				<tr>
+					<td class="text-right col-legend">
+						{{ $module }}
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					<?php $num = $num + 1; ?>
+					{{   
+						Form::select("module_pricings[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
+							'class' => 'form-control input-sm', 
+							//'ng-model' 	=> 'E' . $num, 
+							//'ng-init' 	=> "E{$num}=''", 
+						));
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				@endforeach
+			</table>
+		</div>
+		<div class="well">
+			<legend>Other Services</legend>
+			<table class="table">
+				<?php $num = 47; ?>
+				@foreach($other_services as $id => $other_service)
+				<tr>
+					<td class="text-right col-legend">
+						{{ $other_service }}
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					<?php $num = $num + 1; ?>
+					{{   
+						Form::text("other_service_pricings[{$id}]", $other_service_pricings[$id], array(
+							'class' => 'form-control input-sm', 
+						//	'ng-model' 	=> 'E' . $num, 
+							'numbers-only'	=> 'numbers-only',
+							'required'	=> 'required',
+							'placeholder'	=> 'qty',
+
+						));
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				@endforeach
+			</table>
+		</div>
 		<div class="col-lg-12 pull-right well">
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Download</button>
@@ -516,6 +436,5 @@ Fee Planner
 			</div>
 		</div>
 	{{ Form::close() }}
-	</div>
     </div>
 @stop

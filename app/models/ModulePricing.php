@@ -15,20 +15,25 @@ class ModulePricing extends \Eloquent {
 	public static function getModulePricings($pricing_id = NULL)
 	{
 		$pricing = Pricing::find($pricing_id);
-		$modules = [];
+		$data = [];
 		if ($pricing) {
-			$mods = $pricing->module_pricings();
-			foreach ($mods as $mod) {
-				$modules[$mod->module_id] = $mod->qty;
+			$mpricings = DB::select("
+				SELECT m.id as module_id, mp.*
+				FROM modules m
+				LEFT JOIN module_pricings mp ON mp.module_id = m.id 		
+				WHERE mp.pricing_id = :pricing_id
+			", array('pricing_id' => $pricing_id));
+			foreach ($mpricings as $row) {
+				$data[$row->module_id] = $row->qty;
 			}
 		}
+		else {
+			$modules = Module::all();
+			foreach ($modules as $row) {
+				$data[$row->id] = NULL;
+			}
 
-		$default = DB::table('modules')->get();	
-		$data = [];		
-		foreach ($default as $df) {
-			$data[$df->id] = array_key_exists($df->id, $modules) ? $modules[$df->id] : NULL; 
 		}
-
 		return $data;
 	}
 

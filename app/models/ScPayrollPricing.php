@@ -10,18 +10,25 @@ class ScPayrollPricing extends \Eloquent {
 	public static function getScPeriodRanges($pricing_id = NULL)
 	{
 		$pricing = Pricing::find($pricing_id);
-		$spps = [];
+		$data = [];
 		if ($pricing) {
-			$pps = $pricing->sc_payroll_pricings();
-			foreach ($pps as $pp) {
-				$spps[] = $pp->sc_period_range_id;
+			$ppricings = DB::select("
+				SELECT spp.*, sp.* 
+				FROM periods p
+				JOIN subcontractor_period_ranges spp ON p.id = spp.period_id
+				LEFT JOIN sc_payroll_pricings sp ON sp.sc_period_range_id = spp.id 		
+				WHERE sp.pricing_id = :pricing_id
+			", array('pricing_id' => $pricing_id));
+			foreach ($ppricings as $pp) {
+				$data[$pp->period_id]['range_id'] = $pp->range_id;
 			}
 		}
+		else {
+			$periods = Period::all();
+			foreach ($periods as $pp) {
+				$data[$pp->id]['range_id'] = NULL;
+			}
 
-		$sprs = DB::table('subcontractor_period_ranges')->get();	
-		$data = [];		
-		foreach ($sprs as $spr) {
-			$data[$spr->period_id]['range_id'] = in_array($spr->id, $spps) ? $spr->range_id : NULL; 
 		}
 
 		return $data;

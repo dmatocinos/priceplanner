@@ -43,21 +43,21 @@ class Pricing extends \Eloquent {
 
 	public function employee_payroll_pricings()
 	{
-		return $this->hasMany('employee_payroll_pricings');
+		return $this->hasMany('EmployeePayrollPricing');
 	}
 
 	public function sc_payroll_pricings()
 	{
-		return $this->hasMany('sc_payroll_pricings');
+		return $this->hasMany('ScPayrollPricing');
 	}
 
 	public function module_pricings()
 	{
-		return $this->hasMany('module_pricings');
+		return $this->hasMany('ModulePricing');
 	}
 
 	public function other_service_pricings()
 	{
-		return $this->hasMany('other_service_pricings');
+		return $this->hasMany('OtherServicePricing');
 	}
 }

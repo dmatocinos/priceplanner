@@ -15,18 +15,24 @@ class OtherServicePricing extends \Eloquent {
 	public static function getOtherServicePricings($pricing_id = NULL)
 	{
 		$pricing = Pricing::find($pricing_id);
-		$other_services = [];
+		$data = [];
 		if ($pricing) {
-			$oss = $pricing->other_service_pricings();
-			foreach ($oss as $os) {
-				$other_services[$os->module_id] = $os->qty;
+			$ospricings = DB::select("
+				SELECT os.id as other_service_id, osp.*
+				FROM other_services os
+				LEFT JOIN other_service_pricings osp ON osp.other_service_id = os.id 		
+				WHERE osp.pricing_id = :pricing_id
+			", array('pricing_id' => $pricing_id));
+			foreach ($ospricings as $row) {
+				$data[$row->other_service_id] = $row->qty;
 			}
 		}
+		else {
+			$other_services = OtherService::all();
+			foreach ($other_services as $row) {
+				$data[$row->id] = NULL;
+			}
 
-		$default = DB::table('other_services')->get();	
-		$data = [];		
-		foreach ($default as $df) {
-			$data[$df->id] = array_key_exists($df->id, $other_services) ? $other_services[$df->id] : NULL; 
 		}
 
 		return $data;
