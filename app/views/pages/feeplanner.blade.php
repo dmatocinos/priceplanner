@@ -160,7 +160,7 @@ Fee Planner
 				</td>
 				<td class="col-val">
 				{{   
-					Form::select('pricing[corporate_tax_return]', [1 => 'YES', 0 => 'NO'], $pricing['corporate_tax_return'], array(
+					Form::select('pricing[corporate_tax_return]', [1 => 'Yes', 0 => 'No'], $pricing['corporate_tax_return'], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E18', 
 						//'ng-init' 	=> "E18='{$pricing['corporate_tax_return']}'", 
@@ -178,7 +178,7 @@ Fee Planner
 				</td>
 				<td class="col-val">
 				{{   
-					Form::select('pricing[partnership_tax_return]', [1 => 'YES', 0 => 'NO'], $pricing['partnership_tax_return'], array(
+					Form::select('pricing[partnership_tax_return]', [1 => 'Yes', 0 => 'No'], $pricing['partnership_tax_return'], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E19', 
 						//'ng-init' 	=> "E19='{$pricing['partnership_tax_return']}'", 
@@ -401,7 +401,7 @@ Fee Planner
 				<td class="col-val">
 				<?php $num = $num + 1; ?>
 				{{   
-					Form::select("modules[{$id}]", [1 => 'YES', 0 => 'NO'], $module_pricings[$id], array(
+					Form::select("modules[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E' . $num, 
 						//'ng-init' 	=> "E{$num}=''", 
@@ -503,6 +503,12 @@ Fee Planner
 				</td>
 			</tr>
 		</table>
+		<div class="col-lg-12 pull-right well">
+			<div class="pull-right">
+				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Download</button>
+				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>
+			</div>
+		</div>
 	{{ Form::close() }}
 	</div>
     </div>
