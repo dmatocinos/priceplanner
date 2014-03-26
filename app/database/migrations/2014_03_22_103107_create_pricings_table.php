@@ -17,6 +17,7 @@ class CreatePricingsTable extends Migration {
 			$table->increments('id');
 			$table->integer('client_id')->unsigned()->index();
 			$table->integer('business_type_id')->unsigned()->index();
+			$table->integer('accounting_type_id')->unsigned()->index();
 			$table->integer('record_quality_id')->unsigned()->index();
 			$table->integer('turnovers');
 			$table->integer('audit_requirement_id')->unsigned()->index();
@@ -36,6 +37,7 @@ class CreatePricingsTable extends Migration {
 			$table->foreign('audit_requirement_id')->references('id')->on('audit_requirements')->onDelete('cascade');
 			$table->foreign('audit_risk_id')->references('id')->on('audit_risks')->onDelete('cascade');
 			$table->foreign('business_type_id')->references('id')->on('business_types')->onDelete('cascade');
+			$table->foreign('accounting_type_id')->references('id')->on('accounting_types')->onDelete('cascade');
 
 			$table->timestamps();
 		});

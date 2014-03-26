@@ -25,7 +25,9 @@ Fee Planner
 	</div>
 	<div class="panel-body" ng-app="PPApp">
 	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
+		{{  Form::hidden('pricing[client_id]', $client_id) }}
 		@if ($edit)
+			{{  Form::hidden('pricing[id]', $pricing['id']) }}
 		@endif	
 		<table class="table table-striped">
 			<tr>
@@ -55,10 +57,12 @@ Fee Planner
 				</td>
 				<td class="col-val">
 				{{   
-					Form::text('pricing[turnover]', $pricing['turnover'], array(
-						'class' => 'form-control input-sm', 
+					Form::text('pricing[turnovers]', $pricing['turnovers'], array(
+						'class' => 'form-control input-sm',
+						'required' => 'required',
 						'ng-model' 	=> 'E7', 
-						'ng-init' 	=> "E7='{$pricing['turnover']}'", 
+						'ng-init' 	=> "E7='{$pricing['turnovers']}'", 
+						'numbers-only'	=> 'numbers-only',
 					));
 				}}
 				</td>
@@ -74,7 +78,7 @@ Fee Planner
 				<td class="col-val">
 				{{   
 					Form::select(
-						'pricing[record_type_id]', $select_data['record_types'], $pricing['record_type_id'], [
+						'pricing[accounting_type_id]', $select_data['record_types'], $pricing['accounting_type_id'], [
 						'class' => 'form-control input-sm',
 						//'ng-model' 	=> 'E7', 
 						//'ng-init' 	=> "E7='{$pricing['turnover']}'", 
@@ -202,6 +206,7 @@ Fee Planner
 						'ng-init' 	=> "E20='{$pricing['self_assessment_tax_return']}'", 
 						'numbers-only'	=> 'numbers-only',
 						'required'	=> 'required',
+						'placeholder'	=> 'qty',
 					));
 				}}
 				</td>
@@ -330,7 +335,7 @@ Fee Planner
 				<td class="col-val">
 				<?php $num = $num + 1; ?>
 				{{   
-					Form::select("employee_period_ranges[{$id}][range_id]", $select_data['ranges'], $employee_period_ranges[$id]['range_id'], array(
+					Form::select("employee_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $employee_period_ranges[$id]['range_id'], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E' . $num, 
 						//'ng-init' 	=> "E{$num}='{$employee_period_ranges[$id]['range_id']}'", 
@@ -366,7 +371,7 @@ Fee Planner
 				<?php $num = $num + 1; ?>
 				{{   
 					
-					Form::select("sc_period_ranges[{$id}][range_id]", $select_data['ranges'], $sc_period_ranges[$id]['range_id'], array(
+					Form::select("sc_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $sc_period_ranges[$id]['range_id'], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E' . $num, 
 						//'ng-init' 	=> "E{$num}='{$sc_period_ranges[$id]['range_id']}'", 
@@ -401,7 +406,7 @@ Fee Planner
 				<td class="col-val">
 				<?php $num = $num + 1; ?>
 				{{   
-					Form::select("modules[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
+					Form::select("module_pricings[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
 						'class' => 'form-control input-sm', 
 						//'ng-model' 	=> 'E' . $num, 
 						//'ng-init' 	=> "E{$num}=''", 
@@ -434,12 +439,13 @@ Fee Planner
 				<td class="col-val">
 				<?php $num = $num + 1; ?>
 				{{   
-					Form::text('other_services[$id]', $other_service_pricings[$id], array(
+					Form::text("other_service_pricings[{$id}]", $other_service_pricings[$id], array(
 						'class' => 'form-control input-sm', 
 						'ng-model' 	=> 'E' . $num, 
-						'ng-init' 	=> "E{$num}='1231'", 
 						'numbers-only'	=> 'numbers-only',
 						'required'	=> 'required',
+						'placeholder'	=> 'qty',
+
 					));
 				}}
 				</td>

@@ -2,10 +2,11 @@
 
 class Pricing extends \Eloquent {
 	protected $fillable = [
-		'user_id',
 		'client_id',
-		'accountanting_type_id',
-		'turnover',
+		'business_type_id',
+		'accounting_type_id',
+		'record_quality_id',
+		'turnovers',
 		'audit_requirement_id',
 		'audit_risk_id',
 		'corporate_tax_return',
@@ -17,6 +18,18 @@ class Pricing extends \Eloquent {
 		'bookkeeping_hour_val',
 		'bookkeeping_day_val'
 	];
+
+	public static $rules = array(
+		'turnovers' => 'required|numeric',
+		'corporate_tax_return' => 'required|numeric',
+		'partnership_tax_return' => 'required|numeric',
+		'self_assessment_tax_return' => 'required|numeric',
+		'vat_return' => 'required|numeric',
+		'bookkeeping_hours' => 'required|numeric',
+		'bookkeeping_days' => 'required|numeric',
+		'bookkeeping_hour_val' => 'required|numeric',
+		'bookkeeping_day_val' => 'required|numeric'  
+	);
 
 	public function client()
 	{

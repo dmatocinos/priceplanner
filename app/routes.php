@@ -60,10 +60,10 @@ Route::group(array('before' => 'auth'), function() {
 	Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
 
 	/* routes for fee planner pages */
-	Route::get("feeplanner/{client_id}", array('as' => 'fee_planner.create', 'uses' => 'FeePlannerController@create'));
-	Route::get("feeplanner/edit/{client_id}", array('as' => 'fee_planner.edit', 'uses' => 'FeePlannerController@edit'));
-	Route::put("feeplanner/create", array('as' => 'fee_planner.store', 'uses' => 'FeePlannerController@store'));
-	Route::put("feeplanner/edit", array('as' => 'fee_planner.update', 'uses' => 'FeePlannerController@update'));
+	Route::get("feeplanner/{client_id}", array('as' => 'feeplanner.create', 'uses' => 'FeePlannerController@create'));
+	Route::get("feeplanner/edit/{pricing_id}", array('as' => 'feeplanner.edit', 'uses' => 'FeePlannerController@edit'));
+	Route::put("feeplanner/create", array('as' => 'feeplanner.store', 'uses' => 'FeePlannerController@store'));
+	Route::put("feeplanner/edit", array('as' => 'feeplanner.update', 'uses' => 'FeePlannerController@update'));
 });
 
 /*
