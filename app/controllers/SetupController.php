@@ -82,7 +82,7 @@ class SetupController extends BaseController {
 
 		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing_id : 'feeplanner/' . $client->id
+		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)
@@ -144,7 +144,7 @@ class SetupController extends BaseController {
 
 		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing_id : 'feeplanner/' . $client->id 
+		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)
