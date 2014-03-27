@@ -12,9 +12,12 @@ Setup
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
-	      @if ($edit)
-	      <li class=""><a href="{{ url('feeplanner/' . $client['id']) }}">Fee Planner</a></li>
-	      @endif	
+	      @if(isset($pricing_id))
+	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
+	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
+	      @else
+	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
+	      @endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>

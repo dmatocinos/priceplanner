@@ -32,11 +32,7 @@ class Client extends \Eloquent {
 
 	public function pricing()
 	{
-		if ($this->hasOne('Pricing')->getResults()) {
-			return $this->belongsTo('User');
-		}
-		
-		return NULL;
+		return $this->hasOne('Pricing');
 	}
 	
 	public static function getAll($user_id) 

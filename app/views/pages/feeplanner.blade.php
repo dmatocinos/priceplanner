@@ -24,10 +24,10 @@ Fee Planner
 @section('content')
 	<div ng-app="PPApp">
 	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl')) }}
-		{{  Form::hidden('pricing[client_id]', $client_id) }}
 		@if ($edit)
 			{{  Form::hidden('pricing[id]', $pricing['id']) }}
 		@endif	
+		{{  Form::hidden('pricing[client_id]', $client_id) }}
 		<div class="well">
 			<legend>Business Details</legend>
 			<table class="table">

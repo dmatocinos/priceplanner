@@ -11,7 +11,8 @@ class SetupController extends BaseController {
 				'client' => [],
 				'accountant' => [],
 				'edit'	=> FALSE,
-				'route' => 'setup.store'
+				'route' => 'setup.store',
+				'client_id' => NULL,
 		];
 		
 		$this->layout->content = View::make("pages.setup", $form_data);
@@ -22,12 +23,15 @@ class SetupController extends BaseController {
 		Asset::container('footer')->add('pages-index-js', 'js/pages/index.js');
 
 		$client = Client::find($client_id);
+		$pricing = $client->pricing()->first();
 
 		$form_data = [
 				'client' => $client->getAttributes(),
 				'accountant' => $client->accountant->toArray(),
 				'edit'	=> TRUE,
-				'route' => 'setup.update'
+				'route' => 'setup.update',
+				'client_id' => $client_id,
+				'pricing_id' =>  $pricing ? $pricing->id : NULL
 		];
 
 		$this->layout->content = View::make("pages.setup", $form_data);
@@ -40,15 +44,16 @@ class SetupController extends BaseController {
 		
 		$a_validation = Validator::make($a_input, Accountant::$rules);
 		if ($a_validation->passes()) {
-			if ($a_input['logo_filename']) { 
-				//Upload the file
-				$filename = $a_input['accountant_name'] . '_logo';
-				$a_input['logo_filename']->move(public_path() . '/uploads', $filename);
-				$a_input['logo_filename'] = $filename;
-			}
-
 			$accountant = new Accountant;
 			$accountant = $accountant->create($a_input);
+
+			if ($a_input['logo_filename']) { 
+				//Upload the file
+				$filename = $a_input['accountant_name'] . '_logo_' . $accountant->id;
+				$a_input['logo_filename']->move(public_path() . '/uploads', $filename);
+				$accountant->update(['logo_filename' => $filename]);
+			}
+
 		}
 		else {
 			return Redirect::route('setup.create')
@@ -75,11 +80,12 @@ class SetupController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 
+		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? ($client->pricing()) ? 'feeplanner/edit/' : 'feeplanner/' 
-		       : 'setup/edit/';
+		       ? $pricing ? 'feeplanner/edit/' . $pricing_id : 'feeplanner/' . $client->id
+		       : 'setup/edit/' . $client->id;
 
-		return Redirect::to($route . $client->id)
+		return Redirect::to($route)
 			->withInput()
 			->with('message', 'You have successfully started setting up.');
 
@@ -96,14 +102,18 @@ class SetupController extends BaseController {
 		$a_validation = Validator::make($a_input, Accountant::$rules);
 		if ($a_validation->passes()) {
 			
+			$accountant = Accountant::find($a_input['id']);
+
 			if ($a_input['logo_filename']) { 
 				//Upload the file
-				$filename = $a_input['accountant_name'] . '_logo';
+				$filename = $a_input['accountant_name'] . '_logo_' . $accountant->id;
 				$a_input['logo_filename']->move(public_path() . '/uploads', $filename);
 				$a_input['logo_filename'] = $filename;
 			}
-
-			$accountant = Accountant::find($a_input['id']);
+			else {
+				unset($a_input['logo_filename']);
+			}
+		
 			$accountant->update($a_input);
 		}
 		else {
@@ -132,11 +142,12 @@ class SetupController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 
+		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? ($client->pricing()) ? 'feeplanner/edit/' : 'feeplanner/' 
-		       : 'setup/edit/';
+		       ? $pricing ? 'feeplanner/edit/' . $pricing_id : 'feeplanner/' . $client->id 
+		       : 'setup/edit/' . $client->id;
 
-		return Redirect::to($route . $client->id)
+		return Redirect::to($route)
 			->withInput()
 			->with('message', 'You have successfully updated your setup.');
 	}
