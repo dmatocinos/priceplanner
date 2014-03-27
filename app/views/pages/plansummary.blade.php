@@ -20,20 +20,16 @@ Plan Summary
 @stop
 
 @section('content')
-    <div style="padding-top: 20px;">
-	<legend>
-		<span class="text-left">Plan Summary</span>
-		<span style="margin-top: -15px; margin-left: 5px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Appendices to Pricing Modules</a></span>
-		<span style="margin-top: -15px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Fixed Price Fee Quotation</a></span>
-	</legend>
-    </div>
-    <div class="panel panel-default">
-	<div class="panel-heading">
-    		Plan Summary
+	<div style="padding-top: 20px;">
+		<legend>
+			<span class="text-left">Plan Summary</span>
+			<span style="margin-top: -15px; margin-left: 5px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Appendices to Pricing Modules</a></span>
+			<span style="margin-top: -15px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Fixed Price Fee Quotation</a></span>
+		</legend>
 	</div>
-	<div class="panel-body">
+	<div>
 		<?php $boolean_select = ['1' => 'Yes', '0' => 'No']; ?>
-		<table class="table table-bordered">
+		<table class="table table-striped">
 			<tr>
 				<td class="text-right col-legend emphasize">
 					Type of Business
@@ -389,5 +385,4 @@ Plan Summary
 		</table>
 	{{ Form::close() }}
 	</div>
-    </div>
 @stop

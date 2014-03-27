@@ -57,6 +57,7 @@ class FeePlannerController extends BaseController {
 			'other_service_pricings' => OtherServicePricing::getOtherServicePricings($pricing_id),	
 			'edit'	=> FALSE,
 			'client_id' => $pricing->client_id,
+			'pricing_id' => $pricing->id,
 			'route' => 'feeplanner.store',
 		];
 

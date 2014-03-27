@@ -13,6 +13,9 @@ Fee Planner
 	    <ul class="nav navbar-nav">
 	      <li class=""><a href="{{ url('setup/edit/' . $client_id) }}">Setup</a></li>
 	      <li class="active"><a href="#">Fee Planner</a></li>
+		@if(isset($pricing_id))
+	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
+		@endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
