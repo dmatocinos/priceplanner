@@ -363,7 +363,7 @@ Plan Summary
 				<td class="col-val">
 				</td>
 				<td class="col-total emphasize">
-					{{ NumFormatter::percent($calc->discount) }}
+					{{ NumFormatter::percent($calc->discount * 100) }}
 				</td>
 			</tr>
 			<tr>
