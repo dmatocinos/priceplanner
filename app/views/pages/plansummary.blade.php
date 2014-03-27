@@ -89,7 +89,7 @@ Plan Summary
 					{{ $select_data['audit_requirements'][$pricing['audit_requirement_id']] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i13 }}
+					{{ $calc->g13 }}
 				</td>
 			</tr>
 			<tr>
@@ -102,7 +102,7 @@ Plan Summary
 					{{ $select_data['audit_risks'][$pricing['audit_risk_id']] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i15 }}
+					{{ $calc->g15 }}
 				</td>
 			</tr>
 			<tr>
@@ -132,7 +132,7 @@ Plan Summary
 					{{ $pricing['corporate_tax_return'] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i18 }}
+					{{ $calc->g18 }}
 				</td>
 			</tr>
 			<tr>
@@ -145,7 +145,7 @@ Plan Summary
 					{{ $pricing['partnership_tax_return'] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i19 }}
+					{{ $calc->g19 }}
 				</td>
 			</tr>
 			<tr>
@@ -158,7 +158,7 @@ Plan Summary
 					{{ $pricing['self_assessment_tax_return'] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i20 }}
+					{{ $calc->g20 }}
 				</td>
 			</tr>
 			<tr>
@@ -171,7 +171,7 @@ Plan Summary
 					{{ $pricing['vat_return'] }}
 				</td>
 				<td class="col-total">
-					{{ $calc->i22 }}
+					{{ $calc->g22 }}
 				</td>
 			</tr>
 			<tr>
@@ -187,8 +187,8 @@ Plan Summary
 					<div>{{ $pricing['bookkeeping_days'] . ' (days) x  ' . $pricing['bookkeeping_day_val'] }}</div>
 				</td>
 				<td class="col-total">
-					<div>{{ $calc->i24 }}</div>
-					<div>{{ $calc->i25 }}</div>
+					<div>{{ $calc->g24 }}</div>
+					<div>{{ $calc->g25 }}</div>
 				</td>
 			</tr>
 			<tr>
@@ -204,22 +204,23 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
+					<em>no. of employees</em>
 				</td>
 				<td class="col-total">
 				</td>
 			</tr>
-			<?php $num = 30; ?>
-			@foreach($periods as $id => $period)
+			@foreach($calc->employee_payroll as $ep)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $period }}
+					{{ $ep->name }}
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $select_data['ranges'][$employee_period_ranges[$id]['range_id']] }}
+					{{ $ep->range }}
 				</td>
 				<td class="col-total">
+					{{ $ep->value }}
 				</td>
 			</tr>
 			@endforeach
@@ -236,26 +237,25 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
+					<em>no. of employees</em>
 				</td>
 				<td class="col-total">
 				</td>
 			</tr>
-			<?php $num = 38; ?>
-			@foreach($periods as $id => $period)
-			@if ($period == 'Weekly' || $period == 'Monthly')
+			@foreach($calc->sc_payroll as $sp)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $period }}
+					{{ $sp->name }}
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $select_data['ranges'][$sc_period_ranges[$id]['range_id']] }}
+					{{ $sp->range }}
 				</td>
 				<td class="col-total">
+					{{ $sp->value }}
 				</td>
 			</tr>
-			@endif
 			@endforeach
 			<tr>
 				<td colspan="4"> </td>
@@ -274,18 +274,19 @@ Plan Summary
 				<td class="col-total">
 				</td>
 			</tr>
-			<?php $num = 41; ?>
-			@foreach($modules as $id => $module)
+			@foreach($calc->modules as $mod)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $module }}
+					{{ $mod->name }}
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $boolean_select[$module_pricings[$id]] }}
+					<?php $val = $mod->value ? 'Yes' : 'No'; ?>
+					{{ $val }}
 				</td>
 				<td class="col-total">
+					{{ $mod->value }}
 				</td>
 			</tr>
 			@endforeach
@@ -302,22 +303,24 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
+					<em>qty</em>
 				</td>
 				<td class="col-total">
 				</td>
 			</tr>
 			<?php $num = 47; ?>
-			@foreach($other_services as $id => $other_service)
+			@foreach($calc->other_services as $os)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $other_service }}
+					{{ $os->name }}
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $other_service_pricings[$id] }}
+					{{ $os->qty }}
 				</td>
 				<td class="col-total">
+					{{ $os->value }}
 				</td>
 			</tr>
 			@endforeach
@@ -335,7 +338,8 @@ Plan Summary
 				</td>
 				<td class="col-val">
 				</td>
-				<td class="col-total">
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->annual_fee, '£') }}
 				</td>
 			</tr>
 			<tr>
@@ -346,7 +350,8 @@ Plan Summary
 				</td>
 				<td class="col-val">
 				</td>
-				<td>
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->monthly_cost, '£') }}
 				</td>
 			</tr>
 			<tr>
@@ -357,7 +362,8 @@ Plan Summary
 				</td>
 				<td class="col-val">
 				</td>
-				<td class="col-total">
+				<td class="col-total emphasize">
+					{{ NumFormatter::percent($calc->discount) }}
 				</td>
 			</tr>
 			<tr>
@@ -368,7 +374,8 @@ Plan Summary
 				</td>
 				<td class="col-val">
 				</td>
-				<td class="col-total">
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->total_annual_fee, '£') }}
 				</td>
 			</tr>
 			<tr>
@@ -379,7 +386,8 @@ Plan Summary
 				</td>
 				<td class="col-val">
 				</td>
-				<td class="col-total">
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->total_monthly_cost, '£') }}
 				</td>
 			</tr>
 		</table>

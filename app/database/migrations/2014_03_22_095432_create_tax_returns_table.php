@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePeriodsTable extends Migration {
+class CreateTaxReturnsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreatePeriodsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('periods', function(Blueprint $table)
+		Schema::create('tax_returns', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('amount');
+			$table->double('value');
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreatePeriodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('periods');
+		Schema::drop('tax_returns');
 	}
 
 }

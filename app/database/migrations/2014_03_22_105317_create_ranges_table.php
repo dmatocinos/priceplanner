@@ -17,6 +17,7 @@ class CreateRangesTable extends Migration {
 			$table->increments('id');
 			$table->integer('lower');
 			$table->integer('upper');
+			$table->string('range');
 		});
 	}
 

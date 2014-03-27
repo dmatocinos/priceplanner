@@ -4,12 +4,14 @@ class Range extends \Eloquent {
 
 	protected $fillable = [
 		'lower',
-		'upper'
+		'upper',
+		'range',
 	];
 
 	public static $rules = [
 		'lower' => 'required|numeric',
 		'upper' => 'required|numeric',
+		'range' => 'required',
 	];
 
 	public static function getRanges()

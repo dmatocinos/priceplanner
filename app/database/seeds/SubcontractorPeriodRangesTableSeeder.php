@@ -35,7 +35,7 @@ class SubcontractorPeriodRangesTableSeeder extends Seeder {
 				'30-34' => 85,
 				'35-39' => 100,
 				'40-49' => 125,
-				'50+' => 'POA',
+				'50+' => 0,
 			],
 			'monthly' => [ 
 				'0' => 0,
@@ -48,7 +48,7 @@ class SubcontractorPeriodRangesTableSeeder extends Seeder {
 				'30-34' => 100,
 				'35-39' => 125,
 				'40-49' => 150,
-				'50+' => 'POA',
+				'50+' => 0,
 			],
 		];
 		

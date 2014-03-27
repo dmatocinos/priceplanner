@@ -30,6 +30,7 @@ class CreatePricingsTable extends Migration {
 			$table->integer('bookkeeping_days');
 			$table->double('bookkeeping_hour_val');
 			$table->double('bookkeeping_day_val');
+			$table->double('discount');
 
 			/* foreign keys */
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

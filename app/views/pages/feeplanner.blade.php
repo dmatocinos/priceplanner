@@ -153,7 +153,7 @@ Fee Planner
 			<table class="table">
 			<tr>
 				<td class="text-right col-legend ">
-					Corporate Tax Returns
+					Corporate Tax Return
 				</td>
 				<td class="col-extra">
 				</td>
@@ -171,7 +171,7 @@ Fee Planner
 			</tr>
 			<tr>
 				<td class="text-right col-legend ">
-					Partnership Tax Returns
+					Partnership Tax Return
 				</td>
 				<td class="col-extra">
 				</td>
@@ -189,7 +189,7 @@ Fee Planner
 			</tr>
 			<tr>
 				<td class="text-right col-legend ">
-					Self-Assessment Tax Returns
+					Self-Assessment Return
 				</td>
 				<td class="col-extra">
 				</td>
@@ -309,6 +309,7 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
+						<em>no. of employees</em>
 					</td>
 					<td class="col-total">
 					</td>
@@ -343,6 +344,7 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
+						<em>no. of employees</em>
 					</td>
 					<td class="col-total">
 					</td>
@@ -432,9 +434,35 @@ Fee Planner
 				@endforeach
 			</table>
 		</div>
+		<div class="well">
+			<legend>Discount</legend>
+			<table class="table">
+				<tr>
+					<td class="text-right col-legend">
+						Discount
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					<?php $num = $num + 1; ?>
+					{{   
+						Form::text("pricing[discount]", $pricing['discount'], array(
+							'class' => 'form-control input-sm', 
+							'numbers-only'	=> 'numbers-only',
+							'required'	=> 'required',
+							'placeholder'	=> 'percentage',
+
+						));
+					}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+			</table>
+		</div>
 		<div class="col-lg-12 pull-right well">
 			<div class="pull-right">
-				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Download</button>
+				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & View Plan Summary</button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>
 			</div>
 		</div>

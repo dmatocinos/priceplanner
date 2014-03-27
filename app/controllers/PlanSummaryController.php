@@ -7,6 +7,7 @@ class PlanSummaryController extends BaseController
 	{
 		$pricing = Pricing::find($pricing_id);
 		$calc = new PlanSummaryCalculator($pricing);
+
 		$tpl_data = [
 			'select_data' => [
 				'business_types' => BusinessType::getBusinessTypes(),

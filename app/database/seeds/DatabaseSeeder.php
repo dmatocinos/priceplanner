@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AccountingTypeTableSeeder');
 		$this->call('AuditRequirementsTableSeeder');
 		$this->call('AuditRisksTableSeeder');
+		$this->call('TaxReturnsTableSeeder');
 		$this->call('BusinessTypesTableSeeder');
 		$this->call('ModulesTableSeeder');
 		$this->call('OtherServicesTableSeeder');
