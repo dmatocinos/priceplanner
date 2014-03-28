@@ -56,6 +56,25 @@ Route::get('migrate/{key?}',  array('as' => 'install', function($key = null)
        }
 }));
 
+Route::get('pull/{key?}',  array('as' => 'install', function($key = null)
+{
+       if($key == "where_are_the_cranberries"){
+               try {
+                       echo '<br>git pull origin master...';
+		       SSH::run(array(
+			       'cd /home/datay/Works/priceplannerpro/',
+			       'git pull origin master',
+		       ));
+                       echo '<br>done pulling changes.';
+
+               } catch (Exception $e) {
+		    echo $e->getMessage();
+                    Response::make($e->getMessage(), 500);
+               }
+       }else{
+               App::abort(404);
+       }
+}));
 
 /*
 |--------------------------------------------------------------------------

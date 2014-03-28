@@ -29,9 +29,9 @@ return array(
 	'connections' => array(
 
 		'production' => array(
-			'host'      => '',
-			'username'  => '',
-			'password'  => '',
+			'host'      => 'internationalpensionscheme.co.uk',
+			'username'  => 'u61744424',
+			'password'  => 'T_J2359*!!*j',
 			'key'       => '',
 			'keyphrase' => '',
 			'root'      => '/var/www',
