@@ -72,6 +72,7 @@ class BaseController extends Controller {
 		}
 		/** End adding javascripts  **/
 
+		View::share('user', $this->user);
 
 		$this->layout = View::make($this->layout);
 	}

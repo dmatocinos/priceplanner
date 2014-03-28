@@ -31,16 +31,16 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i>{{ $user->email }}&nbsp;<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+			<!--
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
-                        <li class="divider"></li>
+			-->
                         <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -54,6 +54,7 @@
         <nav class="navbar-inverse navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
+		    @yield('client')
                     <li>
                         <a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
                     </li>

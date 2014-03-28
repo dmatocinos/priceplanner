@@ -6,6 +6,7 @@ class FeePlannerController extends BaseController {
 	{
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
 		$pricing = new Pricing;
+		$client = Client::find($client_id);
 
 		$form_data = [
 			'select_data' => [
@@ -26,6 +27,7 @@ class FeePlannerController extends BaseController {
 			'other_service_pricings' => OtherServicePricing::getOtherServicePricings(),	
 			'edit'	=> FALSE,
 			'client_id' => $client_id,
+			'client_name' => $client->client_name,
 			'route' => 'feeplanner.store',
 		];
 
@@ -36,6 +38,7 @@ class FeePlannerController extends BaseController {
 	{
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
 		$pricing = Pricing::find($pricing_id);
+		$client = Client::find($pricing->client_id);		
 
 		$form_data = [
 			'select_data' => [
@@ -57,6 +60,7 @@ class FeePlannerController extends BaseController {
 			'edit'	=> TRUE,
 			'client_id' => $pricing->client_id,
 			'pricing_id' => $pricing->id,
+			'client_name' => $client->client_name,
 			'route' => 'feeplanner.update',
 		];
 
