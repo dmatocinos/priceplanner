@@ -18,7 +18,7 @@ class CreateAccountantsTable extends Migration {
 			$table->string('accountant_name');
 			$table->string('accountancy_name')->nullable();
 			$table->string('address');
-			$table->string('logo_filename');
+			$table->string('logo_filename')->nullable();
 			$table->timestamps();
 		});
 	}

@@ -24,7 +24,7 @@ Setup
 	      @if(isset($pricing_id))
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
-	      @else
+	      @elseif ($edit)
 	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
 	      @endif
 	    </ul>
