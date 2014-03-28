@@ -6,6 +6,14 @@ Plan Summary
 Plan Summary
 @stop
 
+@section('client')
+@if($client_id)
+    <li>
+	<a href="#"><i class="fa fa-male fa-fw"></i>{{ $client_name }}</a>
+    </li>
+@endif
+@stop
+
 @section('app_nav')
 	<nav id="app-nav" class="navbar navbar-default" role="navigation">
 	  <!-- Collect the nav links, forms, and other content for toggling -->
