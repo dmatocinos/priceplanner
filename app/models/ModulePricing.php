@@ -12,6 +12,11 @@ class ModulePricing extends \Eloquent {
 		'qty'	=> 'required|numeric',
 	];
 
+	public function module()
+	{
+		return $this->belongsTo('Module');
+	}
+
 	public static function getModulePricings($pricing_id = NULL)
 	{
 		$pricing = Pricing::find($pricing_id);

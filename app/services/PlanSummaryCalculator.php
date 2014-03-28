@@ -8,6 +8,8 @@
 **/
 class PlanSummaryCalculator {
 
+	const VAT = .20;
+
 	protected $pricing;
 	protected $business_types;
 	
@@ -37,6 +39,9 @@ class PlanSummaryCalculator {
 		'discount' => null,
 		'total_annual_fee' => null,
 		'total_monthly_cost' => null,
+		'total_annual_fee_tax' => null,
+		'taxed_total_annual_fee' => null,
+		'taxed_total_monthly_cost' => null,
 
 	];
 
@@ -251,6 +256,21 @@ class PlanSummaryCalculator {
 	public function getTotalMonthlyCostVal()
 	{
 		return $this->total_annual_fee / 12;
+	}
+
+	public function getTotalAnnualFeeTaxVal()
+	{
+		return $this->total_annual_fee * self::VAT;
+	}
+
+	public function getTaxedTotalAnnualFeeVal()
+	{
+		return $this->total_annual_fee + $this->total_annual_fee_tax;
+	}
+
+	public function getTaxedTotalMonthlyCostVal()
+	{
+		return $this->taxed_total_annual_fee / 12;
 	}
 
 }

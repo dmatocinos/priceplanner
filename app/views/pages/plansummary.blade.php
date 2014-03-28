@@ -23,8 +23,8 @@ Plan Summary
 	<div style="padding-top: 20px;">
 		<legend>
 			<span class="text-left">Plan Summary</span>
-			<span style="margin-top: -15px; margin-left: 5px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Appendices to Pricing Modules</a></span>
-			<span style="margin-top: -15px;" class="pull-right text-right"><a href="#" class="btn btn-info">Download Fixed Price Fee Quotation</a></span>
+			<span style="margin-top: -15px; margin-left: 5px;" class="pull-right text-right"><a href="{{ route('appendix', array($pricing_id)) }}" class="btn btn-info">Download Appendices to Pricing Modules</a></span>
+			<span style="margin-top: -15px;" class="pull-right text-right"><a href="{{ route('fixedprice', array($pricing_id)) }}" class="btn btn-info">Download Fixed Price Fee Quotation</a></span>
 		</legend>
 	</div>
 	<div>

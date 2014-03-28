@@ -53,13 +53,17 @@ class Pricing extends \Eloquent {
 		return $this->hasMany('ScPayrollPricing');
 	}
 
-	public function module_pricings()
+	public function modulePricings()
 	{
 		return $this->hasMany('ModulePricing');
 	}
 
-	public function other_service_pricings()
+	public function otherServicePricings()
 	{
 		return $this->hasMany('OtherServicePricing');
+	}
+
+	public function module()
+	{
 	}
 }

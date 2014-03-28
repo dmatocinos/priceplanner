@@ -12,6 +12,11 @@ class OtherServicePricing extends \Eloquent {
 		'qty'	=> 'required|numeric',
 	];
 
+	public function otherService()
+	{
+		return $this->belongsTo('OtherService');
+	}
+
 	public static function getOtherServicePricings($pricing_id = NULL)
 	{
 		$pricing = Pricing::find($pricing_id);
