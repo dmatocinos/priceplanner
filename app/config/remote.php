@@ -39,7 +39,7 @@ return array(
 
 		'development' => array(
 			'host'      => 'localhost',
-			'username'  => 'datay',
+			'username'  => '',
 			'password'  => '',
 			'key'       => '',
 			'keyphrase' => '',

@@ -1,3 +1,7 @@
+@section('page_title')
+Dashboard
+@stop
+
 @section('content')
 <div style="">
 	<div class="panel-heading" style="margin-top: 10px;">
