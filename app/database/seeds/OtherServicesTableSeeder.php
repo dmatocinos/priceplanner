@@ -8,7 +8,7 @@ class OtherServicesTableSeeder extends Seeder {
 			[
 				'name' => 'Business Valuation',
 				'value' => '220',
-				'description' => 'We will carry out a commercial valuation of your business using our BizValution software and produce a full report of our calculations that is suitable for your requirements.'
+				'description' => 'We will carry out a commercial valuation of your business using our BizValuation software and produce a full report of our calculations that is suitable for your requirements.'
 			],
 			[
 				'name' => 'Incorporation PLanner',
