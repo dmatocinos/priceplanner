@@ -34,9 +34,17 @@ return array(
 			'password'  => 'T_J2359*!!*j',
 			'key'       => '',
 			'keyphrase' => '',
-			'root'      => '/var/www',
+			'root'      => '/kunden/homepages/46/d354086249/htdocs/priceplannerpro-app',
 		),
 
+		'development' => array(
+			'host'      => 'localhost',
+			'username'  => 'datay',
+			'password'  => '',
+			'key'       => '',
+			'keyphrase' => '',
+			'root'      => '/var/www',
+		),
 	),
 
 	/*
