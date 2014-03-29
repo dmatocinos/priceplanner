@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class RemoveAmountFromClientPeriodsTable extends Migration {
+class RemoveAmountFromPeriodsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class RemoveAmountFromClientPeriodsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('client_periods', function(Blueprint $table)
+		Schema::table('periods', function(Blueprint $table)
 		{
 			$table->dropColumn('amount');
 		});
@@ -26,7 +26,7 @@ class RemoveAmountFromClientPeriodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('client_periods', function(Blueprint $table)
+		Schema::table('periods', function(Blueprint $table)
 		{
 			$table->double('amount');
 		});
