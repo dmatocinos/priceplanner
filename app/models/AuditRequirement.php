@@ -6,14 +6,12 @@ class AuditRequirement extends \Eloquent {
 		'name',
 		'qty',
 		'label',
-		'value'
 	];
 
 	public static $rules = [
 		'name'	=> 'required',
 		'qty' => 'required|numeric',
 		'label' => 'required',
-		'value'	=> 'required'
 	];
 
 	public static function getAuditRequirements()

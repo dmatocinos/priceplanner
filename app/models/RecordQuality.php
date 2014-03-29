@@ -4,13 +4,11 @@ class RecordQuality extends \Eloquent {
 
 	protected $fillable = [
 		'name',
-		'percentage',
 		'accounting_type_id'
 	];
 
 	public static $rules = [
 		'name'	=> 'required',
-		'percentage' => 'required|numeric',
 	];
 
 	public static function getRecordQualities()

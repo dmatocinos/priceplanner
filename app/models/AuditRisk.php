@@ -4,14 +4,10 @@ class AuditRisk extends \Eloquent {
 
 	protected $fillable = [
 		'name',
-		'qty',
-		'percentage',
 	];
 
 	public static $rules = [
 		'name'	=> 'required',
-		'qty' => 'required|numeric',
-		'percentage' => 'required',
 	];
 
 	public static function getAuditRisks()

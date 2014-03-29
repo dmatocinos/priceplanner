@@ -4,12 +4,10 @@ class Module extends \Eloquent {
 
 	protected $fillable = [
 		'name',
-		'value',
 	];
 
 	public static $rules = [
 		'name'	=> 'required',
-		'value' => 'required|numeric',
 	];
 
 	public static function getModules()
