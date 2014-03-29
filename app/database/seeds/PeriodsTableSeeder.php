@@ -8,18 +8,23 @@ class PeriodsTableSeeder extends Seeder {
 		$data = array(
 			[
 				'name' => 'Weekly',
+				'amount' => 52,
 			],
 			[
 				'name' => 'Forthnightly',
+				'amount' => 26,
 			],
 			[
 				'name' => 'Four Weekly',
+				'amount' => 13,
 			],
 			[
 				'name' => 'Monthly',
+				'amount' => 12,
 			],
 			[
 				'name' => 'Annually',
+				'amount' => 1,
 			],
 		);
 
