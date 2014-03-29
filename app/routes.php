@@ -91,22 +91,29 @@ Route::get('/', 'AuthController@getSignin');
 
 Route::group(array('before' => 'auth'), function() {
 	Route::get("home", "HomeController@index");
-	/* routes for setup page */
+
+	# setup  
 	Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
 	Route::get("setup/edit/{client_id}", array('as' => 'setup.edit', 'uses' => 'SetupController@edit'));
 	Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
 	Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
 
-	/* routes for fee planner page */
+	# fee levels
+	Route::get("feelevels/{client_id}", array('as' => 'feelevels.create', 'uses' => 'FeeLevelController@create'));
+	Route::get("feelevels/edit/{client_id}", array('as' => 'feelevels.edit', 'uses' => 'FeeLevelController@edit'));
+	Route::put("feelevels/create", array('as' => 'feelevels.store', 'uses' => 'FeeLevelController@store'));
+	Route::put("feelevels/edit", array('as' => 'feelevels.update', 'uses' => 'FeeLevelController@update'));
+
+	# fee planner 
 	Route::get("feeplanner/{client_id}", array('as' => 'feeplanner.create', 'uses' => 'FeePlannerController@create'));
 	Route::get("feeplanner/edit/{pricing_id}", array('as' => 'feeplanner.edit', 'uses' => 'FeePlannerController@edit'));
 	Route::put("feeplanner/create", array('as' => 'feeplanner.store', 'uses' => 'FeePlannerController@store'));
 	Route::put("feeplanner/edit", array('as' => 'feeplanner.update', 'uses' => 'FeePlannerController@update'));
 
-	/* routes for plan summary */
+	# plan summary 
 	Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
 
-	/* report */
+	# report 
 	Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
 	Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
 });

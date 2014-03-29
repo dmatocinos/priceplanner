@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Price Planner Pro | @yield('page_title') </title>
+    <title>@yield('page_title') | Price Planner Pro</title>
     {{ Asset::container('header')->styles() }}
 
 </head>

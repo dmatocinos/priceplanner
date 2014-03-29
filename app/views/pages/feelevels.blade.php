@@ -20,13 +20,13 @@ Setup
 	  <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Setup</a></li>
+	      <li class=""><a href="#">Setup</a></li>
 	      @if(isset($pricing_id))
-	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
+	      <li class="active"><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
 	      @elseif ($edit)
-	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
+	      <li class="active"><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
 	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
 	      @endif
 	    </ul>
@@ -36,14 +36,14 @@ Setup
 
 @section('content')
 	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'bs-example form-horizontal', 'ng-controller' => 'PPCtrl', 'files' => true)) }}
+		{{  Form::hidden('client_id', $client['id']) }}
+		{{  Form::hidden('accountant_id', $client['accountant_id']) }}
 		@if ($edit)
-			{{  Form::hidden('client[id]', $client['id']) }}
-			{{  Form::hidden('client[accountant_id]', $client['accountant_id']) }}
-			{{  Form::hidden('accountant[id]', $accountant['id']) }}
+			{{  Form::hidden('client_id', $client['id']) }}
 		@endif	
 	<div class="well">
 		<fieldset>
-		  <legend>Client Information</legend>
+		  <legend>Type of Business</legend>
 		  <div class="form-group">
 		    <label for="client[business_name]" class="col-lg-2 control-label">Business Name</label>
 		    <div class="col-lg-4">
