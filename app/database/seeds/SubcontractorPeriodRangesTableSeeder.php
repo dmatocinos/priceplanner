@@ -59,7 +59,6 @@ class SubcontractorPeriodRangesTableSeeder extends Seeder {
 				$data[] = [
 					'range_id' => $ranges[$rid],
 					'period_id' => $periods[$pid],
-					'value'	=> $val
 				];
 			}
 		}

@@ -8,12 +8,10 @@ class AuditRequirementsTableSeeder extends Seeder {
 			[
 				'label' => 'Yes',
 				'qty'	=> 1,
-				'value' => '2500',
 			],
 			[
 				'label' => 'No',
 				'qty'	=> 0,
-				'value' => '0',
 			],
 		);
 

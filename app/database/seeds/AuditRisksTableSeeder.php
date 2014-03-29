@@ -7,15 +7,12 @@ class AuditRisksTableSeeder extends Seeder {
 		$data = array(
 			[
 				'name' => 'Low',
-				'percentage' => '100',
 			],
 			[
 				'name' => 'Medium',
-				'percentage' => '150',
 			],
 			[
 				'name' => 'High',
-				'percentage' => '200',
 			],
 		);
 

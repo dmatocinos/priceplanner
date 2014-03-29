@@ -7,15 +7,12 @@ class TaxReturnsTableSeeder extends Seeder {
 		$data = array (
 			[
 				'name' => 'Coporation Tax Return',
-				'value' => '100',
 			],
 			[
 				'name' => 'Partnership Tax Return',
-				'value' => '120',
 			],
 			[
 				'name' => 'Self-Assessment Return',
-				'value' => '150',
 			],
 		);
 
