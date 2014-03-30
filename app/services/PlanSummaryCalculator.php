@@ -11,7 +11,6 @@ class PlanSummaryCalculator {
 	const VAT = .20;
 
 	protected $pricing;
-	protected $business_types;
 	
 	protected $summary_data = [
 		
@@ -48,8 +47,6 @@ class PlanSummaryCalculator {
 	public function __construct(Pricing $pricing) 
 	{
 		$this->pricing = $pricing;
-		$this->business_types = DB::table('business_types')->lists('base_fee', 'id');
-		$this->turnover_ranges = DB::table('turnover_ranges')->get();
 	}
 	
 	public function __get($name)
@@ -65,30 +62,35 @@ class PlanSummaryCalculator {
 
 	public function getF7Val()
 	{
-		return DB::table('turnover_ranges')
-					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
-					->pluck('modifier') / 100;
+		return DB::table('client_turnover_ranges')
+				->join('turnover_ranges', 'turnover_ranges.id', '=', 'client_turnover_ranges.turnover_range_id')
+				->where('client_id', $this->pricing->client_id)
+				->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+				->pluck('modifier') / 100;
 	}
 
 	public function getF11Val()
 	{
-		return DB::table('record_qualities')
+		return DB::table('client_record_qualities')
+				->where('client_id', $this->pricing->client_id)
 				->where('accounting_type_id', $this->pricing->accounting_type_id)
-				->where('id', $this->pricing->record_quality_id)
+				->where('record_quality_id', $this->pricing->record_quality_id)
 				->pluck('percentage') / 100;
 	}
 
 	public function getF15Val()
 	{
-		return DB::table('audit_risks')
-				->where('id', $this->pricing->audit_risk_id)
+		return DB::table('client_audit_risks')
+				->where('audit_risk_id', $this->pricing->audit_risk_id)
+				->where('client_id', $this->pricing->client_id)
 				->pluck('percentage') / 100;
 	}
 
 	public function getG5Val()
 	{
-		return (integer) DB::table('business_types')
-					->where('id', $this->pricing->business_type_id)
+		return (integer) DB::table('client_business_types')
+					->where('business_type_id', $this->pricing->business_type_id)
+					->where('client_id', $this->pricing->client_id)
 					->pluck('base_fee');
 	}
 
@@ -114,7 +116,8 @@ class PlanSummaryCalculator {
 
 	public function getG15Val()
 	{
-		$val = (integer) DB::table('audit_requirements')
+		$val = (integer) DB::table('client_audit_requirements')
+					->where('client_id', $this->pricing->client_id)
 					->where('id', $this->pricing->audit_requirement_id)
 					->pluck('value');
 
@@ -124,8 +127,10 @@ class PlanSummaryCalculator {
 	public function getG18Val()
 	{
 		// TODO : make this similar to other_services
-		$val = (integer) DB::table('tax_returns')
+		$val = (integer) DB::table('client_tax_returns')
+					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
 					->where('name', 'Corporation Tax Return')
+					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->corporate_tax_return;
 
 		return $val;
@@ -134,8 +139,10 @@ class PlanSummaryCalculator {
 	public function getG19Val()
 	{
 		// TODO : make this similar to other_services
-		$val = (integer) DB::table('tax_returns')
+		$val = (integer) DB::table('client_tax_returns')
+					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
 					->where('name', 'Partnership Tax Return')
+					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->partnership_tax_return;
 		return $val;
 	}
@@ -143,8 +150,10 @@ class PlanSummaryCalculator {
 	public function getG20Val()
 	{
 		// TODO : make this similar to other_services
-		$val = (integer) DB::table('tax_returns')
+		$val = (integer) DB::table('client_tax_returns')
+					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
 					->where('name', 'Self-Assessment Return')
+					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->self_assessment_tax_return;
 		return $val;
 	}
@@ -168,9 +177,11 @@ class PlanSummaryCalculator {
 	{
 		$epp = DB::table('employee_payroll_pricings')
 				->join('employee_period_ranges', 'employee_payroll_pricings.employee_period_range_id', '=', 'employee_period_ranges.id')
+				->join('client_employee_period_ranges', 'client_employee_period_ranges.employee_period_range_id', '=', 'employee_period_ranges.id')
 				->join('periods', 'employee_period_ranges.period_id', '=', 'periods.id')
 				->join('ranges', 'employee_period_ranges.range_id', '=', 'ranges.id')
-            			->select(DB::raw('periods.name, ranges.range, employee_period_ranges.value * amount AS value'))
+            			->select(DB::raw('periods.name, ranges.range, value * amount AS value'))
+				->where('client_employee_period_ranges.client_id', $this->pricing->client_id)
 				->where('pricing_id', $this->pricing->id)
 				->orderBy('period_id')
 				->get();
@@ -182,10 +193,12 @@ class PlanSummaryCalculator {
 	{
 		$spp = DB::table('sc_payroll_pricings')
 				->join('subcontractor_period_ranges', 'sc_payroll_pricings.sc_period_range_id', '=', 'subcontractor_period_ranges.id')
+				->join('client_subcontractor_period_ranges', 'client_subcontractor_period_ranges.subcontractor_period_range_id', '=', 'subcontractor_period_ranges.id')
 				->join('periods', 'subcontractor_period_ranges.period_id', '=', 'periods.id')
 				->join('ranges', 'subcontractor_period_ranges.range_id', '=', 'ranges.id')
-            			->select(DB::raw('periods.name, ranges.range, subcontractor_period_ranges.value * amount AS value'))
+            			->select(DB::raw('periods.name, ranges.range, value * amount AS value'))
 				->where( 'pricing_id', $this->pricing->id)
+				->where('client_subcontractor_period_ranges.client_id', $this->pricing->client_id)
 				->orderBy('period_id')
 				->get();
 		return $spp;
@@ -195,9 +208,11 @@ class PlanSummaryCalculator {
 	{
 		$mp = DB::table('module_pricings')
 				->join('modules', 'modules.id', '=', 'module_pricings.module_id')
+				->join('client_modules', 'modules.id', '=', 'client_modules.module_id')
             			->select(DB::raw('modules.name, qty, qty * value AS value'))
 				->where( 'pricing_id', $this->pricing->id)
-				->orderBy('module_id')
+				->where('client_modules.client_id', $this->pricing->client_id)
+				->orderBy('modules.id')
 				->get();
 
 		return $mp;
@@ -207,9 +222,11 @@ class PlanSummaryCalculator {
 	{
 		$osp = DB::table('other_service_pricings')
 				->join('other_services', 'other_services.id', '=', 'other_service_pricings.other_service_id')
+				->join('client_other_services', 'other_services.id', '=', 'client_other_services.other_service_id')
             			->select(DB::raw('other_services.name, qty, qty * value AS value'))
 				->where( 'pricing_id', $this->pricing->id)
-				->orderBy('other_service_id')
+				->where('client_other_services.client_id', $this->pricing->client_id)
+				->orderBy('other_services.id')
 				->get();
 
 		return $osp;
