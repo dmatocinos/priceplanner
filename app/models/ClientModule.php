@@ -7,6 +7,8 @@ class ClientModule extends \Eloquent {
 		'module_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

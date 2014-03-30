@@ -25,9 +25,11 @@ Setup
 	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
-	      @elseif ($edit)
-	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
+	      @elseif ($edit && ! $has_fee_levels)
 	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
+	      @elseif (isset($has_fee_levels) && $has_fee_levels)
+	      <li class=""><a href="{{ url('feelevels/edit/' . $client_id) }}">Fee Levels</a></li>
+	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
 	      @endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->

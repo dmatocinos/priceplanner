@@ -16,4 +16,15 @@ class EmployeePeriodRange extends \Eloquent {
 		return $res;
 	}
 
+	public function range()
+	{
+		return $this->belongsTo('Range');
+	}
+
+	public function period()
+	{
+		return $this->belongsTo('Period');
+	}
+
+
 }

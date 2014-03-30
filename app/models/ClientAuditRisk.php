@@ -7,6 +7,8 @@ class ClientAuditRisk extends \Eloquent {
 		'audit_risk_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

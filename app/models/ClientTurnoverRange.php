@@ -7,6 +7,8 @@ class ClientTurnoverRange extends \Eloquent {
 		'turnover_range_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

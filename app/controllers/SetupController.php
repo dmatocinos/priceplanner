@@ -29,6 +29,7 @@ class SetupController extends BaseController {
 				'client' => $client->getAttributes(),
 				'accountant' => $client->accountant->toArray(),
 				'edit'	=> TRUE,
+				'has_fee_levels' => $client->hasOne('ClientBusinessType')->getResults(),
 				'route' => 'setup.update',
 				'client_id' => $client_id,
 				'pricing_id' =>  $pricing ? $pricing->id : NULL
@@ -82,7 +83,7 @@ class SetupController extends BaseController {
 
 		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
+		       ? $client->hasOne('ClientBusinessType')->getResults() ? 'feelevels/edit/' . $client->id : 'feelevels/' . $client->id
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)
@@ -144,7 +145,7 @@ class SetupController extends BaseController {
 
 		$pricing = $client->pricing()->first();
 		$route = isset($input['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
+		       ? $client->hasOne('ClientBusinessType')->getResults() ? 'feelevels/edit/' . $client->id : 'feelevels/' . $client->id
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)

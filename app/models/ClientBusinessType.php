@@ -7,6 +7,8 @@ class ClientBusinessType extends \Eloquent {
 		'business_type_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

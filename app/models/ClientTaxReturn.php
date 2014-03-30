@@ -7,6 +7,8 @@ class ClientTaxReturn extends \Eloquent {
 		'tax_return_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

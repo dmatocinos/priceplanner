@@ -7,6 +7,8 @@ class ClientAuditRequirement extends \Eloquent {
 		'audit_requirement_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

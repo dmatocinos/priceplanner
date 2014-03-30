@@ -16,8 +16,10 @@ class CreateClientRecordQualities extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('percentage');
+			$table->integer('accounting_type_id')->unsigned()->index();
 			$table->integer('client_id')->unsigned()->index();
 			$table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+			$table->foreign('accounting_type_id')->references('id')->on('accounting_types')->onDelete('cascade');
 		});
 	}
 

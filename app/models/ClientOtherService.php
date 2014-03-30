@@ -7,6 +7,8 @@ class ClientOtherService extends \Eloquent {
 		'other_service_id'
 	];
 
+	public $timestamps = false;
+
 	public function client()
 	{
 		return $this->belongsTo('Client');

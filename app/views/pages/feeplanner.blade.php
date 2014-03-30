@@ -20,10 +20,11 @@ Fee Planner
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class=""><a href="{{ url('setup/edit/' . $client_id) }}">Setup</a></li>
+	      <li class=""><a href="{{ url('feelevels/edit/' . $client_id) }}">Fee Levels</a></li>
 	      <li class="active"><a href="#">Fee Planner</a></li>
-		@if(isset($pricing_id))
+	      @if(isset($pricing_id))
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
-		@endif
+	      @endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
@@ -388,7 +389,6 @@ Fee Planner
 		<div class="well">
 			<legend>Modules</legend>
 			<table class="table">
-				<?php $num = 41; ?>
 				@foreach($modules as $id => $module)
 				<tr>
 					<td class="text-right col-legend">
@@ -397,12 +397,9 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-					<?php $num = $num + 1; ?>
 					{{   
 						Form::select("module_pricings[{$id}]", [1 => 'Yes', 0 => 'No'], $module_pricings[$id], array(
 							'class' => 'form-control input-sm', 
-							//'ng-model' 	=> 'E' . $num, 
-							//'ng-init' 	=> "E{$num}=''", 
 						));
 					}}
 					</td>
@@ -415,7 +412,6 @@ Fee Planner
 		<div class="well">
 			<legend>Other Services</legend>
 			<table class="table">
-				<?php $num = 47; ?>
 				@foreach($other_services as $id => $other_service)
 				<tr>
 					<td class="text-right col-legend">
@@ -424,11 +420,11 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-					<?php $num = $num + 1; ?>
 					{{   
 						Form::text("other_service_pricings[{$id}]", $other_service_pricings[$id], array(
 							'class' => 'form-control input-sm', 
-						//	'ng-model' 	=> 'E' . $num, 
+							'ng-model' 	=> 'other_services' . $id, 
+							'ng-init' 	=> "other_services{$id}='{$other_service_pricings[$id]}'", 
 							'numbers-only'	=> 'numbers-only',
 							'required'	=> 'required',
 							'placeholder'	=> 'qty',
@@ -452,10 +448,11 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-					<?php $num = $num + 1; ?>
 					{{   
 						Form::text("pricing[discount]", $pricing['discount'], array(
 							'class' => 'form-control input-sm', 
+							'ng-model' 	=> 'discount', 
+							'ng-init' 	=> "discount='{$pricing['discount']}'", 
 							'numbers-only'	=> 'numbers-only',
 							'required'	=> 'required',
 							'placeholder'	=> 'percentage',

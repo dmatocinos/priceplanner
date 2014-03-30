@@ -4,8 +4,11 @@ class ClientRecordQuality extends \Eloquent {
 	protected $fillable = [
 		'percentage',
 		'client_id',
-		'record_quality_id'
+		'record_quality_id',
+		'accounting_type_id'
 	];
+
+	public $timestamps = false;
 
 	public function client()
 	{
