@@ -48,8 +48,8 @@ class PlanSummaryCalculator {
 	public function __construct(Pricing $pricing) 
 	{
 		$this->pricing = $pricing;
-		$this->business_types = DB::table('business_types')->lists('base_fee', 'id');
-		$this->turnover_ranges = DB::table('turnover_ranges')->get();
+		//$this->business_types = DB::table('business_types')->lists('base_fee', 'id');
+		//$this->turnover_ranges = DB::table('turnover_ranges')->get();
 	}
 	
 	public function __get($name)
@@ -66,30 +66,42 @@ class PlanSummaryCalculator {
 	public function getF7Val()
 	{
 		return DB::table('turnover_ranges')
-					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
-					->pluck('modifier') / 100;
+			->join('client_turnover_ranges', 'turnover_ranges.id', '=', 'client_turnover_ranges.turnover_range_id')
+			->where('client_turnover_ranges.client_id', '=', $this->pricing->client->id)
+			->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND upper")
+			->pluck('modifier') / 100;
 	}
 
 	public function getF11Val()
 	{
 		return DB::table('record_qualities')
+				->join('client_record_qualities', 'record_qualities.id', '=', 'client_record_qualities.record_quality_id')
 				->where('accounting_type_id', $this->pricing->accounting_type_id)
-				->where('id', $this->pricing->record_quality_id)
+				->where('record_qualities.id', $this->pricing->record_quality_id)
 				->pluck('percentage') / 100;
 	}
 
 	public function getF15Val()
 	{
+		return $this->pricing->audit_risk()
+			->pluck('percentage') / 100;
+		/*
 		return DB::table('audit_risks')
 				->where('id', $this->pricing->audit_risk_id)
 				->pluck('percentage') / 100;
+		 */
 	}
 
 	public function getG5Val()
 	{
+		return (integer) $this->pricing->business_type
+			->client_business_type
+			->pluck('base_fee');
+		/*
 		return (integer) DB::table('business_types')
 					->where('id', $this->pricing->business_type_id)
 					->pluck('base_fee');
+		 */
 	}
 
 	public function getG7Val()
@@ -115,8 +127,9 @@ class PlanSummaryCalculator {
 	public function getG15Val()
 	{
 		$val = (integer) DB::table('audit_requirements')
-					->where('id', $this->pricing->audit_requirement_id)
-					->pluck('value');
+			->join('client_audit_requirements', 'audit_requirements.id', '=', 'client_audit_requirements.audit_requirement_id')
+			->where('audit_requirements.id', $this->pricing->audit_requirement_id)
+			->pluck('value');
 
 		return ($val ? ($val * $this->f15) : 0);
 	}
@@ -125,8 +138,9 @@ class PlanSummaryCalculator {
 	{
 		// TODO : make this similar to other_services
 		$val = (integer) DB::table('tax_returns')
-					->where('name', 'Corporation Tax Return')
-					->pluck('value') * $this->pricing->corporate_tax_return;
+			->join('client_tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
+			->where('name', 'Corporation Tax Return')
+			->pluck('value') * $this->pricing->corporate_tax_return;
 
 		return $val;
 	}
@@ -135,8 +149,10 @@ class PlanSummaryCalculator {
 	{
 		// TODO : make this similar to other_services
 		$val = (integer) DB::table('tax_returns')
-					->where('name', 'Partnership Tax Return')
-					->pluck('value') * $this->pricing->partnership_tax_return;
+			->join('client_tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
+			->where('name', 'Partnership Tax Return')
+			->pluck('value') * $this->pricing->partnership_tax_return;
+
 		return $val;
 	}
 
@@ -144,8 +160,10 @@ class PlanSummaryCalculator {
 	{
 		// TODO : make this similar to other_services
 		$val = (integer) DB::table('tax_returns')
-					->where('name', 'Self-Assessment Return')
-					->pluck('value') * $this->pricing->self_assessment_tax_return;
+			->join('client_tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
+			->where('name', 'Self-Assessment Return')
+			->pluck('value') * $this->pricing->self_assessment_tax_return;
+
 		return $val;
 	}
 
