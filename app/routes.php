@@ -90,6 +90,13 @@ Route::get('pull/{key?}',  array('as' => 'install', function($key = null)
 Route::get('/', 'AuthController@getSignin');
 
 Route::group(array('before' => 'auth'), function() {
+	# payment
+	Route::get('subscribe', array('as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe'));
+	Route::get('start_payment/{period}', array('as' => 'start_payment', 'uses' => 'SubscriptionController@startPayment'));
+	Route::get('cancel_payment', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
+	Route::get('complete_payment/{period}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
+	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
+
 	Route::get("home", "HomeController@index");
 
 	# setup  

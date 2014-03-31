@@ -66,6 +66,11 @@ class AuthController extends BaseController {
 				
 			// save user info to the current session
 			Session::put('practicepro_user', $practicepro_user[0]);
+
+			$user = Sentry::getUser();
+			if ( ! $user->is_subscribed) {
+				return Redirect::route('subscribe');
+			}
 			
 			/*
 			if ( ! $this->isValid($user)) {

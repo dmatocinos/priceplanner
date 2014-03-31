@@ -10,6 +10,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
 class PracticeProUser extends Eloquent implements UserInterface, RemindableInterface {
+
 	/**
 	 * Default password
 	 *
@@ -18,17 +19,33 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	const APP_PASSWORD = "r3mun3r@t1on!";
 	
 	/**
-	 * The database name used by the model.
+	 * The database connection name where the
+	 * table's database is located
 	 *
 	 * @var string
 	 */
-	protected $connection = 'mysql_practicepro_users';
+	protected $connection = 'practicepro_users';
+
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
 	protected $table = 'practice_pro_login';
+
+	/**
+	 * Table's primary key
+	 *
+	 * @var string
+	 */
+	protected $primaryKey = 'mh2_id';
+
+	/**
+	 * There are no updated_at and created_At column
+	 *
+	 * @var boolean
+	 */
+	public $timestamps = FALSE;
 	
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -45,6 +62,39 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 				'email'    => $email,
 				'password' => md5($password)
 			));
+	}
+
+	/**
+	 * User - PracticeProUser relationship definition
+	 *
+	 */
+	public function user()
+	{
+		return $this->hasOne('User', 'username', 'mh2_id');
+	}
+
+
+	/**
+	 * L4 needs to be updated to 4.1.x for this to work. For now, let's use accessor
+	 *
+	public function pricing()
+	{
+		return $this->belongsTo('Pricing', 'membership_level', 'mh2_membership_level');
+	}
+	*/
+	public function getAppPricingAttribute()
+	{
+		return AppPricing::where('membership_level', '=', $this->membership_level)->first();
+	}
+
+	/**
+	 * Alias to mh2_membership_level attribute
+	 *
+	 * @return string
+	 */
+	public function getMembershipLevelAttribute()
+	{
+		return (empty($this->mh2_membership_level) ? 'Pay as you go' : $this->mh2_membership_level);
 	}
 
 	/**
