@@ -15,7 +15,6 @@ class CreateEmployeePeriodRangesTable extends Migration {
 		Schema::create('employee_period_ranges', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('value');
 			$table->timestamps();
 
 			$table->integer('range_id')->unsigned()->index();

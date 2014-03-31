@@ -16,7 +16,6 @@ class CreateRecordQualitiesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->double('percentage');
 		});
 	}
 

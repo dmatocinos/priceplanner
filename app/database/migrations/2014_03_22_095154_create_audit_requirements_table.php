@@ -17,7 +17,6 @@ class CreateAuditRequirementsTable extends Migration {
 			$table->increments('id');
 			$table->integer('qty');
 			$table->string('label');
-			$table->double('value');
 		});
 	}
 

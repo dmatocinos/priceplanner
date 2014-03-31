@@ -17,7 +17,6 @@ class CreateTurnoverRangesTable extends Migration {
 			$table->increments('id');
 			$table->string('lower');
 			$table->string('upper');
-			$table->double('modifier');
 		});
 	}
 

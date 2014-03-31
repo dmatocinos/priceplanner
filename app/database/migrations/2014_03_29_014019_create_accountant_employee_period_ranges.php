@@ -16,11 +16,11 @@ class CreateAccountantEmployeePeriodRanges extends Migration {
 		{
 			$table->increments('id');
 			$table->double('value');
-			$table->integer('accountant_id')->unsigned()->index();
-			$table->integer('employee_period_range_id')->unsigned()->index();
+			$table->integer('accountant_id')->unsigned();
+			$table->integer('employee_period_range_id')->unsigned();
 
-			$table->foreign('accountant_id')->references('id')->on('accountants')->onDelete('cascade');
-			$table->foreign('employee_period_range_id')->references('id')->on('employee_period_ranges')->onDelete('cascade');
+			$table->foreign('accountant_id', 'aeppr_accountant_id_fk')->references('id')->on('accountants')->onDelete('cascade');
+			$table->foreign('employee_period_range_id', 'aeppr_employee_period_range_id_fk')->references('id')->on('employee_period_ranges')->onDelete('cascade');
 		});
 	}
 

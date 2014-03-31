@@ -16,11 +16,11 @@ class CreateAccountantSubcontractorPeriodRanges extends Migration {
 		{
 			$table->increments('id');
 			$table->double('value');
-			$table->integer('accountant_id')->unsigned()->index();
-			$table->integer('subcontractor_period_range_id')->unsigned()->index();
+			$table->integer('accountant_id')->unsigned();
+			$table->integer('subcontractor_period_range_id')->unsigned();
 
-			$table->foreign('accountant_id')->references('id')->on('accountants')->onDelete('cascade');
-			$table->foreign('subcontractor_period_range_id')->references('id')->on('subcontractor_period_ranges')->onDelete('cascade');
+			$table->foreign('accountant_id', 'aspr_accountant_id_fk')->references('id')->on('accountants')->onDelete('cascade');
+			$table->foreign('subcontractor_period_range_id', 'aspr_subcontraction_period_range_id_fk')->references('id')->on('subcontractor_period_ranges')->onDelete('cascade');
 		});
 	}
 

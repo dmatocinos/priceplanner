@@ -16,7 +16,6 @@ class CreateBusinessTypesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('base_fee');
 		});
 	}
 
