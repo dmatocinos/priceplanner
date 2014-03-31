@@ -104,6 +104,22 @@
 
     </div>
     <!-- /#wrapper -->
+    <div class='notifications bottom-left'>
+	    <div style="float:left; width: 350px;">
+			<div style="width: 230px;">
+				<a href="http://app.bizvaluation.co.uk" class="thumbnail" title=" Create a professional business valuation in just 15 minutes"><img src="{{ url('../images/app-logos/bizvaluation_logo.png') }}" style="width: 200px; padding: 10px 0;"/></a>
+			</div>
+			<div style="width: 230px;">
+				<a href="http://practicepro.co.uk/incorporation/public/" class="thumbnail" title="Show your clients the potential tax savings of incorporating their business"><img src="{{ url('../images/app-logos/incorporationplannerpro_logo.png') }}" style="width: 95%;"/></a>
+			</div>
+			<div style="width: 230px;">
+				<a href="http://remunerationpro.practicepro.co.uk/" class="thumbnail" title="Maximise your clients' personal income"><img src="{{ url('../images/app-logos/remuneration_logo.png') }}" style="width: 80%;"/></a>
+			</div>
+			<div style="width: 230px;">
+				<a href="http://virtualfdpro.practicepro.co.uk/" class="thumbnail" title="Help your clients achieve their goals"><img src="{{ url('../images/app-logos/virtualfdpro_logo.jpg') }}" style="width: 100%; padding: 5px;"/></a>
+			</div>
+	    </div>
+    </div>
 
     {{ Asset::container('footer')->scripts() }}
 

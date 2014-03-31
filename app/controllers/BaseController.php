@@ -41,6 +41,7 @@ class BaseController extends Controller {
 		Asset::container('header')->add('bootstrap-css', 'plugins/bootstrap/css/bootstrap.min.css');
 		Asset::container('header')->add('fontawesome-css', 'plugins/font-awesome/css/font-awesome.min.css');
 		Asset::container('header')->add('sb-admin-css', 'css/base/sb-admin.css');
+		Asset::container('header')->add('notify-css', 'css/base/notify.css');
 	
 		if ($this->layout != 'layout.auth') {
 			Asset::container('header')->add('datepicker-css', 'plugins/datepicker/css/datepicker.css');
