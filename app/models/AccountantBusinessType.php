@@ -9,7 +9,7 @@ class AccountantBusinessType extends \Eloquent {
 
 	public $timestamps = false;
 
-	public function Accountant()
+	public function accountant()
 	{
 		return $this->belongsTo('Accountant');
 	}
