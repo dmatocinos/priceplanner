@@ -67,9 +67,17 @@ class FeeLevelController extends BaseController {
 						->where('client_id', $client->id)
 						->pluck('value'),
 
-			'record_qualities' => DB::table('client_record_qualities')
-						->where('client_id', $client->id)
-						->lists('percentage', 'record_quality_id'),
+			'record_qualities' => [ 
+						1 => DB::table('client_record_qualities')
+							->where('client_id', $client->id)
+							->where('accounting_type_id', 1)
+							->lists('percentage', 'record_quality_id'),
+
+						2 => DB::table('client_record_qualities')
+							->where('client_id', $client->id)
+							->where('accounting_type_id', 2)
+							->lists('percentage', 'record_quality_id'),
+			],
 
 			'employee_period_ranges' => ClientEmployeePeriodRange::getClientEmployeePeriodRanges($client_id),
 
@@ -266,6 +274,10 @@ class FeeLevelController extends BaseController {
 		$input = $all['fee_levels'];
 		$client = Client::find($all['client_id']);
 		$pricing = $client->pricing()->first();
+
+//var_dump('<pre>');
+//dd($input);
+//var_dump('</pre>');
 
 		// saving client business_types
 		ClientBusinessType::where('client_id', $client->id)->delete();

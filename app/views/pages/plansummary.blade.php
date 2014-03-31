@@ -20,6 +20,7 @@ Plan Summary
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li><a href="{{ url('setup/edit/' . $client_id) }}">Setup</a></li>
+	      <li class=""><a href="{{ url('feelevels/edit/' . $client_id) }}">Fee Levels</a></li>
 	      <li><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
 	      <li class="active"><a href="#">Plan Summary</a></li>
 	    </ul>
@@ -137,7 +138,8 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $pricing['corporate_tax_return'] }}
+					<?php $val = $pricing['corporate_tax_return'] ? 'Yes' : 'No'; ?>
+					{{ $val }}
 				</td>
 				<td class="col-total">
 					{{ $calc->g18 }}
@@ -150,7 +152,8 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $pricing['partnership_tax_return'] }}
+					<?php $val = $pricing['partnership_tax_return'] ? 'Yes' : 'No'; ?>
+					{{ $val }}
 				</td>
 				<td class="col-total">
 					{{ $calc->g19 }}

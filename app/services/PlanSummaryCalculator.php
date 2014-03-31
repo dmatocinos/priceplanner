@@ -118,7 +118,7 @@ class PlanSummaryCalculator {
 	{
 		$val = (integer) DB::table('client_audit_requirements')
 					->where('client_id', $this->pricing->client_id)
-					->where('id', $this->pricing->audit_requirement_id)
+					->where('audit_requirement_id', $this->pricing->audit_requirement_id)
 					->pluck('value');
 
 		return ($val ? ($val * $this->f15) : 0);
@@ -127,9 +127,9 @@ class PlanSummaryCalculator {
 	public function getG18Val()
 	{
 		// TODO : make this similar to other_services
-		$val = (integer) DB::table('client_tax_returns')
+		$val = DB::table('client_tax_returns')
 					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
-					->where('name', 'Corporation Tax Return')
+					->where('tax_return_id', 1)
 					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->corporate_tax_return;
 
@@ -141,7 +141,7 @@ class PlanSummaryCalculator {
 		// TODO : make this similar to other_services
 		$val = (integer) DB::table('client_tax_returns')
 					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
-					->where('name', 'Partnership Tax Return')
+					->where('tax_return_id', 2)
 					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->partnership_tax_return;
 		return $val;
@@ -152,7 +152,8 @@ class PlanSummaryCalculator {
 		// TODO : make this similar to other_services
 		$val = (integer) DB::table('client_tax_returns')
 					->join('tax_returns', 'tax_returns.id', '=', 'client_tax_returns.tax_return_id')
-					->where('name', 'Self-Assessment Return')
+					->where('tax_return_id', 3)
+					->where('client_id', $this->pricing->client_id)
 					->where('client_id', $this->pricing->client_id)
 					->pluck('value') * $this->pricing->self_assessment_tax_return;
 		return $val;

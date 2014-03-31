@@ -109,7 +109,7 @@ Fee Levels
 			  <div class="form-group">
 		    	    <label class="col-lg-4 control-label">{{ $name }}</label>
 			  @foreach([1,2] as $ac_id)
-			    <?php $val = isset($client['record_qualities'][$id]) ? $client['record_qualities'][$id] : '' ?>
+			    <?php $val = isset($client['record_qualities'][$ac_id][$id]) ? $client['record_qualities'][$ac_id][$id] : '' ?>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text("fee_levels[record_qualities][$ac_id][{$id}]", $val, array(
