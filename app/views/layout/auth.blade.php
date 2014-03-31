@@ -20,7 +20,17 @@
       <div class="row">
 		<div class="col-md-8 col-sm-8 blob">
 			<h1 class="text-success">Price Planner Pro</h1>
-			<h3> Price professionally and create additional fees.</h3>
+			<p class="lead"> Price professionally and create additional fees.</p>
+			
+			<p>
+				Price PlannerPro is an invaluable asset to any accountancy practice; best of all it saves you an unbelievable amount of time. Gone are the days where clients pay their fee without knowing in advance how much the overall cost will be. Clients want to know exactly what they are getting and how much it is going to cost.
+			</p>
+
+			<p>
+				Price PlannerPro enables you to identify what is important to your clients so that they get the exact services they need. The software is incredibly simple to use and once you have entered your client’s details, Price PlannerPro will show your client exactly what you will be doing for them and how much it will cost.
+			</p>
+
+			</p>A breakdown with each particular service along with costs will be printed on a professional looking report which you can then present to your client.</p>
 		</div>
 
 		<div class="col-md-4 pull-right">
