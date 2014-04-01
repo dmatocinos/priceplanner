@@ -20,10 +20,11 @@ Fee Planner
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class=""><a href="{{ url('setup/edit/' . $client_id) }}">Setup</a></li>
-	      <li class=""><a href="{{ url('feelevels/edit/' . $client_id) }}">Fee Levels</a></li>
 	      <li class="active"><a href="#">Fee Planner</a></li>
 	      @if(isset($pricing_id))
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
+	      @else
+	      <li><a href="#" style="color: #000000;">Plan Summary</a></li>
 	      @endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->

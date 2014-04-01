@@ -39,7 +39,7 @@
 			</div>
 		</div>
       </div>
-	<div class="row" style="height: 195px;">
+	<div class="row" style="height: 50px;">
 		
 	</div>
 	<div class="row">

@@ -22,14 +22,11 @@ Setup
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
 	      @if(isset($pricing_id))
-	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
-	      @elseif ($edit && ! $has_fee_levels)
-	      <li class=""><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
-	      @elseif (isset($has_fee_levels) && $has_fee_levels)
-	      <li class=""><a href="{{ url('feelevels/edit/' . $client_id) }}">Fee Levels</a></li>
-	      <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
+	      @else
+	      <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
+	      <li><a href="#" style="color: #000000;">Plan Summary</a></li>
 	      @endif
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
@@ -109,57 +106,6 @@ Setup
 		       </div>
 		    </div>
 		  </div>
-		</fieldset>
-	</div>
-	<div class="well">
-		<fieldset>
-		  <legend>Accountancy Details</legend>
-		  <div class="form-group">
-		    <label for="accountant[accountancy_name]" class="col-lg-2 control-label">Accountancy Name	</label>
-		    <div class="col-lg-4">
-				{{ 
-					Form::text('accountant[accountancy_name]', isset($accountant['accountancy_name']) ? $accountant['accountancy_name'] : '', array(
-						'class' => 'form-control', 
-						'required' => 'required'
-					)) 
-				}}
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="" class="col-lg-2 control-label">Person Name</label>
-		    <div class="col-lg-4">
-				{{ 
-					Form::text('accountant[accountant_name]', isset($accountant['accountant_name']) ? $accountant['accountant_name'] : '', array(
-						'class' => 'form-control', 
-						'required' => 'required',
-					)) 
-				}}
-		    </div>
-		  </div>	
-		  <div class="form-group">
-		    <label for="accountant[address]" class="col-lg-2 control-label">Address</label>
-		    <div class="col-lg-4">
-				{{ 
-					Form::text('accountant[address]', isset($accountant['address']) ? $accountant['address'] : '', array(
-						'class' => 'form-control', 
-						'required' => 'required'
-					)) 
-				}}
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="accountant[logo_filename]" class="col-lg-2 control-label">Logo (optional)</label>
-		    <div class="col-lg-4">
-				@if (isset($accountant['logo_filename']) && ! is_null($accountant['logo_filename']))
-					<img src="{{asset('uploads/' . $accountant['logo_filename'])}}" width="100" alt="DRC Sports Race Management" id="DRCS-logo" />
-					<br>
-				@endif
-				{{ 
-					Form::file('accountant[logo_filename]');
-				}}
-		    </div>
-		  </div>
-				
 		</fieldset>
 	</div>
 	<div class="col-lg-12 pull-right well">
