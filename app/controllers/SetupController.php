@@ -23,13 +23,12 @@ class SetupController extends BaseController {
 		Asset::container('footer')->add('pages-index-js', 'js/pages/index.js');
 
 		$client = Client::find($client_id);
-		$pricing = $client->pricing()->first();
-
+		$pricing = $client->pricing;
+		
 		$form_data = [
 				'client' => $client->getAttributes(),
 				'accountant' => $client->accountant->toArray(),
 				'edit'	=> TRUE,
-				'has_fee_levels' => $client->hasOne('ClientBusinessType')->getResults(),
 				'route' => 'setup.update',
 				'client_id' => $client_id,
 				'pricing_id' =>  $pricing ? $pricing->id : NULL
@@ -40,6 +39,7 @@ class SetupController extends BaseController {
 
 	public function store()
 	{
+		$accountant = $this->user->accountant;
 		$input = Input::all();
 		
 		$c_input = $input['client'];
@@ -59,9 +59,10 @@ class SetupController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 
-		$pricing = $client->pricing()->first();
-		$route = isset($all['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
+		$pricing = $client->pricing;
+		
+		$route = isset($input['save_next_page']) 
+		       ? ($pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id)
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)
@@ -72,6 +73,7 @@ class SetupController extends BaseController {
 
 	public function update()
 	{
+		$accountant = $this->user->accountant;
 		$input = Input::all();
 		$client = Client::find($input['client']['id']);
 		
@@ -91,9 +93,9 @@ class SetupController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 
-		$pricing = $client->pricing()->first();
-		$route = isset($all['save_next_page']) 
-		       ? $pricing ? 'feeplanner/edit/' . $pricing->id : 'feeplanner/' . $client->id
+		$pricing = $client->pricing;
+		$route = isset($input['save_next_page']) 
+		       ? ($pricing ? ('feeplanner/edit/' . $pricing->id) : ('feeplanner/' . $client->id))
 		       : 'setup/edit/' . $client->id;
 
 		return Redirect::to($route)

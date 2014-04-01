@@ -13,10 +13,6 @@
 					{
 						$completed_tabs[] = $key;
 						
-						if ($key == $practice_detail_current_tab) {
-							$current_tab_index = $index;
-						}
-						
 						if ($key == $user->accountant->last_tab) {
 							$completed_tab_index = $index;
 							break;
@@ -30,7 +26,13 @@
 			@foreach ($practice_detail_tabs as $key => $display)
 				<?php $class = $practice_detail_current_tab == $key ? 'class="active"' : ""; ?>
 				
-				@if ((in_array($key, $completed_tabs) && $i != $current_tab_index) || ($i == $completed_tab_index + 1)) 
+				<?php
+					if ($key == $practice_detail_current_tab) {
+						$current_tab_index = $i;
+					}
+				?>
+				
+				@if ((in_array($key, $completed_tabs) && $i !== $current_tab_index) || ($completed_tab_index !== null && $i == $completed_tab_index + 1 && $current_tab_index !== $completed_tab_index + 1)) 
 					<li {{ $class }}><a href="{{ url("practicedetails/" . $key) }}">{{ $display }}</a></li>
 				@else
 					<?php $color = $i == $current_tab_index ? '' : "color: #000000; "; ?>

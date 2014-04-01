@@ -1,4 +1,4 @@
-<h4>Personal Module - &pound;{{ $module->value }}</h4>
+<h4>Personal Module - &pound;{{ $value }}</h4>
 
 <p>
 <b>Tax PlannerPro</b><br>

@@ -41,7 +41,7 @@ class ReportPdfGenerator extends TCPDF {
 		// set document information
 		$this->SetCreator('');
 		$this->SetAuthor('Pro Media Consultants');
-		$this->SetTitle('Goodwill Report');
+		$this->SetTitle('Price Planner Report');
 		$this->SetSubject('PDF Export');
 
 		// set default header data
@@ -157,22 +157,37 @@ class ReportPdfGenerator extends TCPDF {
 	public function buildAppendix()
 	{
 		$pricing = $this->pricing;
+		$client = $pricing->client; // client info
+		$accountant = $client->accountant; // accountant info
+		$modules = $accountant->accountant_modules;
+		
 		$this->AddPage();
 
 		$html = View::make("report.pdf_styles")->render();
-		$html .= View::make("report.title")->render();
+		$html .= View::make("report.title", array('accountant' => $accountant))->render();
 
 		foreach ($this->pricing->module_pricings as $module_pricing) {
 			if ( ! $module_pricing->qty) {
 				continue;
 			}
+			
+			$val = (integer) DB::table('accountant_modules')
+					->where('accountant_id', $accountant->id)
+					->where('module_id', $module_pricing->module_id)
+					->pluck('value');
+					
 			$module = $module_pricing->module;
+			$value = $module_pricing->qty * $val;
 			$view = "report." . str_replace(' ', '', snake_case($module->name));
-			$html .= View::make($view, compact('module'))->render();
+			$html .= View::make($view, array('value' => $value))->render();
 		}
 
 		$other_service_pricings = $this->pricing->other_service_pricings;
-		$html .= View::make("report.other_services", compact('other_service_pricings'))->render();
+		/*echo '<pre>';
+		var_dump($other_service_pricings);
+		echo '</pre>';
+		die;*/
+		$html .= View::make("report.other_services", array('accountant' => $accountant, 'other_service_pricings' => $other_service_pricings))->render();
 
 		$this->writeHTML($html, true, false, true, false, '');
 	}

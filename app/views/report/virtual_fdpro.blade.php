@@ -1,4 +1,4 @@
-<h4>Virtual FD Pro Module - &pound;{{ $module->value }}</h4>
+<h4>Virtual FD Pro Module - &pound;{{ $value }}</h4>
 
 <p>
 You will be provided with a unique username and password for you to access Virtual FD Pro system.

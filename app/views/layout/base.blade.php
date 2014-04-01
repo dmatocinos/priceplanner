@@ -125,7 +125,7 @@
 				<a href="http://remunerationpro.practicepro.co.uk/" class="thumbnail" title="Maximise your clients' personal income"><img src="{{ asset('images/app-logos/remuneration_logo.png') }}" style="width: 80%;"/></a>
 			</div>
 			<div style="width: 230px;">
-				<a href="http://virtualfdpro.practicepro.co.uk/" class="thumbnail" title="Help your clients achieve their goals"><img src="{{ asset('images/app-logos/virtualfdpro_logo.jpg') }}" style="width: 100%; padding: 5px;"/></a>
+				<a href="http://virtualfdpro.practicepro.co.uk/" class="thumbnail" title="Help your clients achieve their goals"><img src="{{ asset('images/app-logos/vfd.png') }}" style="width: 100%; padding: 5px;"/></a>
 			</div>
 	    </div>
     </div>

@@ -1,5 +1,21 @@
-<h4>{{ $accountant->accountancy_name }}</h4>
-<div class="header text-center">Fixed Price Fee Quotation</div>
+<table style="border: 1px solid white;">
+	<tr>
+		@if ($accountant->logo_filename)
+		<td width="100px;">
+			<img style="width: 100px; float: left;" src="{{ asset('uploads/' . $accountant->logo_filename) }}"/>
+		</td>
+		<td width="500px;">
+			<h4>{{ $accountant->accountancy_name }}</h4>
+			<div class="header text-center">Fixed Price Fee Quotation</div>
+		</td>
+		@else
+		<td width="650px;">
+			<h4>{{ $accountant->accountancy_name }}</h4>
+			<div class="header text-center">Fixed Price Fee Quotation</div>
+		</td>
+		@endif
+	</tr>
+</table>
 <div class="report-container">
 	<div>
 		<p class="emphasize">

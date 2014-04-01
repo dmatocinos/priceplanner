@@ -1,4 +1,4 @@
-<h4>Virtual FD Module - &pound;{{ $module->value }}</h4>
+<h4>Virtual FD Module - &pound;{{ $value }}</h4>
 
 <p>
 <b>Business Growth Plan</b><br>

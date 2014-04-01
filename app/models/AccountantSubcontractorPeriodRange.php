@@ -3,7 +3,7 @@
 class AccountantSubcontractorPeriodRange extends \Eloquent {
 	protected $fillable = [
 		'value',
-		'accoutant_id',
+		'accountant_id',
 		'subcontractor_period_range_id'
 	];
 
@@ -23,8 +23,8 @@ class AccountantSubcontractorPeriodRange extends \Eloquent {
 	{
 		$res = DB::table('accountant_subcontractor_period_ranges')
 					->join('subcontractor_period_ranges', 'subcontractor_period_ranges.id', '=', 'accountant_subcontractor_period_ranges.subcontractor_period_range_id')
-					->where('accounting_id', $accountan_id)
-					->select('period_id', 'range_id', 'value')
+					->where('accountant_id', $accountant_id)
+					->select('period_id', 'range_id', 'accountant_subcontractor_period_ranges.value')
 					->get();	
 		
 		$data = [];

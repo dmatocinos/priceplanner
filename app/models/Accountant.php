@@ -27,4 +27,34 @@ class Accountant extends \Eloquent {
 	{
 		return $this->hasMany('AccountantTurnoverRange');
 	}
+	
+	public function accountantRecordQualities ()
+	{
+		return $this->hasMany('AccountantRecordQuality');
+	}
+	
+	public function accountantAuditRequirements ()
+	{
+		return $this->hasMany('AccountantAuditRequirement');
+	}
+	
+	public function accountantAuditRisks ()
+	{
+		return $this->hasMany('AccountantAuditRisk');
+	}
+	
+	public function accountantTaxReturns ()
+	{
+		return $this->hasMany('AccountantTaxReturn');
+	}
+	
+	public function accountantEmployeePeriodRanges() 
+	{
+		return $this->hasMany('AccountantEmployeePeriodRange');
+	}
+	
+	public function accountantModules() 
+	{
+		return $this->hasMany('AccountantModule');
+	}
 }

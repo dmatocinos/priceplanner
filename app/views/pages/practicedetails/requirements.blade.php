@@ -1,9 +1,9 @@
 @section('title')
-Turnover Ranges
+Audit Requirements
 @stop
 
 @section('page_title')
-Turnover Ranges
+Audit Requirements
 @stop
 
 @section('app_nav')
@@ -16,23 +16,23 @@ Turnover Ranges
 		{{  Form::hidden('accountant_id', $accountant_id) }}
 		<div class="well">
 		<fieldset>
-		  <legend>Turnover Ranges</legend>
+		  <legend>Audit Requirements</legend>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
-		    <div class="col-lg-2 text-center">Modifier</div>
+		    <div class="col-lg-2 text-center">Base Fee</div>
 		  </div>
-		  @foreach ($turnover_ranges as $id => $name)
+		  @foreach($audit_requirements as $id => $name)
 		  <div class="form-group">
-		    <label for="turnover_ranges[{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
+		    <label for="fee_levels[audit_requirements][{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_turnover_ranges[$id]) ? $accountant_turnover_ranges[$id] : ''; ?>
+				<?php $val = isset($accountant_audit_requirements[$id]) ? $accountant_audit_requirements[$id] : ''; ?>
 				{{ 
-					Form::text("turnover_ranges[{$id}]", $val, array(
+					Form::text("audit_requirements[{$id}]", $val, array(
 						'class' => 'form-control', 
 						'required' => 'required',
-						'placeholder' => 'percentage',
-						'ng-model' 	=> 'turnover_range' . $id, 
-						'ng-init' 	=> "turnover_range{$id}='{$val}'", 
+						'placeholder' => 'amount',
+						'ng-model' 	=> 'audit_requirement' . $id, 
+						'ng-init' 	=> "audit_requirement{$id}='{$val}'", 
 						'numbers-only'	=> 'numbers-only',
 					)) 
 				}}

@@ -21,11 +21,14 @@ Setup
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
-	      @if(isset($pricing_id))
+	      @if($edit == true)
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
+		   @else
+	      <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
+	      @endif
+		  @if(isset($pricing_id))
 	      <li><a href="{{ url('plansummary/' . $pricing_id) }}">Plan Summary</a></li>
 	      @else
-	      <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
 	      <li><a href="#" style="color: #000000;">Plan Summary</a></li>
 	      @endif
 	    </ul>
@@ -80,7 +83,7 @@ Setup
 		    <label for="period_start_date" class="col-lg-2 control-label">Accounting Period</label>
 		    <div class="col-lg-5">
 			<div class="row">
-			<span class="col-sm-3">
+			<span class="col-sm-5">
 				{{ 
 					Form::text('client[period_start_date]', isset($client['period_start_date']) ? $client['period_start_date'] : '', array(
 						'class' => 'form-control', 
@@ -93,7 +96,7 @@ Setup
 			<span class="col-md-1">
 				<b>&nbsp;_</b>
 			</span>
-			<span class="col-sm-3">
+			<span class="col-sm-5">
 				{{ 
 					Form::text('client[period_end_date]', isset($client['period_end_date']) ? $client['period_end_date'] : '', array(
 						'class' => 'form-control', 
