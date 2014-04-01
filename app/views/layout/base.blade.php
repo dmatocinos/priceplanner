@@ -59,6 +59,9 @@
                         <a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
                     </li>
                     <li>
+                        <a href="{{ route('pricedetails.setup.create') }}"><i class="fa fa-leaf fa-fw"></i> Price Details</a>
+                    </li>
+                    <li>
                         <a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     @show

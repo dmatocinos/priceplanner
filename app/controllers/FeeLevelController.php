@@ -275,10 +275,6 @@ class FeeLevelController extends BaseController {
 		$client = Client::find($all['client_id']);
 		$pricing = $client->pricing()->first();
 
-//var_dump('<pre>');
-//dd($input);
-//var_dump('</pre>');
-
 		// saving client business_types
 		ClientBusinessType::where('client_id', $client->id)->delete();
 		foreach ($input['business_types'] as $id => $val) {

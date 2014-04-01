@@ -123,6 +123,18 @@ Route::group(array('before' => 'auth'), function() {
 	# report 
 	Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
 	Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
+
+	# price details setup
+	Route::get("pricedetails/setup", array('as' => 'pricedetails.setup.create', 'uses' => 'PriceDetailsSetupController@create'));
+	Route::get("pricedetails/setup/edit/{accountant_id}", array('as' => 'pricedetails.setup.edit', 'uses' => 'PriceDetailsSetupController@edit'));
+	Route::put("pricedetails/setup/create", array('as' => 'pricedetails.setup.store', 'uses' => 'PriceDetailsSetupController@store'));
+	Route::put("pricedetails/setup/edit", array('as' => 'pricedetails.setup.update', 'uses' => 'PriceDetailsSetupController@update'));
+
+	# price details business types
+	Route::get("pricedetails/businesstypes/create/{accountant_id}", array('as' => 'pricedetails.BusinessType.create', 'uses' => 'PriceDetailsBusinessTypeController@create'));
+	Route::get("pricedetails/businesstypes/edit/{accountant_id}", array('as' => 'pricedetails.businesstypes.edit', 'uses' => 'PriceDetailsBusinessTypeController@edit'));
+	Route::put("pricedetails/businesstypes/create", array('as' => 'pricedetails.businesstypes.store', 'uses' => 'PriceDetailsBusinessTypeController@store'));
+	Route::put("pricedetails/businesstypes/edit", array('as' => 'pricedetails.businesstypes.update', 'uses' => 'PriceDetailsBusinessTypeController@update'));
 });
 
 /*
