@@ -133,7 +133,6 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 			$is_subscription_valid = FALSE;
 		}
 		
-return TRUE;
 		return $is_free || $is_subscription_valid;
 	}
 
