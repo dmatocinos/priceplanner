@@ -96,45 +96,46 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('cancel_payment', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
 	Route::get('complete_payment/{period}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
 	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
+});
 
-	Route::get("home", "HomeController@index");
+Route::group(array('before' => 'auth', 'before' => 'subscribe'), function() {
+	# practice details setup
+	Route::get("practicedetails/setup", array('as' => 'practicedetails.setup', 'uses' => 'PracticeDetailsSetupController@index'));
+	Route::put("practicedetails/setup/store", array('as' => 'practicedetails.setup.store', 'uses' => 'PracticeDetailsSetupController@store'));
+	Route::put("practicedetails/setup/update", array('as' => 'practicedetails.setup.update', 'uses' => 'PracticeDetailsSetupController@update'));
 
-	# setup  
-	Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
-	Route::get("setup/edit/{client_id}", array('as' => 'setup.edit', 'uses' => 'SetupController@edit'));
-	Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
-	Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
+	# practice details business types
+	Route::get("practicedetails/businesstypes", array('as' => 'practicedetails.businesstypes', 'uses' => 'PracticeDetailsBusinessTypeController@index'));
+	Route::put("practicedetails/businesstypes/store", array('as' => 'practicedetails.businesstypes.store', 'uses' => 'PracticeDetailsBusinessTypeController@store'));
+	Route::put("practicedetails/businesstypes/update", array('as' => 'practicedetails.businesstypes.update', 'uses' => 'PracticeDetailsBusinessTypeController@update'));
+	
+	# practice details business types
+	Route::get("practicedetails/ranges", array('as' => 'practicedetails.ranges', 'uses' => 'PracticeDetailsRangesController@index'));
+	Route::put("practicedetails/ranges/store", array('as' => 'practicedetails.ranges.store', 'uses' => 'PracticeDetailsRangesController@store'));
+	Route::put("practicedetails/ranges/update", array('as' => 'practicedetails.ranges.update', 'uses' => 'PracticeDetailsRangesController@update'));
+	
+	Route::group(array('before' => 'practicedetailscompleted'), function() {
+		Route::get("home", "HomeController@index");
 
-	# fee levels
-	Route::get("feelevels/{client_id}", array('as' => 'feelevels.create', 'uses' => 'FeeLevelController@create'));
-	Route::get("feelevels/edit/{client_id}", array('as' => 'feelevels.edit', 'uses' => 'FeeLevelController@edit'));
-	Route::put("feelevels/create", array('as' => 'feelevels.store', 'uses' => 'FeeLevelController@store'));
-	Route::put("feelevels/edit", array('as' => 'feelevels.update', 'uses' => 'FeeLevelController@update'));
+		# setup  
+		Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
+		Route::get("setup/edit/{client_id}", array('as' => 'setup.edit', 'uses' => 'SetupController@edit'));
+		Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
+		Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
 
-	# fee planner 
-	Route::get("feeplanner/{client_id}", array('as' => 'feeplanner.create', 'uses' => 'FeePlannerController@create'));
-	Route::get("feeplanner/edit/{pricing_id}", array('as' => 'feeplanner.edit', 'uses' => 'FeePlannerController@edit'));
-	Route::put("feeplanner/create", array('as' => 'feeplanner.store', 'uses' => 'FeePlannerController@store'));
-	Route::put("feeplanner/edit", array('as' => 'feeplanner.update', 'uses' => 'FeePlannerController@update'));
+		# fee planner 
+		Route::get("feeplanner/{client_id}", array('as' => 'feeplanner.create', 'uses' => 'FeePlannerController@create'));
+		Route::get("feeplanner/edit/{pricing_id}", array('as' => 'feeplanner.edit', 'uses' => 'FeePlannerController@edit'));
+		Route::put("feeplanner/create", array('as' => 'feeplanner.store', 'uses' => 'FeePlannerController@store'));
+		Route::put("feeplanner/edit", array('as' => 'feeplanner.update', 'uses' => 'FeePlannerController@update'));
 
-	# plan summary 
-	Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
+		# plan summary 
+		Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
 
-	# report 
-	Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
-	Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
-
-	# price details setup
-	Route::get("pricedetails/setup", array('as' => 'pricedetails.setup.create', 'uses' => 'PriceDetailsSetupController@create'));
-	Route::get("pricedetails/setup/edit/{accountant_id}", array('as' => 'pricedetails.setup.edit', 'uses' => 'PriceDetailsSetupController@edit'));
-	Route::put("pricedetails/setup/create", array('as' => 'pricedetails.setup.store', 'uses' => 'PriceDetailsSetupController@store'));
-	Route::put("pricedetails/setup/edit", array('as' => 'pricedetails.setup.update', 'uses' => 'PriceDetailsSetupController@update'));
-
-	# price details business types
-	Route::get("pricedetails/businesstypes/create/{accountant_id}", array('as' => 'pricedetails.BusinessType.create', 'uses' => 'PriceDetailsBusinessTypeController@create'));
-	Route::get("pricedetails/businesstypes/edit/{accountant_id}", array('as' => 'pricedetails.businesstypes.edit', 'uses' => 'PriceDetailsBusinessTypeController@edit'));
-	Route::put("pricedetails/businesstypes/create", array('as' => 'pricedetails.businesstypes.store', 'uses' => 'PriceDetailsBusinessTypeController@store'));
-	Route::put("pricedetails/businesstypes/edit", array('as' => 'pricedetails.businesstypes.update', 'uses' => 'PriceDetailsBusinessTypeController@update'));
+		# report 
+		Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
+		Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
+	});
 });
 
 /*

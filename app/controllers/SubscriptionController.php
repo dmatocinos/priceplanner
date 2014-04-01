@@ -4,7 +4,7 @@ use \Omnipay\Common\GatewayFactory;
 use \Carbon\Carbon;
 
 class SubscriptionController extends BaseController {
-
+	protected $layout = 'layout.subscribe';
 	protected $user;
 
 	public function __construct()
@@ -31,7 +31,7 @@ class SubscriptionController extends BaseController {
 	// @todo move to service
 	protected function getPurchaseData($period)
 	{
-		$pricing    = $this->user->practice_pro_user->app_pricing;
+		$pricing    = $this->user->practiceProUser()->app_pricing;
 
 		$now = Carbon::now();
 		$paypal_data = array(
@@ -51,14 +51,16 @@ class SubscriptionController extends BaseController {
 	 */
 	public function subscribe()
 	{
-		$pricing    = $this->user->practice_pro_user->app_pricing;
+		$pricing    = $this->user->practiceProUser()->app_pricing;
+		
 		if ($pricing->is_free) {
 			return Redirect::route('complete_subscription');
 		}
 
-		$level      = $this->user->practice_pro_user->membership_level;
-		$discount   = $pricing->discount * 100;
-		$periods = AppPricing::getPaymentOptions() ;
+		$level    = $this->user->practiceProUser()->membership_level;
+		$discount = $pricing->discount * 100;
+		$periods  = AppPricing::getPaymentOptions() ;
+		
 		foreach ($periods as $period => $amount) {
 			if ($period == 'monthly') {
 				$term = 'month';
@@ -69,7 +71,7 @@ class SubscriptionController extends BaseController {
 			$discounted[$period] = NumFormatter::money($pricing->getDiscountedAmount($period), '&pound;') . " for 1 {$term}";
 		}
 
-		switch ($this->user->practice_pro_user->membership_level) {
+		switch ($this->user->practiceProUser()->membership_level) {
 			case 'Tax Club':
 				$msg = "As a Tax Club Member of PracticePro";
 				break;

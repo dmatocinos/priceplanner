@@ -7,7 +7,8 @@ class Accountant extends \Eloquent {
 		'accountant_name',
 		'accountancy_name',
 		'address',
-		'logo_filename'
+		'logo_filename',
+		'last_tab'
 	];
 
 	public static $rules = array(
@@ -16,5 +17,14 @@ class Accountant extends \Eloquent {
 		'address'	=> 'required',
 		'logo_filename'	=> 'image|max:1500'
 	);
-
+	
+	public function accountantBusinessTypes ()
+	{
+		return $this->hasMany('AccountantBusinessType');
+	}
+	
+	public function accountantTurnoverRanges ()
+	{
+		return $this->hasMany('AccountantTurnoverRange');
+	}
 }

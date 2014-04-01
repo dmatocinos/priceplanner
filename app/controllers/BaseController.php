@@ -43,7 +43,7 @@ class BaseController extends Controller {
 		Asset::container('header')->add('sb-admin-css', 'css/base/sb-admin.css');
 		Asset::container('header')->add('notify-css', 'css/base/notify.css');
 	
-		if ($this->layout != 'layout.auth') {
+		if ($this->layout != 'layout.auth' && $this->layout != 'layout.subscribe') {
 			Asset::container('header')->add('datepicker-css', 'plugins/datepicker/css/datepicker.css');
 			Asset::container('header')->add('bootstrap-notify-master-css', 'plugins/bootstrap-notify-master/css/bootstrap-notify.css');
 			Asset::container('header')->add('datatables-css', 'plugins/datatable/media/css/demo_table.css');

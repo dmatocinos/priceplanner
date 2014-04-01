@@ -83,7 +83,7 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	public function accountant()
 	{
 		// @todo does not work
-		return $this->belongsTo('Accountant');
+		return $this->hasOne('Accountant');
 	}
 
 	public function isAccountant()
@@ -137,13 +137,27 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	 */
 	public function practiceProUser()
 	{
-		return $this->belongsTo('PracticeProUser', 'practicepro_user_id', 'mh2_id');
+		return PracticeProUser::where('mh2_id', '=', $this->practicepro_user_id)->first();
 	}
 
 	public static function findPracticeProUser($id) 
 	{
 		return User::where('practicepro_user_id', $id)->first();
 	}
+	
+	public function isSubscribed() 
+	{
+		$pp_user = $this->practiceProUser();
+		$is_free = $pp_user->app_pricing->is_free;
+		
+		if ($this->valid_until) {
+			$now = Carbon::now();
+			$is_subscription_valid = $this->valid_until->gte($now);
+		}
+		else {
+			$is_subscription_valid = FALSE;
+		}
 
-
+		return $is_free || $is_subscription_valid;
+	}
 }

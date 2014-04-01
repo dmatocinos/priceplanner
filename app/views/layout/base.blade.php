@@ -54,17 +54,22 @@
         <nav class="navbar-inverse navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-		    @yield('client')
-                    <li>
-                        <a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('pricedetails.setup.create') }}"><i class="fa fa-leaf fa-fw"></i> Price Details</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    @show
+		            @if ($user->accountant && $user->accountant->last_tab == 'completed')
+						@yield('client')
+						<li>
+							<a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+						</li>
+						<li>
+							<a href="{{ route('practicedetails.setup') }}"><i class="fa fa-leaf fa-fw"></i> Practice Details</a>
+						</li>
+						<li>
+							<a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+						</li>
+					@else
+						<li>
+							<a href="{{ route('practicedetails.setup') }}"><i class="fa fa-leaf fa-fw"></i> Practice Details</a>
+						</li>
+					@endif
                 </ul>
                 <!-- /#side-menu -->
             </div>

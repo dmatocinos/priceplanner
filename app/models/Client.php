@@ -51,15 +51,15 @@ class Client extends \Eloquent {
 		return "{$this->period_start_date->toFormattedDateString()} - {$this->period_end_date->toFormattedDateString()}";
 	}
 
-	public static function getAll($user_id) 
+	public static function getAll($accountant_id) 
 	{
 		return DB::select(
 			"
 				SELECT *
 				FROM clients c
-				WHERE c.user_id = :user_id
+				WHERE c.accountant_id = :accountant_id
 			", 
-			array('user_id' => $user_id)
+			array('accountant_id' => $accountant_id)
 		);
 	}
 	

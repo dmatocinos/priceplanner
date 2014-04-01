@@ -1,41 +1,40 @@
 <?php
 
-class PriceDetailsSetupController extends BaseController {
-
-
-	public function create() 
+class PracticeDetailsSetupController extends PracticeDetailsController {
+	protected $current_tab = "setup";
+	
+	public function index() 
 	{
-		$form_data = [
-				'accountant' => [],
-				'edit'	=> FALSE,
-				'route' => 'pricedetails.setup.store',
-		];
+		if ($this->user->accountant) {
+			$accountant = $this->user->accountant;
+
+			$form_data = [
+					'accountant' => $accountant->getAttributes(),
+					'edit'	=> TRUE,
+					'has_fee_levels' => $accountant->hasOne('AccountantBusinessType')->getResults(),
+					'route' => 'practicedetails.setup.update',
+					'accountant_id' => $accountant->id
+			];
+		}
+		else {
+			$form_data = [
+					'accountant' => [],
+					'edit'	=> FALSE,
+					'route' => 'practicedetails.setup.store',
+			];
+		}
 		
-		$this->layout->content = View::make("pages.pricedetails.setup", $form_data);
+		$this->layout->content = View::make("pages.practicedetails.setup", $form_data);
 	}
-
-	public function edit($accountant_id)
-	{
-		$accountant = Accountant::find($accountant_id);
-
-		$form_data = [
-				'accountant' => $accountant->getAttributes(),
-				'edit'	=> TRUE,
-				'has_fee_levels' => $accountant->hasOne('AccountantBusinessType')->getResults(),
-				'route' => 'pricedetails.setup.update',
-				'accountant_id' => $accountant->id
-		];
-
-		$this->layout->content = View::make("pages.pricedetails.setup", $form_data);
-	}
-
+	
 	public function store()
 	{
 		$input = Input::all();
 		
 		$validation = Validator::make($input, Accountant::$rules);
 		if ($validation->passes()) {
-			$input['user_id'] = $this->user->id;
+			$input['user_id']  = $this->user->id;
+			$input['last_tab'] = 'setup';
 
 			$accountant = new Accountant;
 			$accountant = $accountant->create($input);
@@ -49,15 +48,13 @@ class PriceDetailsSetupController extends BaseController {
 
 		}
 		else {
-			return Redirect::route('pricedetails.setup.create')
+			return Redirect::route('practicedetails.setup')
 				->withInput()
 				->withErrors($validation)
 				->with('message', 'There were validation errors.');
 		}
 		
-		$route = isset($input['save_next_page']) 
-		       ? 'pricedetails/businesstypes/create/' . $accountant->id
-		       : 'pricedetails/setup/edit/' . $accountant->id;
+		$route = isset($input['save_next_page']) ? 'practicedetails/businesstypes' : 'practicedetails/setup';
 
 		return Redirect::to($route)
 			->withInput()
@@ -89,16 +86,14 @@ class PriceDetailsSetupController extends BaseController {
 		}
 		else {
 
-			return Redirect::route('pricedetails.setup.create')
+			return Redirect::route('practicedetails.setup')
 				->withInput()
 				->withErrors($validation)
 				->with('message', 'There were validation errors.' . $validation->errors());
 
 		}
 
-		$route = isset($input['save_next_page']) 
-		       ? 'pricedetails/businesstypes/create/' . $accountant->id
-		       : 'pricedetails/setup/edit/' . $accountant->id;
+		$route = isset($input['save_next_page']) ? 'practicedetails/businesstypes' : 'practicedetails/setup';
 
 		return Redirect::to($route)
 			->withInput()

@@ -46,6 +46,21 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('subscribe', function()
+{
+	if ( ! Sentry::getUser()->isSubscribed()) {
+		return Redirect::route('subscribe');
+	}
+});
+
+Route::filter('practicedetailscompleted', function()
+{
+	$user = Sentry::getUser();
+	
+	if ( ! $user->accountant || $user->accountant->last_tab != 'completed') {
+		return Redirect::route('practicedetails.setup');
+	}
+});
 
 Route::filter('auth.basic', function()
 {

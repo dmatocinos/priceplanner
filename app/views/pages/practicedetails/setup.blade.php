@@ -7,17 +7,7 @@ Setup Accountant Details
 @stop
 
 @section('app_nav')
-	<nav id="app-nav" class="navbar navbar-default" role="navigation">
-	  <!-- Collect the nav links, forms, and other content for toggling -->
-	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Setup</a></li>
-	      @if ($edit)
-	      <li class=""><a href="{{ url("pricedetails/businesstypes/create/{$accountant['id']}") }}">Business Types</a></li>
-	      @endif	
-	    </ul>
-	  </div><!-- /.navbar-collapse -->
-	</nav>
+@include('pages.practicedetails.menu')
 @stop
 
 @section('content')
