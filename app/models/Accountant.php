@@ -3,6 +3,7 @@
 class Accountant extends \Eloquent {
 
 	protected $fillable = [
+		'user_id',
 		'accountant_name',
 		'accountancy_name',
 		'address',

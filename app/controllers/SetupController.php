@@ -65,7 +65,6 @@ class SetupController extends BaseController {
 		
 		$c_input = $input['client'];
 		$c_input['accountant_id'] = $accountant->id;
-		$c_input['user_id'] = $this->user->id;
 		$c_input['period_start_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_start_date']));
 		$c_input['period_end_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_end_date']));
 
@@ -128,7 +127,6 @@ class SetupController extends BaseController {
 		
 		$c_input = $input['client'];
 		$c_input['accountant_id'] = $accountant->id;
-		$c_input['user_id'] = $this->user->id;
 		$c_input['period_start_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_start_date']));
 		$c_input['period_end_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_end_date']));
 

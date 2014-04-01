@@ -35,6 +35,8 @@ class PriceDetailsSetupController extends BaseController {
 		
 		$validation = Validator::make($input, Accountant::$rules);
 		if ($validation->passes()) {
+			$input['user_id'] = $this->user->id;
+
 			$accountant = new Accountant;
 			$accountant = $accountant->create($input);
 

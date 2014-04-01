@@ -10,7 +10,6 @@ class Client extends \Eloquent {
 		'address',
 		'period_start_date',
 		'period_end_date',
-		'user_id',
 		'accountant_id',
 	];
 

@@ -18,8 +18,10 @@ class CreateAccountantsTable extends Migration {
 			$table->string('accountant_name');
 			$table->string('accountancy_name')->nullable();
 			$table->string('address');
+			$table->integer('user_id')->unsigned()->index();
 			$table->string('logo_filename')->nullable();
 			$table->timestamps();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 		});
 	}
 

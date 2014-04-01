@@ -69,11 +69,6 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return Accountant::where('user_id', '=', $this->id)->first();
 	}
 
-	public function asClient()
-	{
-		return Client::where('user_id', '=', $this->id)->first();
-	}
-
 	public function getFullName()
 	{
 		return "{$this->first_name} {$this->last_name}";
@@ -132,7 +127,7 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		else {
 			$is_subscription_valid = FALSE;
 		}
-		
+
 		return $is_free || $is_subscription_valid;
 	}
 
