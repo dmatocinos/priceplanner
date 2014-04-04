@@ -56,7 +56,7 @@ return array(
 	|
 	*/
 
-	'username' => 'sandbox_dxc_bus_api1.test.com',
+	'username' => 'payments_api1.practicepro.co.uk',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'password' => '1392007298',
+	'password' => 'MB4YWQDQ6SQ2X7J4',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ return array(
 	| @todo add link for generating signature
 	*/
 
-	'signature' => 'AiPC9BjkCyDFQXbSkoZcgqH3hpacAHEN5-o4LIjnhECPR825QdHT95XE',
+	'signature' => 'AAZrCi1Vx5cadMQKSkY4BOKmx5ZYAR0i4lktii1.u1COTU.3W4OOg0yr',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -86,6 +86,6 @@ return array(
 	|
 	*/
 
-	'test_mode' => 'true'
+	'testMode' => 'false'
 );
 
