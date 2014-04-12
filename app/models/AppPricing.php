@@ -4,7 +4,29 @@ use \Carbon\Carbon;
 
 class AppPricing extends Eloquent {
 	protected $guarded = array();
+	
+	/**
+	 * The database connection name where the
+	 * table's database is located
+	 *
+	 * @var string
+	 */
+	protected $connection = 'practicepro_users';
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	
+	protected $table = 'application_discounts';
 
+	/**
+	 * Table's primary key
+	 *
+	 * @var string
+	 */
+	protected $primaryKey = 'application_discount_id';
+	
 	public static $rules = array();
 
 

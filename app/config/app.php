@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -180,5 +180,7 @@ return array(
 		'Carbon' 	  => 'Carbon\Carbon',
 
 	),
+	
+	'application_key' => 'price_planner',
 
 );
