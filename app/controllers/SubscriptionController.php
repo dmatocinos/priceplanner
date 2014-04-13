@@ -70,22 +70,9 @@ class SubscriptionController extends BaseController {
 			}
 			$discounted[$period] = NumFormatter::money($pricing->getDiscountedAmount($period), '&pound;') . " for 1 {$term}";
 		}
-
-		switch ($this->user->practiceProUser()->membership_level) {
-			case 'Tax Club':
-				$msg = "As a Tax Club Member of PracticePro";
-				break;
-				
-			case 'Elite Member':
-				$msg = "As an Elite Member of PracticePro";
-				break;
-			
-			case 'Pay as you go':
-			default:
-				$msg = "As a Pay as you go member of PracticePro";
-				break;
-		}
 		
+		$msg = sprintf("As a %s Member of PracticePro", $this->user->practiceProUser()->membership_level_display);
+
 		if ($discount > 0) {
 			$msg .= ", we are giving you a special " . $discount . "% discount. Don't let this offer pass!";
 		}
