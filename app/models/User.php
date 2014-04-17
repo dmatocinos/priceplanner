@@ -160,4 +160,20 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 
 		return $is_free || $is_subscription_valid;
 	}
+
+	public function getRememberToken()
+	{
+
+	}
+
+	public function setRememberToken($value)
+	{
+
+	}
+
+	public function getRememberTokenName()
+	{
+
+	}
+
 }

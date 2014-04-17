@@ -57,4 +57,9 @@ class Accountant extends \Eloquent {
 	{
 		return $this->hasMany('AccountantModule');
 	}
+
+	public function accountantBookkeeping() 
+	{
+		return $this->hasMany('AccountantBookkeeping');
+	}
 }

@@ -134,6 +134,11 @@ Route::group(array('before' => 'auth', 'before' => 'subscribe'), function() {
 	Route::put("practicedetails/taxes/store", array('as' => 'practicedetails.taxes.store', 'uses' => 'PracticeDetailsTaxesController@store'));
 	Route::put("practicedetails/taxes/update", array('as' => 'practicedetails.taxes.update', 'uses' => 'PracticeDetailsTaxesController@update'));
 	
+	# practice details bookeeping
+	Route::get("practicedetails/bookkeeping", array('as' => 'practicedetails.bookkeeping', 'uses' => 'PracticeDetailsBookkeepingController@index'));
+	Route::put("practicedetails/bookkeeping/store", array('as' => 'practicedetails.bookkeeping.store', 'uses' => 'PracticeDetailsBookkeepingController@store'));
+	Route::put("practicedetails/bookkeeping/update", array('as' => 'practicedetails.bookkeeping.update', 'uses' => 'PracticeDetailsBookkeepingController@update'));
+
 	# practice details payrolls
 	Route::get("practicedetails/payrolls", array('as' => 'practicedetails.payrolls', 'uses' => 'PracticeDetailsPayrollsController@index'));
 	Route::put("practicedetails/payrolls/store", array('as' => 'practicedetails.payrolls.store', 'uses' => 'PracticeDetailsPayrollsController@store'));

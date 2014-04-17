@@ -16,7 +16,7 @@ Record Qualities
 		{{  Form::hidden('accountant_id', $accountant_id) }}
 		<div class="well">
 		<fieldset>
-		  <legend>Accounting System Qualities</legend>
+		  <legend>Accounting System Qualities - % Increase/Decrease</legend>
 		  <div class="row">
 			<div class="col-lg-6">
 			  <div class="form-group">

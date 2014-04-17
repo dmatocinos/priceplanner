@@ -87,7 +87,7 @@ class FeePlannerController extends BaseController {
 			$pricing = $pricing->create($p_data);
 		}
 		else {
-			return Redirect::route('feeplanner.create')
+			return Redirect::to('feeplanner/' . $input['pricing']['client_id'])
 				->withInput()
 				->withErrors($p_validation)
 				->with('message', 'There were validation errors.');
@@ -165,7 +165,7 @@ class FeePlannerController extends BaseController {
 			$pricing->update($p_data);
 		}
 		else {
-			return Redirect::route('feeplanner.create')
+			return Redirect::to('feeplanner/edit/' . $p_data['id'])
 				->withInput()
 				->withErrors($p_validation)
 				->with('message', 'There were validation errors.');

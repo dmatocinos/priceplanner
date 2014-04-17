@@ -192,9 +192,9 @@ Plan Summary
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					<div>{{ $pricing['bookkeeping_hours'] . ' (hours) x  ' . $pricing['bookkeeping_hour_val'] }}</div>
+					<div>{{ $pricing['bookkeeping_hours'] . ' (hours)' }}</div>
 
-					<div>{{ $pricing['bookkeeping_days'] . ' (days) x  ' . $pricing['bookkeeping_day_val'] }}</div>
+					<div>{{ $pricing['bookkeeping_days'] . ' (days)' }}</div>
 				</td>
 				<td class="col-total">
 					<div>{{ $calc->g24 }}</div>

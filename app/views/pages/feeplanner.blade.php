@@ -224,7 +224,7 @@ Fee Planner
 				</td>
 				<td class="col-val">
 				{{   
-					Form::text('pricing[vat_return]',$pricing['vat_return'], array(
+					Form::select('pricing[vat_return]', ['0' => 0, 4 => 4, 12 => 12], $pricing['vat_return'], array(
 						'class' => 'form-control input-sm', 
 						'ng-model' 	=> 'E22', 
 						'ng-init' 	=> "E22='{$pricing['vat_return']}'", 
@@ -235,72 +235,53 @@ Fee Planner
 				<td class="col-total">
 				</td>
 			</tr>
+		</table>
+		</div>
+		<div class="well">
+			<legend>Bookkeeping <em style="font-weight: normal; font-size: 16px;">(if we do the book keeping don't forget to adjust the quality of records)</em>
+</legend>
+			<table class="table">
 			<tr>
 				<td class="text-right col-legend ">
-					Book Keeping <br>
-					<em style="font-weight: normal;">if we do the book keeping don't forget to adjust the quality of records</em>
-				</td>
+					Number of Hours
 				<td class="col-extra">
-				<div class="pull-right">
-					{{   
-						Form::text('pricing[bookkeeping_hours]',$pricing['bookkeeping_hours'], array(
-							'class' => 'form-control input-sm', 
-							'ng-model' 	=> 'C24', 
-							'ng-init' 	=> "C24='{$pricing['bookkeeping_hours']}'", 
-							'numbers-only'	=> 'numbers-only',
-							'style'	=> 'width: 50px;',
-							'placeholder' => 'hrs'
-						));
-						
-					}}
-				</div>
-				<br>
-				<br>
-				&nbsp;
-				<div class="pull-right">
-					{{   
-						Form::text('pricing[bookkeeping_days]',$pricing['bookkeeping_days'], array(
-							'class' => 'form-control input-sm', 
-							'ng-model' 	=> 'C25', 
-							'ng-init' 	=> "C25='{$pricing['bookkeeping_days']}'", 
-							'numbers-only'	=> 'numbers-only',
-							'style'	=> 'width: 50px;',
-							'placeholder' => 'days'
-						));
-						
-					}}
-				</div>
 				</td>
 				<td class="col-val">
-				<div class="">
-					{{   
-						Form::text('pricing[bookkeeping_hour_val]',$pricing['bookkeeping_hour_val'], array(
-							'class' => 'form-control input-sm', 
-							'ng-model' 	=> 'E24', 
-							'ng-init' 	=> "E24='{$pricing['bookkeeping_hour_val']}'", 
-							'numbers-only'	=> 'numbers-only',
-							'placeholder' => 'amount per hour'
-						));
-						
-					}}
-				</div>
-				<div style="padding-top: 10px;">
-					{{   
-						Form::text('pricing[bookkeeping_day_val]',$pricing['bookkeeping_day_val'], array(
-							'class' => 'form-control input-sm', 
-							'ng-model' 	=> 'E25', 
-							'ng-init' 	=> "E25='{$pricing['bookkeeping_day_val']}'", 
-							'numbers-only'	=> 'numbers-only',
-							'placeholder' => 'amount per day'
-						));
-						
-					}}
-				</div>
+						{{   
+							Form::text('pricing[bookkeeping_hours]',$pricing['bookkeeping_hours'], array(
+								'class' => 'form-control input-sm', 
+								'ng-model' 	=> 'C24', 
+								'ng-init' 	=> "C24='{$pricing['bookkeeping_hours']}'", 
+								'numbers-only'	=> 'numbers-only',
+								'placeholder' => 'hrs'
+							));
+							
+						}}
 				</td>
 				<td class="col-total">
 				</td>
 			</tr>
-		</table>
+			<tr>
+				<td class="text-right col-legend ">
+					Number of Days
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+						{{   
+							Form::text('pricing[bookkeeping_days]',$pricing['bookkeeping_days'], array(
+								'class' => 'form-control input-sm', 
+								'ng-model' 	=> 'C25', 
+								'ng-init' 	=> "C25='{$pricing['bookkeeping_days']}'", 
+								'numbers-only'	=> 'numbers-only',
+								'placeholder' => 'days'
+							));
+							
+						}}
+				</td>
+				<td class="col-total">
+				</td>
+			</tr>
+			</table>
 		</div>
 		<div class="well">
 			<legend>Payroll</legend>

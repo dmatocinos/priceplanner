@@ -142,4 +142,20 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	{
 		return $this->mh2_email;
 	}
+
+	public function getRememberToken()
+	{
+
+	}
+
+	public function setRememberToken($value)
+	{
+
+	}
+
+	public function getRememberTokenName()
+	{
+
+	}
+
 }
