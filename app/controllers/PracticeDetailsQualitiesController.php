@@ -64,14 +64,13 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully created record qualities practice details.');
+			->with('message', 'Successfully saved Record Qualities.');
 	}
 
 	public function update()
 	{
 		$input = Input::all();
 		$accountant = $this->user->accountant;
-		$accountant->update(array('last_tab' => $this->current_tab));
 		
 		AccountantRecordQuality::where('accountant_id', $accountant->id)->delete();
 		
@@ -94,7 +93,7 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated record qualities practice details.');
+			->with('message', 'Successfully saved Record Qualities.');
 	}
 
 }

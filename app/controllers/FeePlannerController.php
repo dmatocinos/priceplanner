@@ -7,6 +7,11 @@ class FeePlannerController extends BaseController {
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
 		$pricing = new Pricing;
 		$client = Client::find($client_id);
+		
+		//echo "<pre>";
+		//var_dump($client_id);
+		//echo "</pre>";
+		//die;
 
 		$form_data = [
 			'select_data' => [
@@ -142,7 +147,7 @@ class FeePlannerController extends BaseController {
 
 		return Redirect::to($route . $pricing->id)
 			->withInput()
-			->with('message', 'You have successfully created your plan.');
+			->with('message', 'Successfully saved Fee Planner.');
 	}
 
 	public function update()
@@ -224,7 +229,7 @@ class FeePlannerController extends BaseController {
 
 		return Redirect::to($route . $pricing->id)
 			->withInput()
-			->with('message', 'You have successfully updated your plan.');
+			->with('message', 'Successfully saved Fee Planner.');
 
 	}
 

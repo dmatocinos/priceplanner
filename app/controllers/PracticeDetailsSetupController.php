@@ -58,7 +58,7 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully started setting up your account details.');
+			->with('message', 'Successfully saved Setup.');
 
 		
 	}
@@ -97,7 +97,7 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated your account details.');
+			->with('message', 'Successfully saved Setup.');
 	}
 
 }

@@ -17,7 +17,7 @@ Setup Accountant Details
 		@endif	
 		<div class="well">
 			<fieldset>
-			  <legend>Accountancy Details</legend>
+			  <legend>Practice Details</legend>
 			  <div class="form-group">
 			    <label for="accountancy_name" class="col-lg-2 control-label">Accountancy Name	</label>
 			    <div class="col-lg-4">
@@ -30,7 +30,7 @@ Setup Accountant Details
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="accountant_name" class="col-lg-2 control-label">Person Name</label>
+			    <label for="accountant_name" class="col-lg-2 control-label">Project Manager</label>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text('accountant_name', isset($accountant['accountant_name']) ? $accountant['accountant_name'] : '', array(

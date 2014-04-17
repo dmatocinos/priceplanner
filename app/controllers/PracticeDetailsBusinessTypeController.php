@@ -52,7 +52,7 @@ class PracticeDetailsBusinessTypeController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully created business types practice details.');
+			->with('message', 'Successfully saved Types of Business.');
 	}
 
 	public function update()
@@ -78,7 +78,7 @@ class PracticeDetailsBusinessTypeController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated business types details.');
+			->with('message', 'Successfully saved Types of Business.');
 	}
 
 }

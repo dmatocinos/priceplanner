@@ -29,7 +29,6 @@ Modules & Other Services
 				{{ 
 					Form::text("modules[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'amount',
 						'numbers-only'	=> 'numbers-only',
 						'ng-model' 	=> 'modules' . $id, 
@@ -58,7 +57,6 @@ Modules & Other Services
 				{{ 
 					Form::text("other_services[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'amount',
 						'numbers-only'	=> 'numbers-only',
 						'ng-model' 	=> 'other_services' . $id, 

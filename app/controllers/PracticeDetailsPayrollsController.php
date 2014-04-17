@@ -93,6 +93,6 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully ' . $msg . ' Employee & Subcontractor Payroll Tables practice details.');
+			->with('message', 'Successfully saved Payrolls.');
 	}
 }

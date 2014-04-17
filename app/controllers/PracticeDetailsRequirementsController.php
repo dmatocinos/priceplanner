@@ -53,7 +53,7 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully created audit requirements practice details.');
+			->with('message', 'Successfully saved Audit Requirements.');
 	}
 
 	public function update()
@@ -78,6 +78,6 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated audit requirements practice details.');
+			->with('message', 'Successfully saved Audit Requirements.');
 	}
 }

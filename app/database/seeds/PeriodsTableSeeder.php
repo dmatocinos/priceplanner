@@ -11,11 +11,11 @@ class PeriodsTableSeeder extends Seeder {
 				'amount' => 52,
 			],
 			[
-				'name' => 'Forthnightly',
+				'name' => 'Fortnightly',
 				'amount' => 26,
 			],
 			[
-				'name' => 'Four Weekly',
+				'name' => 'Four-Weekly',
 				'amount' => 13,
 			],
 			[

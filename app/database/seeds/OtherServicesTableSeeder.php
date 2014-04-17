@@ -10,7 +10,7 @@ class OtherServicesTableSeeder extends Seeder {
 				'description' => 'We will carry out a commercial valuation of your business using our BizValuation software and produce a full report of our calculations that is suitable for your requirements.'
 			],
 			[
-				'name' => 'Incorporation PLanner',
+				'name' => 'Incorporation Planner',
 				'description' => 'We will produce a report showing the benefits of becoming incorporated and the tax savings.  We are able to set up your company and register it to Companies House should you require it'
 			],
 			[

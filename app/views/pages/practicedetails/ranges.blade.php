@@ -29,7 +29,6 @@ Turnover Ranges
 				{{ 
 					Form::text("turnover_ranges[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'percentage',
 						'ng-model' 	=> 'turnover_range' . $id, 
 						'ng-init' 	=> "turnover_range{$id}='{$val}'", 

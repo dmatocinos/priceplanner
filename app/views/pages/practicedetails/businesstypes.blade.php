@@ -29,7 +29,6 @@ Business Types
 					{{ 
 						Form::text("business_types[{$id}]", $val, array(
 							'class' => 'form-control', 
-							'required' => 'required',
 							'placeholder' => 'amount',
 							'ng-model' 	=> 'business_type' . $id, 
 							'ng-init' 	=> "business_type{$id}='{$val}'", 

@@ -79,6 +79,6 @@ class PracticeDetailsTaxesController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully ' . $msg . ' Tax & VAT returns practice details.');
+			->with('message', 'Successfully saved Taxes.');
 	}
 }

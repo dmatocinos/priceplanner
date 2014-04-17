@@ -35,7 +35,6 @@ Employee & Subcontractor Payroll Tables
 						{{ 
 							Form::text("employee_period_ranges[$rid][{$pid}]", $val, array(
 								'class' => 'form-control', 
-								'required' => 'required',
 								'placeholder' => 'amount',
 								'ng-model' 	=> 'epr_' . $rid . '_' . $pid, 
 								'ng-init' 	=> "epr_{$rid}_{$pid}='{$val}'", 
@@ -73,7 +72,6 @@ Employee & Subcontractor Payroll Tables
 						{{ 
 							Form::text("subcontractor_period_ranges[$rid][{$pid}]", $val, array(
 								'class' => 'form-control', 
-								'required' => 'required',
 								'placeholder' => 'amount',
 								'ng-model' 	=> 'spr_' . $rid . '_' . $pid, 
 								'ng-init' 	=> "spr_{$rid}_{$pid}='{$val}'", 

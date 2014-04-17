@@ -52,7 +52,7 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 	{
 		$input = Input::all();
 		$accountant = $this->user->accountant;
-
+		
 		AccountantModule::where('accountant_id', $accountant->id)->delete();
 		AccountantOtherService::where('accountant_id', $accountant->id)->delete();
 		
@@ -84,6 +84,6 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 
 		return Redirect::to('practicedetails/services')
 			->withInput()
-			->with('message', 'You have successfully ' . $msg . ' Modules & Other Services practice details.');
+			->with('message', 'Successfully saved Modules & Services.');
 	}
 }

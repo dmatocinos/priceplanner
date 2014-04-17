@@ -54,7 +54,7 @@ class PracticeDetailsRisksController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully created audit risks practice details.');
+			->with('message', 'Successfully saved Audit Risks.');
 	}
 
 	public function update()
@@ -79,6 +79,6 @@ class PracticeDetailsRisksController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated audit risks practice details.');
+			->with('message', 'Successfully saved Audit Risks.');
 	}
 }

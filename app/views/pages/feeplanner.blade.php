@@ -70,7 +70,6 @@ Fee Planner
 					{{   
 						Form::text('pricing[turnovers]', $pricing['turnovers'], array(
 							'class' => 'form-control input-sm',
-							'required' => 'required',
 							'ng-model' 	=> 'E7', 
 							'ng-init' 	=> "E7='{$pricing['turnovers']}'", 
 							'numbers-only'	=> 'numbers-only',
@@ -210,7 +209,6 @@ Fee Planner
 						'ng-model' 	=> 'E20', 
 						'ng-init' 	=> "E20='{$pricing['self_assessment_tax_return']}'", 
 						'numbers-only'	=> 'numbers-only',
-						'required'	=> 'required',
 						'placeholder'	=> 'qty',
 					));
 				}}
@@ -231,7 +229,6 @@ Fee Planner
 						'ng-model' 	=> 'E22', 
 						'ng-init' 	=> "E22='{$pricing['vat_return']}'", 
 						'numbers-only'	=> 'numbers-only',
-						'required'	=> 'required',
 					));
 				}}
 				</td>
@@ -251,7 +248,6 @@ Fee Planner
 							'ng-model' 	=> 'C24', 
 							'ng-init' 	=> "C24='{$pricing['bookkeeping_hours']}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'style'	=> 'width: 50px;',
 							'placeholder' => 'hrs'
 						));
@@ -268,7 +264,6 @@ Fee Planner
 							'ng-model' 	=> 'C25', 
 							'ng-init' 	=> "C25='{$pricing['bookkeeping_days']}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'style'	=> 'width: 50px;',
 							'placeholder' => 'days'
 						));
@@ -284,7 +279,6 @@ Fee Planner
 							'ng-model' 	=> 'E24', 
 							'ng-init' 	=> "E24='{$pricing['bookkeeping_hour_val']}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'placeholder' => 'amount per hour'
 						));
 						
@@ -297,7 +291,6 @@ Fee Planner
 							'ng-model' 	=> 'E25', 
 							'ng-init' 	=> "E25='{$pricing['bookkeeping_day_val']}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'placeholder' => 'amount per day'
 						));
 						
@@ -427,7 +420,6 @@ Fee Planner
 							'ng-model' 	=> 'other_services' . $id, 
 							'ng-init' 	=> "other_services{$id}='{$other_service_pricings[$id]}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'placeholder'	=> 'qty',
 
 						));
@@ -455,7 +447,6 @@ Fee Planner
 							'ng-model' 	=> 'discount', 
 							'ng-init' 	=> "discount='{$pricing['discount']}'", 
 							'numbers-only'	=> 'numbers-only',
-							'required'	=> 'required',
 							'placeholder'	=> 'percentage',
 
 						));

@@ -6,7 +6,7 @@ class BusinessTypesTableSeeder extends Seeder {
 	{
 		$business_types = array(
 			[
-				'name' => 'Ltd Co',
+				'name' => 'Limited Company',
 			],
 			[
 				'name' => 'LLP',
@@ -24,13 +24,13 @@ class BusinessTypesTableSeeder extends Seeder {
 				'name' => 'Partnership',
 			],
 			[
-				'name' => 'Sole trader',
+				'name' => 'Sole Trader',
 			],
 			[
 				'name' => 'Subcontrator',
 			],
 			[
-				'name' => 'Tax only',
+				'name' => 'Tax Only',
 			],
 		);
 

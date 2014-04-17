@@ -33,7 +33,6 @@ Record Qualities
 							{{ 
 								Form::text("record_qualities[$ac_id][{$id}]", $val, array(
 									'class' => 'form-control', 
-									'required' => 'required',
 									'placeholder' => 'percentage',
 									'ng-model' 	=> "record_quality_{$ac_id}_{$id}", 
 									'ng-init' 	=> "record_quality_{$ac_id}_{$id}='{$val}'", 

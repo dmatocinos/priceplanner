@@ -63,7 +63,7 @@
 							<a href="{{ route('practicedetails.setup') }}"><i class="fa fa-leaf fa-fw"></i> Practice Details</a>
 						</li>
 						<li>
-							<a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+							<a href="{{ url('home')  }}"><i class="fa fa-dashboard fa-fw"></i> Clients</a>
 						</li>
 					@else
 						<li>
@@ -114,7 +114,7 @@
     </div>
     <!-- /#wrapper -->
     <div class='notifications bottom-left'>
-	    <div style="float:left; width: 350px;">
+	    <div style="float:left; width: 100%; max-width: 350px;">
 			<div style="width: 230px;">
 				<a href="http://bizvaluationpro.practicepro.co.uk" class="thumbnail" title=" Create a professional business valuation in just 15 minutes"><img src="{{ asset('images/app-logos/bizvaluation_logo.png') }}" style="width: 200px; padding: 10px 0;"/></a>
 			</div>

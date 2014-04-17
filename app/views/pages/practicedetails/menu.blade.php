@@ -19,6 +19,12 @@
 						}
 					}
 				}
+				/*echo "<pre>";
+				var_dump($user->accountant->last_tab);
+				echo "<br/>";
+				var_dump($completed_tabs);
+				echo "</pre>";
+				die;*/
 				
 				$i = 0;
 			?>
@@ -35,7 +41,7 @@
 				@if ((in_array($key, $completed_tabs) && $i !== $current_tab_index) || ($completed_tab_index !== null && $i == $completed_tab_index + 1 && $current_tab_index !== $completed_tab_index + 1)) 
 					<li {{ $class }}><a href="{{ url("practicedetails/" . $key) }}">{{ $display }}</a></li>
 				@else
-					<?php $color = $i == $current_tab_index ? '' : "color: #000000; "; ?>
+					<?php $color = ($i == $current_tab_index ? '' : "color: #000000; "); ?>
 					<li {{ $class }}><a href="#" style="{{ $color }}cursor: default;">{{ $display }}</a></li>
 				@endif
 				

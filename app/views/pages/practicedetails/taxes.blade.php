@@ -29,7 +29,6 @@ Tax and VAT Returns
 				{{ 
 					Form::text("tax_returns[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'amount',
 						'ng-model' 	=> 'tax_returns' . $id, 
 						'ng-init' 	=> "tax_returns{$id}='{$val}'", 
@@ -51,7 +50,6 @@ Tax and VAT Returns
 				{{ 
 					Form::text("vat_returns", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'amount',
 						'ng-model' 	=> 'vat_returns', 
 						'ng-init' 	=> "vat_returns='{$val}'", 

@@ -22,8 +22,12 @@ Setup
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Setup</a></li>
 	      @if($edit == true)
-	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
-		   @else
+			  @if($pricing_id)
+			  <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>
+			  @else
+			  <li class=""><a href="{{ url('feeplanner/' . $client_id) }}">Fee Planner</a></li>
+			  @endif
+		  @else
 	      <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
 	      @endif
 		  @if(isset($pricing_id))
@@ -58,7 +62,7 @@ Setup
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="" class="col-lg-2 control-label">Person Name</label>
+		    <label for="" class="col-lg-2 control-label">Client Name</label>
 		    <div class="col-lg-4">
 				{{ 
 					Form::text('client[client_name]', isset($client['client_name']) ? $client['client_name'] : '', array(

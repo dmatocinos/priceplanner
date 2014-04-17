@@ -53,7 +53,7 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully created turnover ranges practice details.');
+			->with('message', 'Successfully saved Turnover Ranges.');
 	}
 
 	public function update()
@@ -78,6 +78,6 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated turnover ranges details.');
+			->with('message', 'Successfully saved Turnover Ranges.');
 	}
 }

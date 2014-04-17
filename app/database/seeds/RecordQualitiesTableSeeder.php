@@ -6,10 +6,10 @@ class RecordQualitiesTableSeeder extends Seeder {
 	{
 		$record_qualities = array(
 			[
-				'name' => 'Non existant',
+				'name' => 'Non-Existent',
 			],
 			[
-				'name' => 'Very poor',
+				'name' => 'Very Poor',
 			],
 			[
 				'name' => 'Poor',
@@ -21,13 +21,13 @@ class RecordQualitiesTableSeeder extends Seeder {
 				'name' => 'Good',
 			],
 			[
-				'name' => 'Very good',
+				'name' => 'Very Good',
 			],
 			[
 				'name' => 'Excellent',
 			],
 			[
-				'name' => 'Full accounts',
+				'name' => 'Full Accounts',
 			],
 		);
 

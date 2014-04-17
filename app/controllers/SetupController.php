@@ -67,7 +67,7 @@ class SetupController extends BaseController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully started setting up.');
+			->with('message', 'Successfully saved Setup.');
 
 	}
 
@@ -100,7 +100,7 @@ class SetupController extends BaseController {
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'You have successfully updated your setup.');
+			->with('message', 'Successfully saved Setup.');
 	}
 
 }
