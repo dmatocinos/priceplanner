@@ -71,7 +71,7 @@ class SetupController extends BaseController {
 			$client = $client->create($c_input);
 		}
 		else {
-			return Redirect::route('setup.create')
+			return Redirect::to('setup.create')
 				->withInput()
 				->withErrors($c_validation)
 				->with('message', 'There were validation errors.');

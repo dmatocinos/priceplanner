@@ -19,7 +19,7 @@ Audit Risks
 		  <legend>Audit Risks</legend>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
-		    <div class="col-lg-2 text-center">Base Fee</div>
+		    <div class="col-lg-2 text-center">Base Fee - % Increase</div>
 		  </div>
 		  @foreach($audit_risks as $id => $name)
 		  <div class="form-group">
@@ -29,7 +29,8 @@ Audit Risks
 				{{ 
 					Form::text("audit_risks[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'placeholder' => 'amount',
+						'required' => 'required',
+						'placeholder' => 'percentage',
 						'ng-model' 	=> 'audit_requirement' . $id, 
 						'ng-init' 	=> "audit_requirement{$id}='{$val}'", 
 						'numbers-only'	=> 'numbers-only',

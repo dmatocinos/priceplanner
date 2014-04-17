@@ -167,12 +167,20 @@ class PlanSummaryCalculator {
 
 	public function getG24Val()
 	{
-		return $this->pricing->bookkeeping_hours * $this->pricing->bookkeeping_hour_val;
+		$hour_val = (integer) DB::table('accountant_bookkeepings')
+					->where('accountant_id', $this->client->accountant_id)
+					->pluck('hour_val');
+
+		return $this->pricing->bookkeeping_hours * $hour_val;
 	}
 
 	public function getG25Val()
 	{
-		return $this->pricing->bookkeeping_days * $this->pricing->bookkeeping_day_val;
+		$day_val = (integer) DB::table('accountant_bookkeepings')
+					->where('accountant_id', $this->client->accountant_id)
+					->pluck('day_val');
+
+		return $this->pricing->bookkeeping_days * $day_val;
 	}
 
 	public function getEmployeePayrollVal()

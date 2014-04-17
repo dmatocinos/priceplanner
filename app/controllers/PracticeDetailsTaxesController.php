@@ -75,7 +75,7 @@ class PracticeDetailsTaxesController extends PracticeDetailsController {
 		$model = new AccountantVatReturn;
 		$model->create(['accountant_id' => $accountant->id, 'value' => $input['vat_returns']]);
 		
-		$route = isset($input['save_next_page']) ? 'practicedetails/payrolls' : 'practicedetails/taxes';
+		$route = isset($input['save_next_page']) ? 'practicedetails/bookkeeping' : 'practicedetails/taxes';
 
 		return Redirect::to($route)
 			->withInput()

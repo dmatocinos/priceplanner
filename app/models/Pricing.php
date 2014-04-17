@@ -15,8 +15,6 @@ class Pricing extends \Eloquent {
 		'vat_return',
 		'bookkeeping_hours',
 		'bookkeeping_days',
-		'bookkeeping_hour_val',
-		'bookkeeping_day_val',
 		'discount',
 	];
 
@@ -28,8 +26,6 @@ class Pricing extends \Eloquent {
 		'vat_return' => 'required|numeric',
 		'bookkeeping_hours' => 'required|numeric',
 		'bookkeeping_days' => 'required|numeric',
-		'bookkeeping_hour_val' => 'required|numeric',
-		'bookkeeping_day_val' => 'required|numeric',  
 		'discount' => 'required|numeric',  
 	);
 

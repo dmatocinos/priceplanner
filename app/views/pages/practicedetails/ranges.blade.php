@@ -19,7 +19,7 @@ Turnover Ranges
 		  <legend>Turnover Ranges</legend>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
-		    <div class="col-lg-2 text-center">Modifier</div>
+		    <div class="col-lg-2 text-center">Modifier - % Increase</div>
 		  </div>
 		  @foreach ($turnover_ranges as $id => $name)
 		  <div class="form-group">

@@ -16,6 +16,7 @@ class PracticeDetailsController extends BaseController
 			'requirements' => 'Audit Requirements',
 			'risks' => 'Audit Risks',
 			'taxes' => 'Taxes',
+			'bookkeeping' => 'Bookkeeping',
 			'payrolls' => 'Payrolls',
 			'services' => 'Modules & Services'
 		));
