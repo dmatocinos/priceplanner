@@ -52,6 +52,7 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 	{
 		$input = Input::all();
 		$accountant = $this->user->accountant;
+		$accountant->update(array('last_tab' => 'completed'));
 		
 		AccountantModule::where('accountant_id', $accountant->id)->delete();
 		AccountantOtherService::where('accountant_id', $accountant->id)->delete();
