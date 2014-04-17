@@ -10,7 +10,8 @@
 		"dragonfire1119/asset": "dev-master",
 		"way/generators": "dev-master",
 		"omnipay/paypal": "~2.0",
-		"rearlabs/tcpdf-rl": "dev-master"
+		"rearlabs/tcpdf-rl": "dev-master",
+		"doctrine/dbal": "~2.3"
 	},
 	"autoload": {
 		"classmap": [

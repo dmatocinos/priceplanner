@@ -15,6 +15,15 @@ class SetupController extends BaseController {
 				'client_id' => NULL,
 		];
 		
+		$result    = DB::select("SELECT country_id, short_name FROM countries");
+		$countries = array('- Select Country -');
+		
+		foreach ($result as $row) {
+			$countries[$row->country_id] = $row->short_name;
+		}
+		
+		$form_data['countries'] = $countries;
+		
 		$this->layout->content = View::make("pages.setup", $form_data);
 	}
 
@@ -33,6 +42,15 @@ class SetupController extends BaseController {
 				'client_id' => $client_id,
 				'pricing_id' =>  $pricing ? $pricing->id : NULL
 		];
+		
+		$result    = DB::select("SELECT country_id, short_name FROM countries");
+		$countries = array('- Select Country -');
+		
+		foreach ($result as $row) {
+			$countries[$row->country_id] = $row->short_name;
+		}
+		
+		$form_data['countries'] = $countries;
 
 		$this->layout->content = View::make("pages.setup", $form_data);
 	}

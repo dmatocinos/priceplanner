@@ -6,7 +6,11 @@ class Accountant extends \Eloquent {
 		'user_id',
 		'accountant_name',
 		'accountancy_name',
-		'address',
+		'street_address',
+		'city_address',
+		'state_address',
+		'country_address',
+		'zip_address',
 		'logo_filename',
 		'last_tab'
 	];
@@ -14,7 +18,8 @@ class Accountant extends \Eloquent {
 	public static $rules = array(
 		'accountant_name' => 'required',
 		'accountancy_name' => 'required',
-		'address'	=> 'required',
+		'street_address'	=> 'required',
+		'city_address'	=> 'required',
 		'logo_filename'	=> 'image|max:1500'
 	);
 	

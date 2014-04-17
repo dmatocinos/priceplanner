@@ -40,18 +40,7 @@ Setup Accountant Details
 					}}
 			    </div>
 			  </div>	
-			  <div class="form-group">
-			    <label for="address" class="col-lg-2 control-label">Address</label>
-			    <div class="col-lg-4">
-					{{ 
-						Form::text('address', isset($accountant['address']) ? $accountant['address'] : '', array(
-							'class' => 'form-control', 
-							'required' => 'required'
-						)) 
-					}}
-			    </div>
-			  </div>
-			  <div class="form-group">
+			   <div class="form-group">
 			    <label for="logo_filename" class="col-lg-2 control-label">Logo (optional)</label>
 			    <div class="col-lg-4">
 					@if (isset($accountant['logo_filename']) && ! is_null($accountant['logo_filename']))
@@ -63,7 +52,64 @@ Setup Accountant Details
 					}}
 			    </div>
 			  </div>
-					
+			<legend><h4>Address</h4></legend>
+			  <div class="form-group">
+			    <label for="street_address" class="col-lg-2 control-label">Street Address</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('street_address', isset($accountant['street_address']) ? $accountant['street_address'] : '', array(
+							'class' => 'form-control', 
+							'required' => 'required'
+						)) 
+					}}
+			    </div>
+			  </div>
+			   <div class="form-group">
+			    <label for="city_address" class="col-lg-2 control-label">City</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('city_address', isset($accountant['city_address']) ? $accountant['city_address'] : '', array(
+							'class' => 'form-control', 
+							'required' => 'required'
+						)) 
+					}}
+			    </div>
+			  </div>
+			   <div class="form-group">
+			    <label for="state_address" class="col-lg-2 control-label">State</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('state_address', isset($accountant['state_address']) ? $accountant['state_address'] : '', array(
+							'class' => 'form-control'
+						)) 
+					}}
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="country_address" class="col-lg-2 control-label">Country</label>
+			    <div class="col-lg-4">
+					{{   
+						Form::select(
+							'country_address', $countries, isset($accountant['country_address']) ? $accountant['country_address'] : '', [
+							'class' => 'form-control',
+						]);
+					}}
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="zip_address" class="col-lg-2 control-label">Zip Code</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('zip_address', isset($accountant['zip_address']) ? $accountant['zip_address'] : '', array(
+							'class' => 'form-control', 
+							'numbers-only'	=> 'numbers-only',
+							'ng-model' 	=> 'zip_address',
+							'ng-init' 	=> "zip_address='" . (isset($accountant['zip_address']) ? $accountant['zip_address'] : '') . "'", 
+						)) 
+					}}
+			    </div>
+			  </div>
+			 	
 			</fieldset>
 		</div>
 		<div class="col-lg-12 pull-right well">

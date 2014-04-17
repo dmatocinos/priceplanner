@@ -5,6 +5,8 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 	
 	public function index() 
 	{
+		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
+		
 		if ($this->user->accountant) {
 			$accountant = $this->user->accountant;
 
@@ -23,6 +25,15 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 					'route' => 'practicedetails.setup.store',
 			];
 		}
+		
+		$result    = DB::select("SELECT country_id, short_name FROM countries");
+		$countries = array('- Select Country -');
+		
+		foreach ($result as $row) {
+			$countries[$row->country_id] = $row->short_name;
+		}
+		
+		$form_data['countries'] = $countries;
 		
 		$this->layout->content = View::make("pages.practicedetails.setup", $form_data);
 	}
@@ -45,7 +56,6 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 				$input['logo_filename']->move(public_path() . '/uploads', $filename);
 				$accountant->update(['logo_filename' => $filename]);
 			}
-
 		}
 		else {
 			return Redirect::route('practicedetails.setup')

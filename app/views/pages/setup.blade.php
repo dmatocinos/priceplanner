@@ -73,17 +73,6 @@ Setup
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="client[address]" class="col-lg-2 control-label">Address</label>
-		    <div class="col-lg-4">
-				{{ 
-					Form::text('client[address]', isset($client['address']) ? $client['address'] : '', array(
-						'class' => 'form-control', 
-						'required' => 'required'
-					)) 
-				}}
-		    </div>
-		  </div>
-		  <div class="form-group">
 		    <label for="period_start_date" class="col-lg-2 control-label">Accounting Period</label>
 		    <div class="col-lg-5">
 			<div class="row">
@@ -113,6 +102,63 @@ Setup
 		       </div>
 		    </div>
 		  </div>
+		  <legend><h4>Address</h4></legend>
+			  <div class="form-group">
+			    <label for="client[street_address]" class="col-lg-2 control-label">Street Address</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('client[street_address]', isset($client['street_address']) ? $client['street_address'] : '', array(
+							'class' => 'form-control', 
+							'required' => 'required'
+						)) 
+					}}
+			    </div>
+			  </div>
+			   <div class="form-group">
+			    <label for="client[city_address]" class="col-lg-2 control-label">City</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('client[city_address]', isset($client['city_address']) ? $client['city_address'] : '', array(
+							'class' => 'form-control', 
+							'required' => 'required'
+						)) 
+					}}
+			    </div>
+			  </div>
+			   <div class="form-group">
+			    <label for="client[state_address]" class="col-lg-2 control-label">State</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('client[state_address]', isset($client['state_address']) ? $client['state_address'] : '', array(
+							'class' => 'form-control'
+						)) 
+					}}
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="client[country_address]" class="col-lg-2 control-label">Country</label>
+			    <div class="col-lg-4">
+					{{   
+						Form::select(
+							'client[country_address]', $countries, isset($client['country_address']) ? $client['country_address'] : '', [
+							'class' => 'form-control',
+						]);
+					}}
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="client[zip_address]" class="col-lg-2 control-label">Zip Code</label>
+			    <div class="col-lg-4">
+					{{ 
+						Form::text('client[zip_address]', isset($client['zip_address']) ? $client['zip_address'] : '', array(
+							'class' => 'form-control', 
+							'numbers-only'	=> 'numbers-only',
+							'ng-model' 	=> 'zip_address',
+							'ng-init' 	=> "zip_address='" . (isset($client['zip_address']) ? $client['zip_address'] : '') . "'", 
+						)) 
+					}}
+			    </div>
+			  </div>
 		</fieldset>
 	</div>
 	<div class="col-lg-12 pull-right well">

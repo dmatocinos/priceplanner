@@ -7,7 +7,11 @@ class Client extends \Eloquent {
 	protected $fillable = [
 		'client_name',
 		'business_name',
-		'address',
+		'street_address',
+		'city_address',
+		'state_address',
+		'country_address',
+		'zip_address',
 		'period_start_date',
 		'period_end_date',
 		'accountant_id',
@@ -16,7 +20,8 @@ class Client extends \Eloquent {
 	public static $rules = array(
 		'client_name' => 'required',
 		'business_name' => 'required',
-		'address' => 'required',
+		'street_address'	=> 'required',
+		'city_address'	=> 'required',
 		'period_start_date' => 'required',
 		'period_end_date' => 'required',
 	);

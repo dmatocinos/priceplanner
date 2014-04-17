@@ -50,6 +50,21 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	{
 		return $this->email;
 	}
+	
+	public function getRememberToken() 
+	{
+		return null;
+	}
+	
+	public function setRememberToken($value)
+	{
+	
+	}
+	
+	public function getRememberTokenName()
+	{
+		return null;
+	}
 
 	public function getUserType()
 	{

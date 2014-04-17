@@ -1,5 +1,5 @@
 @section('page_title')
-Dashboard
+Clients
 @stop
 
 @section('content')
