@@ -23,6 +23,7 @@ class SetupController extends BaseController {
 		}
 		
 		$form_data['countries'] = $countries;
+		$form_data['default_country'] = $this->getDefaultCountryId();
 		
 		$this->layout->content = View::make("pages.setup", $form_data);
 	}
@@ -51,6 +52,7 @@ class SetupController extends BaseController {
 		}
 		
 		$form_data['countries'] = $countries;
+		$form_data['default_country'] = $this->getDefaultCountryId();
 
 		$this->layout->content = View::make("pages.setup", $form_data);
 	}

@@ -126,7 +126,7 @@ Setup
 			    </div>
 			  </div>
 			   <div class="form-group">
-			    <label for="client[state_address]" class="col-lg-2 control-label">State</label>
+			    <label for="client[state_address]" class="col-lg-2 control-label">County</label>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text('client[state_address]', isset($client['state_address']) ? $client['state_address'] : '', array(
@@ -140,14 +140,14 @@ Setup
 			    <div class="col-lg-4">
 					{{   
 						Form::select(
-							'client[country_address]', $countries, isset($client['country_address']) ? $client['country_address'] : '', [
+							'client[country_address]', $countries, (isset($client['country_address']) && !empty($client['country_address'])) ? $client['country_address'] : $default_country, [
 							'class' => 'form-control',
 						]);
 					}}
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="client[zip_address]" class="col-lg-2 control-label">Zip Code</label>
+			    <label for="client[zip_address]" class="col-lg-2 control-label">Postcode</label>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text('client[zip_address]', isset($client['zip_address']) ? $client['zip_address'] : '', array(

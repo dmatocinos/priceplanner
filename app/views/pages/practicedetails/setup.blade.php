@@ -76,7 +76,7 @@ Setup Accountant Details
 			    </div>
 			  </div>
 			   <div class="form-group">
-			    <label for="state_address" class="col-lg-2 control-label">State</label>
+			    <label for="state_address" class="col-lg-2 control-label">County</label>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text('state_address', isset($accountant['state_address']) ? $accountant['state_address'] : '', array(
@@ -90,14 +90,14 @@ Setup Accountant Details
 			    <div class="col-lg-4">
 					{{   
 						Form::select(
-							'country_address', $countries, isset($accountant['country_address']) ? $accountant['country_address'] : '', [
+							'country_address', $countries, (isset($accountant['country_address']) && !empty($accountant['country_address'])) ? $accountant['country_address'] : $default_country, [
 							'class' => 'form-control',
 						]);
 					}}
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="zip_address" class="col-lg-2 control-label">Zip Code</label>
+			    <label for="zip_address" class="col-lg-2 control-label">Postcode</label>
 			    <div class="col-lg-4">
 					{{ 
 						Form::text('zip_address', isset($accountant['zip_address']) ? $accountant['zip_address'] : '', array(

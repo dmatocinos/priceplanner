@@ -24,7 +24,6 @@ Tax and VAT Returns
 					{{ 
 						Form::text("hour_val", $hour_val, array(
 							'class' => 'form-control', 
-							'required' => 'required',
 							'placeholder' => 'amount',
 							'ng-model' 	=> 'hour_val', 
 							'ng-init' 	=> "hour_val='{$hour_val}'", 
@@ -40,7 +39,6 @@ Tax and VAT Returns
 					{{ 
 						Form::text("day_val", $day_val, array(
 							'class' => 'form-control', 
-							'required' => 'required',
 							'placeholder' => 'amount',
 							'ng-model' 	=> 'day_val', 
 							'ng-init' 	=> "day_val='{$day_val}'", 

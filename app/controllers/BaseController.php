@@ -77,5 +77,10 @@ class BaseController extends Controller {
 
 		$this->layout = View::make($this->layout);
 	}
-
+	
+	protected function getDefaultCountryId() 
+	{
+		$result = DB::select("SELECT country_id FROM countries WHERE iso2='GB'");
+		return $result[0]->country_id;
+	}
 }

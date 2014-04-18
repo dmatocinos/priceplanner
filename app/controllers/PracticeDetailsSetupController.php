@@ -34,6 +34,7 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 		}
 		
 		$form_data['countries'] = $countries;
+		$form_data['default_country'] = $this->getDefaultCountryId();
 		
 		$this->layout->content = View::make("pages.practicedetails.setup", $form_data);
 	}

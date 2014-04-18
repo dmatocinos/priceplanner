@@ -29,7 +29,6 @@ Audit Risks
 				{{ 
 					Form::text("audit_risks[{$id}]", $val, array(
 						'class' => 'form-control', 
-						'required' => 'required',
 						'placeholder' => 'percentage',
 						'ng-model' 	=> 'audit_requirement' . $id, 
 						'ng-init' 	=> "audit_requirement{$id}='{$val}'", 
