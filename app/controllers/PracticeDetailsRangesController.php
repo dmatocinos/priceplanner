@@ -11,10 +11,7 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 		
 		if ($accountant->accountant_turnover_ranges->count()) {
 			$form_data = [
-					'turnover_ranges' => TurnoverRange::getTurnoverRanges(),
-					'accountant_turnover_ranges' => DB::table('accountant_turnover_ranges')
-						->where('accountant_id', $accountant->id)
-						->lists('modifier', 'turnover_range_id'),
+					'turnover_ranges' => AccountantTurnoverRange::getAccountantTurnoverRanges($accountant->id),
 					'edit'	=> TRUE,
 					'route' => 'practicedetails.ranges.update',
 					'accountant_id' => $accountant->id
@@ -22,7 +19,7 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 		}
 		else {
 			$form_data = [
-					'turnover_ranges' => TurnoverRange::getTurnoverRanges(),
+					'turnover_ranges' => AccountantTurnoverRange::getAccountantTurnoverRanges($accountant->id),
 					'edit'	=> FALSE,
 					'route' => 'practicedetails.ranges.store',
 					'accountant_id' => $accountant->id,
@@ -37,14 +34,16 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 		$input = Input::all();
 		$accountant = $this->user->accountant;
 		$accountant->update(array('last_tab' => $this->current_tab));
-		
+
 		// saving accountant turnover_ranges
-		foreach ($input['turnover_ranges'] as $id => $val) {
+		foreach ($input['turnover_ranges'] as $id => $input_val) {
+			
 			$data = [
-				'modifier' => $val,
 				'accountant_id' => $accountant->id,
-				'turnover_range_id' => $id
 			];
+
+			$data = $data + $input_val;
+
 			$model = new AccountantTurnoverRange;
 			$model->create($data);
 		}
@@ -60,16 +59,17 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 	{
 		$input = Input::all();
 		$accountant = $this->user->accountant;
-
 		AccountantTurnoverRange::where('accountant_id', $accountant->id)->delete();
 
 		// saving accountant turnover_ranges
-		foreach ($input['turnover_ranges'] as $id => $val) {
+		foreach ($input['turnover_ranges'] as $id => $input_val) {
+			$model = new AccountantTurnoverRange;
 			$data = [
-				'modifier' => $val,
 				'accountant_id' => $accountant->id,
-				'turnover_range_id' => $id
 			];
+
+			$data = $data + $input_val;
+
 			$model = new AccountantTurnoverRange;
 			$model->create($data);
 		}
