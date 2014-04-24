@@ -19,8 +19,8 @@ Turnover Ranges
 		  <legend>Turnover Ranges</legend>
 		  <div class="form-group">
 			<div class="col-md-8">
-			    <div class="col-lg-3 text-center">From - rate</div>
-			    <div class="col-lg-3 text-center">To - rate</div>
+			    <div class="col-lg-3 text-center">From - Rate</div>
+			    <div class="col-lg-3 text-center">To - Rate</div>
 			    <div class="col-lg-3 text-center">Modifier - % Increase</div>
 			</div>
 		  </div>

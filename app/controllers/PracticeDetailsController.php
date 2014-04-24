@@ -13,11 +13,10 @@ class PracticeDetailsController extends BaseController
 			'businesstypes' => 'Types of Business',
 			'ranges' => 'Turnover Ranges',
 			'qualities' => 'Record Qualities',
-			'requirements' => 'Audit Requirements',
-			'risks' => 'Audit Risks',
+			'audit' => 'Audit',
 			'taxes' => 'Taxes',
-			'bookkeeping' => 'Bookkeeping',
-			'payrolls' => 'Payrolls',
+			'bookkeeping' => 'Rates',
+			'payrolls' => 'Payroll',
 			'services' => 'Modules & Services'
 		));
 		

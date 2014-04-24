@@ -16,7 +16,7 @@ Tax and VAT Returns
 		{{  Form::hidden('accountant_id', $accountant_id) }}
 		<div class="well">
 			<fieldset>
-			  <legend>Bookkeeping Base Fee</legend>
+			  <legend>Rates Base Fee</legend>
 
 			  <div class="form-group">
 			    <label for="hour_val" class="col-lg-2 control-label">Per Hour</label>

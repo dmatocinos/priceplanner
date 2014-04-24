@@ -29,15 +29,25 @@ Record Qualities
 						<label class="col-lg-4 control-label">{{ $name }}</label>
 					@foreach([1,2] as $ac_id)
 						<?php $val = isset($accountant_record_qualities[$ac_id][$id]) ? $accountant_record_qualities[$ac_id][$id] : '' ?>
+						<?php 
+							$attrs = [
+								'class' => 'form-control', 
+								'placeholder' => 'percentage',
+								'ng-model' 	=> "record_quality_{$ac_id}_{$id}", 
+								'ng-init' 	=> "record_quality_{$ac_id}_{$id}='{$val}'", 
+							];
+							
+							if (in_array($name, ['Good', 'Very Good', 'Excellent', 'Full Accounts'])) {
+								$attrs['numbers-negative'] = 'numbers-negative'; 
+							}
+							else {
+								$attrs['numbers-only'] = 'numbers-only'; 
+							}
+
+						?>
 						<div class="col-lg-4">
 							{{ 
-								Form::text("record_qualities[$ac_id][{$id}]", $val, array(
-									'class' => 'form-control', 
-									'placeholder' => 'percentage',
-									'ng-model' 	=> "record_quality_{$ac_id}_{$id}", 
-									'ng-init' 	=> "record_quality_{$ac_id}_{$id}='{$val}'", 
-									'numbers-only'	=> 'numbers-only',
-								)) 
+								Form::text("record_qualities[$ac_id][{$id}]", $val, $attrs) 
 							}}
 						</div>
 					@endforeach

@@ -1,7 +1,7 @@
 <?php
 
-class PracticeDetailsRequirementsController extends PracticeDetailsController {
-	protected $current_tab = "requirements";
+class PracticeDetailsAuditController extends PracticeDetailsController {
+	protected $current_tab = "audit";
 	
 	public function index() 
 	{
@@ -9,27 +9,32 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 		
 		$accountant = $this->user->accountant;
 		
-		if ($accountant->accountant_audit_requirements->count()) {
+		if ($accountant->accountant_audit_requirements->count() && $accountant->accountant_audit_risks->count()) {
 			$form_data = [
 					'audit_requirements' => AuditRequirement::getAuditRequirements(),
+					'audit_risks' => AuditRisk::getAuditRisks(),
 					'accountant_audit_requirements' => DB::table('accountant_audit_requirements')
 						->where('accountant_id', $accountant->id)
 						->lists('value', 'audit_requirement_id'),
+					'accountant_audit_risks' => DB::table('accountant_audit_risks')
+						->where('accountant_id', $accountant->id)
+						->lists('percentage', 'audit_risk_id'),
 					'edit'	=> TRUE,
-					'route' => 'practicedetails.requirements.update',
+					'route' => 'practicedetails.audit.update',
 					'accountant_id' => $accountant->id
 			];
 		}
 		else {
 			$form_data = [
 					'audit_requirements' => AuditRequirement::getAuditRequirements(),
+					'audit_risks' => AuditRisk::getAuditRisks(),
 					'edit'	=> FALSE,
-					'route' => 'practicedetails.requirements.store',
+					'route' => 'practicedetails.audit.store',
 					'accountant_id' => $accountant->id,
 			];
 		}
 			
-		$this->layout->content = View::make("pages.practicedetails.requirements", $form_data);
+		$this->layout->content = View::make("pages.practicedetails.audit", $form_data);
 	}
 
 	public function store()
@@ -37,7 +42,7 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 		$input = Input::all();
 		$accountant = $this->user->accountant;
 		$accountant->update(array('last_tab' => $this->current_tab));
-		
+
 		// saving client audit_requirements
 		foreach ($input['audit_requirements'] as $id => $val) {
 			$data = [
@@ -49,11 +54,22 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 			$model->create($data);
 		}
 		
-		$route = isset($input['save_next_page']) ? 'practicedetails/risks' : 'practicedetails/requirements';
+		// saving client audit_risks
+		foreach ($input['audit_risks'] as $id => $val) {
+			$data = [
+				'percentage' => $val,
+				'accountant_id' => $accountant->id,
+				'audit_risk_id' => $id
+			];
+			$model = new AccountantAuditRisk;
+			$model->create($data);
+		}
+		
+		$route = isset($input['save_next_page']) ? 'practicedetails/taxes' : 'practicedetails/audit';
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'Successfully saved Audit Requirements.');
+			->with('message', 'Successfully saved Audit details.');
 	}
 
 	public function update()
@@ -73,11 +89,24 @@ class PracticeDetailsRequirementsController extends PracticeDetailsController {
 			$model = new AccountantAuditRequirement;
 			$model->create($data);
 		}
+
+		AccountantAuditRisk::where('accountant_id', $accountant->id)->delete();
+
+		// saving client audit_risks
+		foreach ($input['audit_risks'] as $id => $val) {
+			$data = [
+				'percentage' => $val,
+				'accountant_id' => $accountant->id,
+				'audit_risk_id' => $id
+			];
+			$model = new AccountantAuditRisk;
+			$model->create($data);
+		}
 		
-		$route = isset($input['save_next_page']) ? 'practicedetails/risks' : 'practicedetails/requirements';
+		$route = isset($input['save_next_page']) ? 'practicedetails/taxes' : 'practicedetails/audit';
 
 		return Redirect::to($route)
 			->withInput()
-			->with('message', 'Successfully saved Audit Requirements.');
+			->with('message', 'Successfully saved Audit details.');
 	}
 }
