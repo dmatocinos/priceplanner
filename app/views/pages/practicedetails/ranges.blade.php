@@ -17,6 +17,8 @@ Turnover Ranges
 		<div class="well">
 		<fieldset>
 		  <legend>Turnover Ranges</legend>
+		  <p class="help-block">Please enter the percentage increase over base fee that you charge clients based on their turnover.</p>
+		  <br>
 		  <div class="form-group">
 			<div class="col-md-8">
 			    <div class="col-lg-3 text-center">From - Rate</div>

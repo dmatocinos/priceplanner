@@ -47,4 +47,11 @@ class OtherService extends \Eloquent {
 		return $data;
 	}
 
+	public function accountantOtherService()
+	{
+		return $this->hasOne('AccountantOtherService');
+	}
+
+	
+
 }

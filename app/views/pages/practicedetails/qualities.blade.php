@@ -17,6 +17,8 @@ Record Qualities
 		<div class="well">
 		<fieldset>
 		  <legend>Accounting System Qualities - % Increase/Decrease</legend>
+		  <p class="help-block">Please enter the percentage increase or decrease over base fee that you charge clients based on the quality of their records. <br>Average will always be 0%, with the values entered in ‘Good’ and better being discounts against the average base fee.</p>
+		  <br>
 		  <div class="row">
 			<div class="col-lg-6">
 			  <div class="form-group">
@@ -35,13 +37,11 @@ Record Qualities
 								'placeholder' => 'percentage',
 								'ng-model' 	=> "record_quality_{$ac_id}_{$id}", 
 								'ng-init' 	=> "record_quality_{$ac_id}_{$id}='{$val}'", 
+								//'numbers-only'  => 'numbers-only'
 							];
 							
 							if (in_array($name, ['Good', 'Very Good', 'Excellent', 'Full Accounts'])) {
 								$attrs['numbers-negative'] = 'numbers-negative'; 
-							}
-							else {
-								$attrs['numbers-only'] = 'numbers-only'; 
 							}
 
 						?>

@@ -18,11 +18,14 @@ Audit Risks
 		<div class="well">
 		<fieldset>
 		  <legend>Audit Requirements</legend>
+		  <p class="help-block">Please enter the base fee you charge clients for audits.</p>
+		  <br>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
 		  </div>
 		  @foreach($audit_requirements as $id => $name)
+		  @if ($name == 'Yes')
 		  <div class="form-group">
 		    <label for="fee_levels[audit_requirements][{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
 		    <div class="col-lg-2">
@@ -38,6 +41,11 @@ Audit Risks
 				}}
 		    </div>
 		  </div>
+		  @else 
+				{{ 
+					Form::hidden("audit_requirements[{$id}]", 0) 
+				}}
+		  @endif
 		  @endforeach
 		</fieldset>
 		</div>
@@ -45,6 +53,8 @@ Audit Risks
 		<div class="well">
 		<fieldset>
 		  <legend>Audit Risks</legend>
+		  <p class="help-block">Please enter the percentage increase over base fee that you charge clients for audits based on the risk level.</p>
+		  <br>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee - % Increase</div>

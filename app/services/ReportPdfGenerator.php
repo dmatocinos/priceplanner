@@ -178,15 +178,12 @@ class ReportPdfGenerator extends TCPDF {
 					
 			$module = $module_pricing->module;
 			$value = $module_pricing->qty * $val;
+
 			$view = "report." . str_replace(' ', '', snake_case($module->name));
 			$html .= View::make($view, array('value' => $value))->render();
 		}
 
 		$other_service_pricings = $this->pricing->other_service_pricings;
-		/*echo '<pre>';
-		var_dump($other_service_pricings);
-		echo '</pre>';
-		die;*/
 		$html .= View::make("report.other_services", array('accountant' => $accountant, 'other_service_pricings' => $other_service_pricings))->render();
 
 		$this->writeHTML($html, true, false, true, false, '');

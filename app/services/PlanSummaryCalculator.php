@@ -65,7 +65,6 @@ class PlanSummaryCalculator {
 	public function getF7Val()
 	{
 		return DB::table('accountant_turnover_ranges')
-				->join('turnover_ranges', 'turnover_ranges.id', '=', 'accountant_turnover_ranges.turnover_range_id')
 				->where('accountant_id', $this->client->accountant_id)
 				->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
 				->pluck('modifier') / 100;

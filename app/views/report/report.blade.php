@@ -23,7 +23,7 @@
 			Business Name: {{ $client->business_name }}
 		</p>
 		<p>
-			Propietors/Owners: {{ $client->client_name }}
+			Proprietors/Owners: {{ $client->client_name }}
 		</p>
 		<p>
 			Accounting Period: {{ $client->accounting_period }}

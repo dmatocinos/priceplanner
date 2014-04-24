@@ -16,7 +16,9 @@ Tax and VAT Returns
 		{{  Form::hidden('accountant_id', $accountant_id) }}
 		<div class="well">
 			<fieldset>
-			  <legend>Rates Base Fee</legend>
+			  <legend>Rates</legend>
+			  <p class="help-block">Please enter the standard daily and hourly rates you charge your clients.</p>
+			  <br>
 
 			  <div class="form-group">
 			    <label for="hour_val" class="col-lg-2 control-label">Per Hour</label>

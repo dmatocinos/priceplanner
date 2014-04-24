@@ -17,6 +17,8 @@ Tax and VAT Returns
 		<div class="well">
 		<fieldset>
 		  <legend>Tax Returns</legend>
+		  <p class="help-block">Please enter the base fee you charge clients per tax return.</p>
+		  <br>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
@@ -43,6 +45,8 @@ Tax and VAT Returns
 	<div class="well">
 		<fieldset>
 		  <legend>VAT Returns</legend>
+		  <p class="help-block">Please enter the base fee you charge clients per VAT return.</p>
+		  <br>
 		  <div class="form-group">
 		    <label for="vat_returns" class="col-lg-2 control-label">Per Return</label>
 		    <div class="col-lg-2">

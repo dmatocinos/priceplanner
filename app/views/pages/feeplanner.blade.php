@@ -62,7 +62,7 @@ Fee Planner
 				</tr>
 				<tr>
 					<td class="text-right col-legend ">
-						Turnovers
+						Turnover
 					</td>
 					<td class="col-extra">
 					</td>
@@ -159,6 +159,8 @@ Fee Planner
 		</div>
 		<div class="well">
 			<legend>Tax Returns</legend>
+			  <p class="help-block">Please select which tax returns you produce for the client and how many self-assessment tax returns you produce for the staff and directors annually.</p>
+			  <br>
 			<table class="table">
 			<tr>
 				<td class="text-right col-legend ">
@@ -238,8 +240,9 @@ Fee Planner
 		</table>
 		</div>
 		<div class="well">
-			<legend>Bookkeeping <em style="font-weight: normal; font-size: 16px;">(if we do the book keeping don't forget to adjust the quality of records)</em>
-</legend>
+			<legend>Bookkeeping <em style="font-weight: normal; font-size: 16px;">(if we do the book keeping don't forget to adjust the quality of records)</em></legend>
+			  <p class="help-block">Please enter the average hours or days spent working on bookkeeping and other financial services that don’t fall into the other categories for this client</p>
+			  <br>
 			<table class="table">
 			<tr>
 				<td class="text-right col-legend ">
@@ -285,6 +288,9 @@ Fee Planner
 		</div>
 		<div class="well">
 			<legend>Payroll</legend>
+			  <p class="help-block">Please select the number of employees and subcontractors that you process payroll runs for this client against the relevant periods.</p>
+			  <br>
+
 			<table class="table">
 				<tr>
 					<td class="text-right col-legend emphasize">
@@ -363,6 +369,8 @@ Fee Planner
 		</div>
 		<div class="well">
 			<legend>Modules</legend>
+			<p class="help-block">Please specify which modules (if any) you supply to this client</p>
+			<br>
 			<table class="table">
 				@foreach($modules as $id => $module)
 				<tr>
@@ -386,6 +394,8 @@ Fee Planner
 		</div>
 		<div class="well">
 			<legend>Other Services</legend>
+			<p class="help-block">Please enter the quantity of other services that you supply to this client.</p>
+			<br>
 			<table class="table">
 				@foreach($other_services as $id => $other_service)
 				<tr>
@@ -414,6 +424,7 @@ Fee Planner
 		</div>
 		<div class="well">
 			<legend>Discount</legend>
+			<p class="help-block">Please enter an across-the-board discount (if any) against all services for this client.</p>
 			<table class="table">
 				<tr>
 					<td class="text-right col-legend">

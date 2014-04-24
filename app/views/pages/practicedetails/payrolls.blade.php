@@ -17,6 +17,8 @@ Employee & Subcontractor Payroll Tables
 		<div class="well">
 		<fieldset>
 		  <legend>Employee Payroll Table</legend>
+		  <p class="help-block">Please enter the base fee you charge clients for weekly and monthly payroll runs for the ranges of employees specified in the table below.</p>
+		  <br>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="col-lg-2 text-right"></div>
@@ -51,6 +53,8 @@ Employee & Subcontractor Payroll Tables
 	<div class="well">
 		<fieldset>
 		  <legend>Subcontractor Payroll Table</legend>
+		  <p class="help-block">Please enter the base fee you charge clients for weekly and monthly payroll runs for the ranges of subcontractors specified in the table below.</p>
+		  <br>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="col-lg-2 text-right"></div>

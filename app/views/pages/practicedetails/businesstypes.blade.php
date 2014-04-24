@@ -17,6 +17,8 @@ Business Types
 		<div class="well">
 			<fieldset>
 			  <legend>Types of Business</legend>
+			  <p class="help-block">Please enter the average yearly fee that you typically charge clients based on their type of businesses.</p>
+		  	  <br>
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
 			    <div class="col-lg-2 text-center">Base Fee</div>

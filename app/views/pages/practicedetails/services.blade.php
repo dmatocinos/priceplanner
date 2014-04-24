@@ -17,6 +17,9 @@ Modules & Other Services
 		<div class="well">
 		<fieldset>
 		  <legend>Modules</legend>
+		  <p class="help-block">Please enter the base price you charge clients for modular services.</p>
+		  <br>
+			
 		  <div class="form-group">
 		    <div class="col-lg-3 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
@@ -45,6 +48,8 @@ Modules & Other Services
 	<div class="well">
 		<fieldset>
 		  <legend>Other Services</legend>
+		  <p class="help-block">Please enter the base price you charger clients for any other services. You can add your own bespoke services at the bottom of the list.</p>
+		  <br>
 		  <div class="form-group">
 		    <div class="col-lg-3 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
