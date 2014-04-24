@@ -62,6 +62,11 @@ class Accountant extends \Eloquent {
 	{
 		return $this->hasMany('AccountantModule');
 	}
+	
+	public function accountantOtherServices() 
+	{
+		return $this->hasMany('AccountantOtherService');
+	}
 
 	public function accountantBookkeeping() 
 	{

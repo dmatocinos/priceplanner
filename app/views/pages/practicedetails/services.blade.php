@@ -18,12 +18,12 @@ Modules & Other Services
 		<fieldset>
 		  <legend>Modules</legend>
 		  <div class="form-group">
-		    <div class="col-lg-2 control-label"></div>
+		    <div class="col-lg-3 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
 		  </div>
 		  @foreach($modules as $id => $name)
 		  <div class="form-group">
-		    <label for="modules[{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
+		    <label for="modules[{{ $id }}]" class="col-lg-3 control-label">{{ $name }}</label>
 		    <div class="col-lg-2">
 				<?php $val = isset($accountant_modules[$id]) ? $accountant_modules[$id] : ''; ?>
 				{{ 
@@ -46,21 +46,67 @@ Modules & Other Services
 		<fieldset>
 		  <legend>Other Services</legend>
 		  <div class="form-group">
-		    <div class="col-lg-2 control-label"></div>
+		    <div class="col-lg-3 control-label"></div>
 		    <div class="col-lg-2 text-center">Base Fee</div>
 		  </div>
 		  @foreach($other_services as $id => $name)
 		  <div class="form-group">
-		    <label for="other_service[{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
+		    @if (isset($other_services_extra[$id]))
+		    	<div class="col-lg-3">
+			{{ 
+				Form::text("other_services[{$id}][name]", $other_services_extra[$id], array(
+					'class' => 'form-control', 
+					'placeholder' => 'Service Name',
+					'ng-model' 	=> 'other_services_name' . $id, 
+					'ng-init' 	=> "other_services_name{$id}='{$other_services_extra[$id]}'", 
+					
+				)) 
+			}}
+			</div>
+		    @else 
+		    	<label for="other_service[{{ $id }}]" class="col-lg-3 control-label">{{ $name }}</label>
+			{{ 
+				Form::hidden("other_services[{$id}][name]", $name, array(
+					'class' => 'form-control', 
+				)) 
+			}}
+		    @endif	
 		    <div class="col-lg-2">
 				<?php $val = isset($accountant_other_services[$id]) ? $accountant_other_services[$id] : ''; ?>
+
 				{{ 
-					Form::text("other_services[{$id}]", $val, array(
+					Form::text("other_services[{$id}][value]", $val, array(
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
 						'numbers-only'	=> 'numbers-only',
 						'ng-model' 	=> 'other_services' . $id, 
 						'ng-init' 	=> "other_services{$id}='{$val}'", 
+					)) 
+				}}
+		    </div>
+		  </div>
+		  @endforeach
+		  @foreach(range(1,10) as $num)
+		  <div class="form-group">
+		    <div class="col-lg-3">
+				{{ 
+					Form::text("other_services_extra[{$num}][name]", '', array(
+						'class' => 'form-control', 
+						'placeholder' => 'Service Name',
+						'ng-model' 	=> 'other_services_extra_name' . $num, 
+						'ng-init' 	=> "other_services_extra_name{$num}=''", 
+						
+					)) 
+				}}
+		    </div>
+		    <div class="col-lg-2">
+				{{ 
+					Form::text("other_services_extra[{$num}][value]", '', array(
+						'class' => 'form-control', 
+						'placeholder' => 'amount',
+						'numbers-only'	=> 'numbers-only',
+						'ng-model' 	=> 'other_services_extra_val' . $num, 
+						'ng-init' 	=> "other_services_extra_val{$num}=''", 
 						'numbers-only'	=> 'numbers-only',
 						
 					)) 
@@ -69,7 +115,7 @@ Modules & Other Services
 		  </div>
 		  @endforeach
 		</fieldset>
-	</div>
+		</div>
 		<div class="col-lg-12 pull-right well">
 			<div class="pull-right">
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

@@ -10,9 +10,19 @@ class Module extends \Eloquent {
 		'name'	=> 'required',
 	];
 
-	public static function getModules()
+	public $timestamps = false;
+
+	public static function getModules($accountant_id = null)
 	{
-		$res = DB::table('modules')->get();	
+		$table = DB::table('modules');
+
+		if ($accountant_id) {
+			$table
+				->join('accountant_modules', 'accountant_modules.module_id', '=', 'moduless.id')
+				->where('accountant_id', $accountant_id);
+		}		
+
+		$res = $table->get();	
 		$data = [];
 		foreach ($res as $row)
 		{
