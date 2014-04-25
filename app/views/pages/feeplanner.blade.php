@@ -73,6 +73,7 @@ Fee Planner
 							'ng-model' 	=> 'E7', 
 							'ng-init' 	=> "E7='{$pricing['turnovers']}'", 
 							'numbers-only'	=> 'numbers-only',
+							'required'	=> 'required',
 						));
 					}}
 					</td>
@@ -212,6 +213,7 @@ Fee Planner
 						'ng-init' 	=> "E20='{$pricing['self_assessment_tax_return']}'", 
 						'numbers-only'	=> 'numbers-only',
 						'placeholder'	=> 'qty',
+						'required'	=> 'required',
 					));
 				}}
 				</td>
@@ -226,11 +228,8 @@ Fee Planner
 				</td>
 				<td class="col-val">
 				{{   
-					Form::select('pricing[vat_return]', ['0' => 0, 4 => 4, 12 => 12], $pricing['vat_return'], array(
+					Form::select('pricing[vat_return]', [0 => 0, 4 => 4, 12 => 12], $pricing['vat_return'], array(
 						'class' => 'form-control input-sm', 
-						'ng-model' 	=> 'E22', 
-						'ng-init' 	=> "E22='{$pricing['vat_return']}'", 
-						'numbers-only'	=> 'numbers-only',
 					));
 				}}
 				</td>
@@ -256,7 +255,8 @@ Fee Planner
 								'ng-model' 	=> 'C24', 
 								'ng-init' 	=> "C24='{$pricing['bookkeeping_hours']}'", 
 								'numbers-only'	=> 'numbers-only',
-								'placeholder' => 'hrs'
+								'placeholder' => 'hrs',
+								'required'	=> 'required',
 							));
 							
 						}}
@@ -276,7 +276,8 @@ Fee Planner
 								'ng-model' 	=> 'C25', 
 								'ng-init' 	=> "C25='{$pricing['bookkeeping_days']}'", 
 								'numbers-only'	=> 'numbers-only',
-								'placeholder' => 'days'
+								'placeholder' => 'days',
+								'required'	=> 'required',
 							));
 							
 						}}
@@ -440,6 +441,7 @@ Fee Planner
 							'ng-init' 	=> "discount='{$pricing['discount']}'", 
 							'numbers-only'	=> 'numbers-only',
 							'placeholder'	=> 'percentage',
+							'required'	=> 'required',
 
 						));
 					}}

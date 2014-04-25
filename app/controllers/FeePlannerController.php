@@ -41,6 +41,7 @@ class FeePlannerController extends BaseController {
 
 	public function edit($pricing_id)
 	{
+
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
 		$pricing = Pricing::find($pricing_id);
 		$client = Client::find($pricing->client_id);		
