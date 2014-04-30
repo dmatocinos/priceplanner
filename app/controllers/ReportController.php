@@ -11,6 +11,26 @@ class ReportController extends BaseController {
 		$generator->generate();
 	}
 
+	public function planSummary($pricing_id)
+	{
+		$pricing = Pricing::findOrFail($pricing_id);
+		$calc = new PlanSummaryCalculator($pricing);
+		
+		$tpl_data = [
+			'select_data' => [
+				'business_types' => BusinessType::getBusinessTypes(),
+				'record_types' => AccountingType::getAccountingTypes(),
+				'record_qualities' => RecordQuality::getRecordQualities(),
+				'audit_requirements' => AuditRequirement::getAuditRequirements(),
+				'audit_risks' => AuditRisk::getAuditRisks(),
+			]
+		];
+		
+		$generator = new ReportPdfGenerator($pricing, $calc);
+		$generator->generatePlanSummary($tpl_data);
+
+	}
+	
 	public function appendix($pricing_id)
 	{
 		$pricing = Pricing::findOrFail($pricing_id);

@@ -165,6 +165,8 @@ Route::group(array('before' => 'auth', 'before' => 'subscribe'), function() {
 		# report 
 		Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
 		Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
+		Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
+		Route::get("report/plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'ReportController@planSummary'));
 	});
 });
 

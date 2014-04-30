@@ -159,7 +159,6 @@ class ReportPdfGenerator extends TCPDF {
 		$pricing = $this->pricing;
 		$client = $pricing->client; // client info
 		$accountant = $client->accountant; // accountant info
-		$modules = $accountant->accountant_modules;
 		
 		$this->AddPage();
 
@@ -189,6 +188,34 @@ class ReportPdfGenerator extends TCPDF {
 		$this->writeHTML($html, true, false, true, false, '');
 	}
 
+	public function buildPlanSummary($params = [])
+	{
+
+		$pricing = $this->pricing;
+		$client = $pricing->client; // client info
+		$calc = $this->calc;
+
+		$params = $params +  [
+			'pricing' => $pricing->getAttributes(),
+			'client_id' => $pricing->client_id,
+			'pricing_id' => $pricing->id,
+			'client_name' => $client->client_name,
+			'calc' => $calc
+		];
+
+		// add a page
+		$this->AddPage();
+
+		$html = View::make("report.pdf_styles")->render();
+		$html .= View::make(
+			"report.plansummary", 
+			$params
+		)->render();
+
+		// output the HTML content
+		$this->writeHTML($html, true, false, true, false, '');
+	}
+
 	public function generate($params = [])
 	{
 		//$this->buildCoverPage();
@@ -211,6 +238,17 @@ class ReportPdfGenerator extends TCPDF {
 
 
 		$this->Output("Appendices_To_Pricing_Modules.pdf", 'D');
+	}
+
+	public function generatePlanSummary($params = [])
+	{
+		$this->setupPdf($params);
+		$this->buildPlanSummary($params);
+
+		$this->lastPage();
+
+
+		$this->Output("Plan_Summary.pdf", 'D');
 	}
 
 }
