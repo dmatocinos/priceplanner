@@ -121,8 +121,6 @@
 					Option 1 – Monthly standing order: <span class="num-val">{{ NumFormatter::money($calc->taxed_total_monthly_cost, '£') }}</span>
 				</li>
 			</ul>
-		</p>
-		<p>
 			This quotation is valid for 21 days. The minimum fee payable under this agreement will be an amount equal to 25% of the annual charge.
 		</p>
 	</div>
