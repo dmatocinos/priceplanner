@@ -52,7 +52,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Turnovers
+					Turnover
 				</td>
 				<td class="col-extra">
 				</td>
@@ -186,7 +186,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Book Keeping <br>
+					Bookkeeping <br>
 					<em style="font-weight: normal;">if we do the book keeping don't forget to adjust the quality of records</em>
 				</td>
 				<td class="col-extra">
@@ -242,7 +242,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Subcontractors Payroll
+					Subcontractor Payroll
 				</td>
 				<td class="col-extra">
 				</td>

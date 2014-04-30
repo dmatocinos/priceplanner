@@ -193,10 +193,13 @@ class ReportPdfGenerator extends TCPDF {
 
 		$pricing = $this->pricing;
 		$client = $pricing->client; // client info
+		$accountant = $client->accountant; // accountant info
 		$calc = $this->calc;
 
 		$params = $params +  [
-			'pricing' => $pricing->getAttributes(),
+			'pricing' => $pricing,
+			'client' => $client,
+			'accountant' => $accountant,
 			'client_id' => $pricing->client_id,
 			'pricing_id' => $pricing->id,
 			'client_name' => $client->client_name,

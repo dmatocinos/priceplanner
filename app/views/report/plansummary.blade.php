@@ -1,303 +1,150 @@
-	<div style="">
-		<legend>
-			<span class="text-left">Itemised Fixed Price Fee Quotation</span>
-		</legend>
+<table style="border: 1px solid white;">
+	<tr>
+		@if ($accountant->logo_filename)
+		<td width="100px;">
+			<img style="width: 100px; float: left;" src="{{ asset('uploads/' . $accountant->logo_filename) }}"/>
+		</td>
+		<td width="500px;">
+			<h4>{{ $accountant->accountancy_name }}</h4>
+			<div class="header text-center">Itemised Fixed Price Fee Quotation</div>
+		</td>
+		@else
+		<td width="650px;">
+			<h4>{{ $accountant->accountancy_name }}</h4>
+			<div class="header text-center">Itemised Fixed Price Fee Quotation</div>
+		</td>
+		@endif
+	</tr>
+</table>
+	<p>
+		<b>Business Name:</b> {{ $client->business_name }}
+	</p>
+	<p>
+		<b>Proprietors/Owners:</b> {{ $client->client_name }}
+	</p>
+	<p>
+		<b>Accounting Period:</b> {{ $client->accounting_period }}
+	</p>
+	<p>
+		<b>Anticipated Turnover:</b> {{ NumFormatter::money($pricing->turnovers, '&pound;') }}
+	</p>
+
+<div class="">
+	<div>
+		<p></p>
+		<p></p>
+		<p>
+			To provide any misunderstanding, this Itemised Fixed Price Fee Quotation defines the services <span class="emphasize">{{ $accountant->accountancy_name }}</span> will perform for you.
+			Your current service level will be <span class="num-val">{{ NumFormatter::money($calc->total_monthly_cost, '£') }} + VAT per month</span>.
+			This includes:
+			<ol>
+				<li>All general accountancy compliance work as requested</li>
+				@foreach ($calc->modules as $module)
+					@if ($module->value)
+						<li>{{ $module->name }} will be {{ NumFormatter::money($module->value, '£') }} + VAT per month</li>
+					@endif
+				@endforeach
+				<li>
+					Additional Services
+					<ul>
+					@foreach ($calc->other_services as $other_service)
+						@if ($other_service->value)
+							<li>{{ $other_service->name }} will be at {{ NumFormatter::money($other_service->value, '£') }} + VAT per month.</li>
+						@endif
+					@endforeach
+					</ul>
+				</li>
+			</ol>
+		</p>
+		<table class="table" style="line-height: 20.4333px">
+			<tbody>
+				<tr>
+					<td style="width: 80%;" class="text-left">Base Fee (*)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->i11, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Audit</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g15, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Corporation Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g18, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Partnership Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g19, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Self-Assessment Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g19, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Bookkeeping (daily rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g25, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Bookkeeping (hourly rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g24, '£') }}</td>
+				</tr>
+				@foreach ($calc->other_services as $other_service)
+					@if ($other_service->value)
+					<tr>
+						<td style="width: 80%;" class="text-left">{{ $other_service->name }}</td><td style="width: 20%;" class="text-left">{{ NumFormatter::money($other_service->value, '£') }}</td>
+					</tr>
+					@endif
+				@endforeach
+				<tr>
+					<td style="width: 80%;" class="text-left"></td><td style="width:20%;" class="text-left"></td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Annual Fee</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_fee, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left"></td><td style="width:20%;" class="text-left"></td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Discount</td><td style="width:20%;" class="text-left">{{ NumFormatter::percent($calc->discount * 100) }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left"></td><td style="width:20%;" class="text-left"></td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Net Fee</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->total_annual_fee, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">VAT at current rates ~ 20%</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->total_annual_fee_tax, '£') }}</td>
+				</tr>
+				<tr style="background-color: #ECF0F1; color: black;">
+					<td style="width: 80%;" class="text-left">Total Annual Professional Services stated above</td>
+					<td class="num-val" style="width:20%;" class="text-left">{{ NumFormatter::money($calc->taxed_total_annual_fee, '£') }}</td>
+				</tr>
+			</tbody>
+		</table>
+		*’Base Fee’ is the figure from the ‘Quality of Records’ data
 	</div>
 	<div>
-		<table class="table table-striped">
-			<tr>
-				<td class="text-right col-legend emphasize" style="width: 280px;">
-					Type of Business
-				</td>
-				<td class="col-val" style="width: 180px;">
-					{{ $select_data['business_types'][$pricing['business_type_id']] }}
-				</td>
-				<td class="text-right col-total" style="width: 180px;">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Turnovers
-				</td>
-				<td class="col-val">
-					{{ $pricing['turnovers'] }}
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Type of Records
-				</td>
-				<td class="col-val">
-					{{ $select_data['record_types'][$pricing['accounting_type_id']] }}
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Quality of Records
-				</td>
-				<td class="col-val">
-					{{ $select_data['record_qualities'][$pricing['record_quality_id']] }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->i11 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Audit Requirements
-				</td>
-				<td class="col-val">
-					{{ $select_data['audit_requirements'][$pricing['audit_requirement_id']] }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g13 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Audit Risk
-				</td>
-				<td class="col-val">
-					{{ $select_data['audit_risks'][$pricing['audit_risk_id']] }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g15 }}
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Tax Returns
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend">
-					Corporate Tax Returns
-				</td>
-				<td class="col-val">
-					<?php $val = $pricing['corporate_tax_return'] ? 'Yes' : 'No'; ?>
-					{{ $val }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g18 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend">
-					Partnership Tax Returns
-				</td>
-				<td class="col-val">
-					<?php $val = $pricing['partnership_tax_return'] ? 'Yes' : 'No'; ?>
-					{{ $val }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g19 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend">
-					Self-Assessment Tax Returns
-				</td>
-				<td class="col-val">
-					{{ $pricing['self_assessment_tax_return'] }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g20 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					VAT Returns
-				</td>
-				<td class="col-val">
-					{{ $pricing['vat_return'] }}
-				</td>
-				<td class="text-right col-total">
-					{{ $calc->g22 }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Book Keeping <br>
-					<em style="font-weight: normal;">if we do the book keeping don't forget to adjust the quality of records</em>
-				</td>
-				<td class="col-val">
-					<div>{{ $pricing['bookkeeping_hours'] . ' (hours)' }}</div>
-
-					<div>{{ $pricing['bookkeeping_days'] . ' (days)' }}</div>
-				</td>
-				<td class="text-right col-total">
-					<div>{{ $calc->g24 }}</div>
-					<div>{{ $calc->g25 }}</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Employee Payroll
-				</td>
-				<td class="col-val">
-					<em>no. of employees</em>
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			@foreach($calc->employee_payroll as $ep)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $ep->name }}
-				</td>
-				<td class="col-val">
-					{{ $ep->range }}
-				</td>
-				<td class="text-right col-total">
-					{{ $ep->value }}
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Subcontractors Payroll
-				</td>
-				<td class="col-val">
-					<em>no. of employees</em>
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			@foreach($calc->sc_payroll as $sp)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $sp->name }}
-				</td>
-				<td class="col-val">
-					{{ $sp->range }}
-				</td>
-				<td class="text-right col-total">
-					{{ $sp->value }}
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Modules
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			@foreach($calc->modules as $mod)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $mod->name }}
-				</td>
-				<td class="col-val">
-					<?php $val = $mod->value ? 'Yes' : 'No'; ?>
-					{{ $val }}
-				</td>
-				<td class="text-right col-total">
-					{{ $mod->value }}
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Other Services
-				</td>
-				<td class="col-val">
-					<em>qty</em>
-				</td>
-				<td class="text-right col-total">
-				</td>
-			</tr>
-			<?php $num = 47; ?>
-			@foreach($calc->other_services as $os)
-			<tr>
-				<td class="text-right col-legend">
-					{{ $os->name }}
-				</td>
-				<td class="col-val">
-					{{ $os->qty }}
-				</td>
-				<td class="text-right col-total">
-					{{ $os->value }}
-				</td>
-			</tr>
-			@endforeach
-			<tr>
-				<td colspan="3"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Annual Fee
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total emphasize">
-					{{ NumFormatter::money($calc->annual_fee, '£') }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Monthly Cost
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total emphasize">
-					{{ NumFormatter::money($calc->monthly_cost, '£') }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Discount
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total emphasize">
-					{{ NumFormatter::percent($calc->discount * 100) }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Total Annual Fee
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total emphasize">
-					{{ NumFormatter::money($calc->total_annual_fee, '£') }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Total Monthly Cost
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="text-right col-total emphasize">
-					{{ NumFormatter::money($calc->total_monthly_cost, '£') }}
-				</td>
-			</tr>
-		</table>
+		<p>In order to assist with your business cash flow, we have the following payment option available:
+			<ul>
+				<li>
+					Option 1 – Monthly standing order: <span class="num-val">{{ NumFormatter::money($calc->taxed_total_monthly_cost, '£') }}</span>
+				</li>
+			</ul>
+		</p>
+		<p>
+			This quotation is valid for 21 days. The minimum fee payable under this agreement will be an amount equal to 25% of the annual charge.
+		</p>
 	</div>
+	<div>
+		Guarantees and Safeguards
+		<p>
+			To make sure that our arrangement continues to be fair to both parties, we will meet throughout the year and, if necessary, change the scope of services to be provided and the prices to be charged in light of mutual experience.
+		</p>
+		<p>
+			In addition, either party may terminate the Agreement at any time, for any reason, by giving 10 days written notice. Any services that have not been paid for at that time will then be settled in full within 10 days.
+		</p>
+		<p>
+			If you are in agreement to this quotation please sign, date and return this agreement.
+		</p>
+		<p>
+		</p>
+		<p>
+			Signed: ________________________<br><br>
+			Date: __________
+		</p>
+	</div>
+
+</div>
+</div> {{-- .header --}}
