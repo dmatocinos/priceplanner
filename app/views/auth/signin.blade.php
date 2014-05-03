@@ -1,5 +1,6 @@
 @section('content')
-	<legend><h3 class="text-center">Please Log In, or {{ HTML::link('signup', 'Register') }}</h3></legend>
+	<div class="form-group" style="text-align: center;"><img src="{{ asset('images/logo.png') }}" style="width: 100%;"/></div>
+	<legend><h4 class="text-center">Log in with PracticePro account, <br> or {{ HTML::link('http://registration.practicepro.co.uk/', 'Register', ['target' => '_blank']) }}</h4></legend>
 		{{ Form::open(array('url' => 'signin')) }}
 			<div class="form-group">
 			  <label for="email">Email</label>
