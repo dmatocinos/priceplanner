@@ -15,7 +15,7 @@ class PracticeDetailsController extends BaseController
 			'qualities' => 'Record Qualities',
 			'audit' => 'Audit',
 			'taxes' => 'Taxes',
-			'bookkeeping' => 'Rates',
+			'bookkeeping' => 'Bookkeeping',
 			'payrolls' => 'Payroll',
 			'services' => 'Modules & Services'
 		));

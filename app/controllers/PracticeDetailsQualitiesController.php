@@ -60,7 +60,7 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 			}
 		}
 		
-		$route = isset($input['save_next_page']) ? 'practicedetails/requirements' : ('practicedetails/' . $this->current_tab);
+		$route = isset($input['save_next_page']) ? 'practicedetails/audit' : ('practicedetails/' . $this->current_tab);
 
 		return Redirect::to($route)
 			->withInput()
@@ -89,7 +89,7 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 			}
 		}
 		
-		$route = isset($input['save_next_page']) ? 'practicedetails/requirements' : ('practicedetails/' . $this->current_tab);
+		$route = isset($input['save_next_page']) ? 'practicedetails/audit' : ('practicedetails/' . $this->current_tab);
 
 		return Redirect::to($route)
 			->withInput()
