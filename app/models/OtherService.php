@@ -41,7 +41,8 @@ class OtherService extends \Eloquent {
 		$data = [];
 		foreach ($res as $row)
 		{
-			$data[$row->other_service_id] = $row->name; 
+			$id = isset($row->other_service_id) ? $row->other_service_id : $row->id; 
+			$data[$id] = $row->name; 
 		}
 
 		return $data;
