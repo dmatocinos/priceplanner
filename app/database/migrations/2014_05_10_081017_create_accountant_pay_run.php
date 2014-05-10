@@ -12,7 +12,6 @@ class CreateAccountantPayRun extends Migration {
 	 */
 	public function up()
 	{
-		/*
 		Schema::create('accountant_pay_runs', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -23,7 +22,6 @@ class CreateAccountantPayRun extends Migration {
 			$table->timestamps();
 			$table->foreign('accountant_id')->references('id')->on('accountants')->onDelete('cascade');
 		});
-		*/
 	}
 
 
