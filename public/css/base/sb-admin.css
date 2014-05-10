@@ -423,3 +423,6 @@ table.dataTable thead .sorting:after {
 .col-total {
 	width: 30%
 }
+.help-block {
+	font-weight: bold;
+}

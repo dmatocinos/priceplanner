@@ -294,78 +294,45 @@ Fee Planner
 
 			<table class="table">
 				<tr>
-					<td class="text-right col-legend emphasize">
-						Employee
+					<td class="text-right col-legend">
+						Number of Employees/Subcontractors
 					</td>
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-						<em>no. of employees</em>
+						{{   
+							Form::text('pricing[no_of_employees]',$pricing['no_of_employees'], array(
+								'class' => 'form-control input-sm', 
+								'ng-model' 	=> 'C26', 
+								'ng-init' 	=> "C26='{$pricing['no_of_employees']}'", 
+								'numbers-only'	=> 'numbers-only',
+								'placeholder' => 'number',
+								'required'	=> 'required',
+							));
+							
+						}}
 					</td>
 					<td class="col-total">
 					</td>
 				</tr>
-				<?php $num = 30; ?>
-				@foreach($periods as $id => $period)
 				<tr>
-					<td class="text-right col-legend ">
-						{{ $period }}
+					<td class="text-right col-legend">
+						Payroll Run Frequency
 					</td>
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-					<?php $num = $num + 1; ?>
-					{{   
-						Form::select("employee_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $employee_period_ranges[$id]['range_id'], array(
-							'class' => 'form-control input-sm', 
-							//'ng-model' 	=> 'E' . $num, 
-							//'ng-init' 	=> "E{$num}='{$employee_period_ranges[$id]['range_id']}'", 
-						));
+						{{   
+							
+							Form::select("pricing[payroll_run_frequency]", $periods, $pricing['payroll_run_frequency'], array(
+								'class' => 'form-control input-sm', 
+							));
 						
-					}}
+						}}
 					</td>
 					<td class="col-total">
 					</td>
 				</tr>
-				@endforeach
-				<tr>
-					<td class="text-right col-legend emphasize">
-						Subcontractors
-					</td>
-					<td class="col-extra">
-					</td>
-					<td class="col-val">
-						<em>no. of employees</em>
-					</td>
-					<td class="col-total">
-					</td>
-				</tr>
-				<?php $num = 38; ?>
-				@foreach($periods as $id => $period)
-				@if ($period == 'Weekly' || $period == 'Monthly')
-				<tr>
-					<td class="text-right col-legend ">
-						{{ $period }}
-					</td>
-					<td class="col-extra">
-					</td>
-					<td class="col-val">
-					<?php $num = $num + 1; ?>
-					{{   
-						
-						Form::select("sc_payroll_pricings[{$id}][range_id]", $select_data['ranges'], $sc_period_ranges[$id]['range_id'], array(
-							'class' => 'form-control input-sm', 
-							//'ng-model' 	=> 'E' . $num, 
-							//'ng-init' 	=> "E{$num}='{$sc_period_ranges[$id]['range_id']}'", 
-						));
-						
-					}}
-					</td>
-					<td class="col-total">
-					</td>
-				</tr>
-				@endif
-				@endforeach
 			</table>
 		</div>
 		<div class="well">

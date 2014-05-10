@@ -30,8 +30,6 @@ class PlanSummaryCalculator {
 		'g22' => null,
 		'g24' => null,
 		'g25' => null,
-		'employee_payroll' => [],
-		'sc_payroll' => [],
 		'modules' => [],
 		'other_services' => [],
 		'annual_fee' => null,
@@ -42,6 +40,9 @@ class PlanSummaryCalculator {
 		'total_annual_fee_tax' => null,
 		'taxed_total_annual_fee' => null,
 		'taxed_total_monthly_cost' => null,
+		'annual_base_fee_per_pay_run' => null,
+		'annual_base_fee_per_employee_per_payroll_run' => null,
+		'total_annual_employee_payroll' => null,
 
 	];
 
@@ -184,38 +185,7 @@ class PlanSummaryCalculator {
 
 		return $this->pricing->bookkeeping_days * $day_val;
 	}
-
-	public function getEmployeePayrollVal()
-	{
-		$epp = DB::table('employee_payroll_pricings')
-				->join('employee_period_ranges', 'employee_payroll_pricings.employee_period_range_id', '=', 'employee_period_ranges.id')
-				->join('accountant_employee_period_ranges', 'accountant_employee_period_ranges.employee_period_range_id', '=', 'employee_period_ranges.id')
-				->join('periods', 'employee_period_ranges.period_id', '=', 'periods.id')
-				->join('ranges', 'employee_period_ranges.range_id', '=', 'ranges.id')
-            			->select(DB::raw('periods.name, ranges.range, accountant_employee_period_ranges.value * amount AS value'))
-				->where('accountant_employee_period_ranges.accountant_id', $this->client->accountant_id)
-				->where('pricing_id', $this->pricing->id)
-				->orderBy('period_id')
-				->get();
-
-		return $epp;
-	}
-
-	public function getScPayrollVal()
-	{
-		$spp = DB::table('sc_payroll_pricings')
-				->join('subcontractor_period_ranges', 'sc_payroll_pricings.sc_period_range_id', '=', 'subcontractor_period_ranges.id')
-				->join('accountant_subcontractor_period_ranges', 'accountant_subcontractor_period_ranges.subcontractor_period_range_id', '=', 'subcontractor_period_ranges.id')
-				->join('periods', 'subcontractor_period_ranges.period_id', '=', 'periods.id')
-				->join('ranges', 'subcontractor_period_ranges.range_id', '=', 'ranges.id')
-            			->select(DB::raw('periods.name, ranges.range, accountant_subcontractor_period_ranges.value * amount AS value'))
-				->where( 'pricing_id', $this->pricing->id)
-				->where('accountant_subcontractor_period_ranges.accountant_id', $this->client->accountant_id)
-				->orderBy('period_id')
-				->get();
-		return $spp;
-	}
-
+		
 	public function getModulesVal()
 	{
 		$mp = DB::table('module_pricings')
@@ -246,15 +216,7 @@ class PlanSummaryCalculator {
 
 	public function getAnnualFeeVal()
 	{
-		$val = $this->i11 + $this->g15 + $this->g18 + $this->g19 + $this->g20 + $this->g22 + $this->g24 + $this->g25;
-
-		foreach($this->employee_payroll as $ep) {
-			$val += $ep->value; 
-		}
-
-		foreach($this->sc_payroll as $sp) {
-			$val += $sp->value; 
-		}
+		$val = $this->i11 + $this->g15 + $this->g18 + $this->g19 + $this->g20 + $this->g22 + $this->g24 + $this->g25 + $this->total_annual_employee_payroll;
 
 		foreach($this->modules as $mod) {
 			$val += $mod->value; 
@@ -300,6 +262,37 @@ class PlanSummaryCalculator {
 	public function getTaxedTotalMonthlyCostVal()
 	{
 		return $this->taxed_total_annual_fee / 12;
+	}
+
+	public function getAnnualBaseFeePerPayRunVal()
+	{
+		$base_fee = (integer) DB::table('accountant_pay_runs')
+					->where('accountant_id', $this->client->accountant_id)
+					->pluck('value');
+
+		return $base_fee * $this->pricing->payroll_run_frequency;
+	}
+
+	public function getAnnualBaseFeePerEmployeePerPayrollRunVal()
+	{
+		$rate = DB::table('accountant_pay_runs')
+				->where('accountant_id', $this->client->accountant_id)
+				->where('based_on', 'all_clients')
+				->pluck('allclients_base_fee');
+		if ( ! $rate) {
+			$rate = (int) DB::table('accountant_turnover_ranges')
+					->join('accountant_payroll_runs', 'accountant_turnover_ranges.id', '=', 'accountant_payroll_runs.accountant_turnover_range_id')
+					->where('accountant_payroll_runs.accountant_id', $this->client->accountant_id)
+					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+					->pluck('accountant_payroll_runs.value');
+		}
+	
+		return $rate * $this->pricing->payroll_run_frequency * $this->pricing->no_of_employees;
+	}
+
+	public function getTotalAnnualEmployeePayrollVal()
+	{
+		return $this->annual_base_fee_per_pay_run + $this->annual_base_fee_per_employee_per_payroll_run;
 	}
 
 }

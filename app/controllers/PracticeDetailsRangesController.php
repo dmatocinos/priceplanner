@@ -59,19 +59,17 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 	{
 		$input = Input::all();
 		$accountant = $this->user->accountant;
-		AccountantTurnoverRange::where('accountant_id', $accountant->id)->delete();
 
 		// saving accountant turnover_ranges
 		foreach ($input['turnover_ranges'] as $id => $input_val) {
-			$model = new AccountantTurnoverRange;
 			$data = [
 				'accountant_id' => $accountant->id,
 			];
 
 			$data = $data + $input_val;
-
-			$model = new AccountantTurnoverRange;
-			$model->create($data);
+			DB::table('accountant_turnover_ranges')
+			    ->where('id', $id)
+			    ->update($data);
 		}
 		
 		$route = isset($input['save_next_page']) ? 'practicedetails/qualities' : 'practicedetails/ranges';

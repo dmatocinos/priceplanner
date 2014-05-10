@@ -40,6 +40,18 @@ Plan Summary
 		<table class="table table-striped">
 			<tr>
 				<td class="text-right col-legend emphasize">
+					
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				</td>
+				<td class="col-total emphasize">
+					Total Per Rate
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right col-legend emphasize">
 					Type of Business
 				</td>
 				<td class="col-extra">
@@ -209,64 +221,56 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Employee Payroll
+					Payroll
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					<em>no. of employees</em>
 				</td>
 				<td class="col-total">
 				</td>
 			</tr>
-			@foreach($calc->employee_payroll as $ep)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $ep->name }}
+					Number of Employees/Subcontractors
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $ep->range }}
+					<div>{{ $pricing['no_of_employees'] }}</div>
 				</td>
 				<td class="col-total">
-					{{ $ep->value }}
+					<div>{{ $calc->annual_base_fee_per_pay_run }}</div>
 				</td>
 			</tr>
-			@endforeach
-			<tr>
-				<td colspan="4"> </td>
-			</tr>
-			<tr>
-				<td colspan="4"> </td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
-					Subcontractor Payroll
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-					<em>no. of employees</em>
-				</td>
-				<td class="col-total">
-				</td>
-			</tr>
-			@foreach($calc->sc_payroll as $sp)
 			<tr>
 				<td class="text-right col-legend">
-					{{ $sp->name }}
+					Payroll Run Frequency
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					{{ $sp->range }}
+					<div>{{ $pricing['payroll_run_frequency'] }}</div>
 				</td>
 				<td class="col-total">
-					{{ $sp->value }}
+					<div>{{ $calc->annual_base_fee_per_employee_per_payroll_run }}</div>
 				</td>
 			</tr>
-			@endforeach
+			<!--
+			<tr>
+				<td class="text-right col-legend">
+					Total Annual Employee/Subcontractor Payroll
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+					<div>{{ $calc->annual_base_fee_per_pay_run }}  + {{ $calc->annual_base_fee_per_employee_per_payroll_run }}</div>
+				</td>
+				<td class="col-total">
+					<div>{{ $calc->total_annual_employee_payroll }}</div>
+				</td>
+			</tr>
+			-->
 			<tr>
 				<td colspan="4"> </td>
 			</tr>

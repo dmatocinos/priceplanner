@@ -20,14 +20,11 @@ class FeePlannerController extends BaseController {
 				'record_qualities' => RecordQuality::getRecordQualities(),
 				'audit_requirements' => AuditRequirement::getAuditRequirements(),
 				'audit_risks' => AuditRisk::getAuditRisks(),
-				'ranges' => Range::getRanges(),
 			],
 			'pricing' => array_fill_keys($pricing->getFillable(), null),
 			'periods' => Period::getPeriods(),
 			'modules' => Module::getModules(),
 			'other_services' => OtherService::getOtherServices($client->accountant_id),	
-			'employee_period_ranges' => EmployeePayrollPricing::getEmployeePeriodRanges(),
-			'sc_period_ranges' => ScPayrollPricing::getScPeriodRanges(),
 			'module_pricings' => ModulePricing::getModulePricings(),	
 			'other_service_pricings' => OtherServicePricing::getOtherServicePricings(),	
 			'edit'	=> FALSE,
@@ -53,11 +50,8 @@ class FeePlannerController extends BaseController {
 				'record_qualities' => RecordQuality::getRecordQualities(),
 				'audit_requirements' => AuditRequirement::getAuditRequirements(),
 				'audit_risks' => AuditRisk::getAuditRisks(),
-				'ranges' => Range::getRanges(),
 			],
 			'pricing' => $pricing->getAttributes(),
-			'employee_period_ranges' => EmployeePayrollPricing::getEmployeePeriodRanges($pricing_id),
-			'sc_period_ranges' => ScPayrollPricing::getScPeriodRanges($pricing_id),
 			'periods' => Period::getPeriods(),
 			'modules' => Module::getModules(),
 			'other_services' => OtherService::getOtherServices($client->accountant_id),	
@@ -77,8 +71,6 @@ class FeePlannerController extends BaseController {
 	{
 		$input = Input::all();
 		$p_data = $input['pricing'];
-		$epp_data = $input['employee_payroll_pricings'];
-		$spp_data = $input['sc_payroll_pricings'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
 
@@ -94,32 +86,6 @@ class FeePlannerController extends BaseController {
 				->with('message', 'There were validation errors.');
 		}
 		
-		// saving employee payroll pricings	
-		foreach ($epp_data as $period_id => $epp) {
-			$data = [
-				'employee_period_range_id' => DB::table('employee_period_ranges')
-								->where('period_id', $period_id)
-								->where('range_id', $epp['range_id'])
-								->pluck('id'),
-				'pricing_id' => $pricing->id		
-			];
-			$employee_payroll_pricing = new EmployeePayrollPricing;
-			$employee_payroll_pricing->create($data);
-		}
-
-		// saving subcontractor payroll pricings	
-		foreach ($spp_data as $period_id => $spp) {
-			$data = [
-				'sc_period_range_id' => DB::table('subcontractor_period_ranges')
-								->where('period_id', $period_id)
-								->where('range_id', $spp['range_id'])
-								->pluck('id'),
-				'pricing_id' => $pricing->id		
-			];
-			$sc_payroll_pricing = new ScPayrollPricing;
-			$sc_payroll_pricing->create($data);
-		}
-
 		// saving module pricings	
 		foreach ($mp_data as $module_id => $qty) {
 			$data = [
@@ -155,8 +121,6 @@ class FeePlannerController extends BaseController {
 	{
 		$input = Input::all();
 		$p_data = $input['pricing'];
-		$epp_data = $input['employee_payroll_pricings'];
-		$spp_data = $input['sc_payroll_pricings'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
 
@@ -170,34 +134,6 @@ class FeePlannerController extends BaseController {
 				->withInput()
 				->withErrors($p_validation)
 				->with('message', 'There were validation errors.');
-		}
-
-		// saving employee payroll pricings	
-		EmployeePayrollPricing::where('pricing_id', $pricing->id)->delete();
-		foreach ($epp_data as $period_id => $epp) {
-			$data = [
-				'employee_period_range_id' => DB::table('employee_period_ranges')
-								->where('period_id', $period_id)
-								->where('range_id', $epp['range_id'])
-								->pluck('id'),
-				'pricing_id' => $pricing->id		
-			];
-			$employee_payroll_pricing = new EmployeePayrollPricing;
-			$employee_payroll_pricing->create($data);
-		}
-
-		// saving subcontractor payroll pricings	
-		ScPayrollPricing::where('pricing_id', $pricing->id)->delete();
-		foreach ($spp_data as $period_id => $spp) {
-			$data = [
-				'sc_period_range_id' => DB::table('subcontractor_period_ranges')
-								->where('period_id', $period_id)
-								->where('range_id', $spp['range_id'])
-								->pluck('id'),
-				'pricing_id' => $pricing->id		
-			];
-			$sc_payroll_pricing = new ScPayrollPricing;
-			$sc_payroll_pricing->create($data);
 		}
 
 		// saving module pricings	

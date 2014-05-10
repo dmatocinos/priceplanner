@@ -6,32 +6,35 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 	public function index() 
 	{
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
+		Asset::container('footer')->add('pages-payroll-js', 'js/pages/practice_details_payroll.js');
 		
 		$accountant = $this->user->accountant;
 		
-		if ($accountant->accountant_employee_period_ranges->count()) {
-			$accountant_employee_period_ranges = AccountantEmployeePeriodRange::getAccountantEmployeePeriodRanges($accountant->id);
-			$accountant_subcontractor_period_ranges = AccountantSubcontractorPeriodRange::getAccountantSubcontractorPeriodRanges($accountant->id);
+		if ($accountant->accountant_pay_run) {
+			$payrun = $accountant->accountant_pay_run->getAttributes();
 			$edit = TRUE;
 			$route = 'update';
+			$all_clients_display = ($payrun['based_on'] == 'all_clients');
+			$turnover_ranges_display = ($payrun['based_on'] == 'turnover_ranges');
 		}
 		else {
-			$accountant_employee_period_ranges = NULL;
-			$accountant_subcontractor_period_ranges = null;
+			$payrun = null;
 			$edit = FALSE;
 			$route = 'store';
+			$all_clients_display = $turnover_ranges_display = false; 
 		}
 		
 		$form_data = [
-				'ranges' => Range::getRanges(),
-				'periods' => Period::getPeriods(),
-				'accountant_employee_period_ranges' => $accountant_employee_period_ranges,
-				'accountant_subcontractor_period_ranges' => $accountant_subcontractor_period_ranges,
+				'turnover_ranges' => AccountantTurnoverRange::getAccountantTurnoverRanges($accountant->id),
+				'payrun' => $payrun,
+				'payroll_runs' => AccountantPayrollRun::getPayrollRunTurnoverRanges($accountant->id),
 				'edit'	=> $edit,
 				'route' => 'practicedetails.payrolls.' . $route,
+				'all_clients_display' => $all_clients_display,
+				'turnover_ranges_display' => $turnover_ranges_display,
 				'accountant_id' => $accountant->id
 		];
-			
+
 		$this->layout->content = View::make("pages.practicedetails.payrolls", $form_data);
 	}
 
@@ -49,44 +52,35 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 		$input = Input::all();
 		$accountant = $this->user->accountant;
 
-		AccountantEmployeePeriodRange::where('accountant_id', $accountant->id)->delete();
-		AccountantSubcontractorPeriodRange::where('accountant_id', $accountant->id)->delete();
+		AccountantPayRun::where('accountant_id', $accountant->id)->delete();
+		AccountantPayrollRun::where('accountant_id', $accountant->id)->delete();
 		
 		return $this->save($accountant, $input, 'updated');
 	}
 	
 	protected function save($accountant, $input, $msg) 
 	{
-		// saving client employee_period_ranges
-		foreach ($input['employee_period_ranges'] as $rid => $pids) {
-			foreach($pids as $pid => $val) {
+		// saving accountant_payroll_run
+		$data = $input['payrun'];
+		$data['accountant_id'] = $accountant->id;
+		$accountant_pay_run = new AccountantPayRun;
+		$accountant_pay_run->create($data);
+		
+		// saving accountant_pay_run
+		if ($data['based_on'] == 'turnover_ranges') {
+			
+			foreach ($input['payroll_turnover_ranges'] as $id => $val) {
 				$data = [
 					'value' => $val,
 					'accountant_id' => $accountant->id,
-					'employee_period_range_id' => DB::table('employee_period_ranges')
-									->where('period_id', $pid)
-									->where('range_id', $rid)
-									->pluck('id'),
+					'accountant_turnover_range_id' => $id
 				];
-				$model = new AccountantEmployeePeriodRange;
+				$model = new AccountantPayrollRun;
 				$model->create($data);
 			}
-		}
 
-		// saving client employee_period_ranges
-		foreach ($input['subcontractor_period_ranges'] as $rid => $pids) {
-			foreach($pids as $pid => $val) {
-				$data = [
-					'value' => $val,
-					'accountant_id' => $accountant->id,
-					'subcontractor_period_range_id' => DB::table('subcontractor_period_ranges')
-									->where('period_id', $pid)
-									->where('range_id', $rid)
-									->pluck('id'),
-				];
-				$model = new AccountantSubcontractorPeriodRange;
-				$model->create($data);
-			}
+			$accountant_pay_run->allclients_base_fee = 0;
+			$accountant_pay_run->save();
 		}
 		
 		$route = isset($input['save_next_page']) ? 'practicedetails/services' : 'practicedetails/payrolls';

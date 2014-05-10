@@ -16,7 +16,7 @@ class Period extends \Eloquent {
 		$data = [];
 		foreach ($res as $row)
 		{
-			$data[$row->id] = $row->name; 
+			$data[$row->amount] = $row->name; 
 		}
 
 		return $data;

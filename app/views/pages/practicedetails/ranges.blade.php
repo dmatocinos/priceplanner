@@ -26,7 +26,7 @@ Turnover Ranges
 			    <div class="col-lg-3 text-center">Modifier - % Increase</div>
 			</div>
 		  </div>
-		  @foreach (range(1,10) as $num)
+		  @foreach (range(1,15) as $num)
 		  <?php 
 			if ( isset($turnover_ranges[$num]) && is_array($turnover_ranges[$num]) && ! is_null($turnover_ranges[$num])) {
 				$id = key($turnover_ranges[$num]);

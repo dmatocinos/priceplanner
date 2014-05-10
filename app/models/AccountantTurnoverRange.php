@@ -24,7 +24,7 @@ class AccountantTurnoverRange extends \Eloquent {
 	public static function getAccountantTurnoverRanges($accountant_id)
 	{
 		$res = DB::table('accountant_turnover_ranges')->where('accountant_id', $accountant_id)->get();	
-		$data = range(1,10);
+		$data = range(1,15);
 		foreach ($res as $num => $row) {
 			$data[$num + 1] = [
 				$row->id => [

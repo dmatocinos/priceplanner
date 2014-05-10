@@ -1,41 +1,42 @@
 <table style="border: 1px solid white;">
 	<tr>
 		@if ($accountant->logo_filename)
-		<td width="100px;">
-			<img style="width: 100px; float: left;" src="{{ asset('uploads/' . $accountant->logo_filename) }}"/>
+		<td width="200px;">
+			<img style="width: 150px; height: 60px; float: left;" src="{{ asset('uploads/' . $accountant->logo_filename) }}"/>
 		</td>
-		<td width="500px;">
-			<h4>{{ $accountant->accountancy_name }}</h4>
-			<div class="header text-center">Fixed Price Fee Quotation</div>
+		<td width="680px;">
+			<p style="float:right;" class="text-right"><h4>{{ $accountant->accountancy_name }}</h4></p>
 		</td>
 		@else
 		<td width="650px;">
 			<h4>{{ $accountant->accountancy_name }}</h4>
-			<div class="header text-center">Fixed Price Fee Quotation</div>
 		</td>
 		@endif
 	</tr>
+	<tr>
+		<td width="650px;"></td>
+	</tr>
+	<tr>
+		<td width="650px;">
+			<div class="header text-center">Fixed Price Fee Quotation</div>
+		</td>
+	</tr>
 </table>
 <div class="report-container">
-	<div>
-		<p class="emphasize">
-		<p>
-			Business Name: {{ $client->business_name }}
-		</p>
-		<p>
-			Proprietors/Owners: {{ $client->client_name }}
-		</p>
-		<p>
-			Accounting Period: {{ $client->accounting_period }}
-		</p>
-		<p>
-			Anticipated Turnover: {{ NumFormatter::money($pricing->turnovers, '&pound;') }}
-		</p>
-		</div>
+	<p>
+		<b>Business Name:</b> {{ $client->business_name }}
+	</p>
+	<p>
+		<b>Proprietors/Owners:</b> {{ $client->client_name }}
+	</p>
+	<p>
+		<b>Accounting Period:</b> {{ $client->accounting_period }}
+	</p>
+	<p>
+		<b>Anticipated Turnover:</b> {{ NumFormatter::money($pricing->turnovers, '&pound;') }}
+	</p>
 		<p>
 			To provide any misunderstanding, this Fixed Price Fee Quotation defines the services <span class="emphasize">{{ $accountant->accountancy_name }}</span> will perform for you.
-		</p>
-		<p>
 			Your current service level will be <span class="num-val">{{ NumFormatter::money($calc->total_monthly_cost, '£') }} + VAT per month</span>.
 		</p>
 		<p>

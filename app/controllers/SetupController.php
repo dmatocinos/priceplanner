@@ -61,7 +61,6 @@ class SetupController extends BaseController {
 	{
 		$accountant = $this->user->accountant;
 		$input = Input::all();
-		
 		$c_input = $input['client'];
 		$c_input['accountant_id'] = $accountant->id;
 		$c_input['period_start_date'] = date('Y-m-d H:i:a', strtotime($c_input['period_start_date']));

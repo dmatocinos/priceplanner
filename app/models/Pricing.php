@@ -16,6 +16,8 @@ class Pricing extends \Eloquent {
 		'bookkeeping_hours',
 		'bookkeeping_days',
 		'discount',
+		'no_of_employees',
+		'payroll_run_frequency'
 	];
 
 	public static $rules = array(
@@ -27,6 +29,8 @@ class Pricing extends \Eloquent {
 		'bookkeeping_hours' => 'required|numeric',
 		'bookkeeping_days' => 'required|numeric',
 		'discount' => 'required|numeric',  
+		'no_of_employees' => 'required|numeric',  
+		'payroll_run_frequency' => 'required|numeric',  
 	);
 
 	public function client()

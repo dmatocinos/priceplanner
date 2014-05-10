@@ -53,11 +53,6 @@ class Accountant extends \Eloquent {
 		return $this->hasMany('AccountantTaxReturn');
 	}
 	
-	public function accountantEmployeePeriodRanges() 
-	{
-		return $this->hasMany('AccountantEmployeePeriodRange');
-	}
-	
 	public function accountantModules() 
 	{
 		return $this->hasMany('AccountantModule');
@@ -72,4 +67,15 @@ class Accountant extends \Eloquent {
 	{
 		return $this->hasMany('AccountantBookkeeping');
 	}
+
+	public function accountantPayRun() 
+	{
+		return $this->hasOne('AccountantPayRun');
+	}
+
+	public function accountantPayrollRun() 
+	{
+		return $this->hasMany('AccountantPayrollRun');
+	}
+
 }
