@@ -139,7 +139,7 @@ Payroll | Employee & Subcontractor
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">Per Pay Run</label>
 			    <div class="col-lg-2">
-					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] : 0 ?>
+					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] : null ?>
 					{{ 
 						Form::text("payruns[subcontractor][value]", $val, array(
 							'class' => 'form-control', 
