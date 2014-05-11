@@ -40,9 +40,11 @@ class PlanSummaryCalculator {
 		'total_annual_fee_tax' => null,
 		'taxed_total_annual_fee' => null,
 		'taxed_total_monthly_cost' => null,
-		'annual_base_fee_per_pay_run' => null,
-		'annual_base_fee_per_employee_per_payroll_run' => null,
-		'total_annual_employee_payroll' => null,
+		'annual_base_fee_emp_per_pay_run' => null,
+		'annual_base_fee_sub_per_pay_run' => null,
+		'annual_base_fee_per_emp_per_payroll_run' => null,
+		'annual_base_fee_per_sub_per_payroll_run' => null,
+		'total_annual_payroll' => null,
 
 	];
 
@@ -216,7 +218,7 @@ class PlanSummaryCalculator {
 
 	public function getAnnualFeeVal()
 	{
-		$val = $this->i11 + $this->g15 + $this->g18 + $this->g19 + $this->g20 + $this->g22 + $this->g24 + $this->g25 + $this->total_annual_employee_payroll;
+		$val = $this->i11 + $this->g15 + $this->g18 + $this->g19 + $this->g20 + $this->g22 + $this->g24 + $this->g25 + $this->total_annual_payroll;
 
 		foreach($this->modules as $mod) {
 			$val += $mod->value; 
@@ -264,35 +266,68 @@ class PlanSummaryCalculator {
 		return $this->taxed_total_annual_fee / 12;
 	}
 
-	public function getAnnualBaseFeePerPayRunVal()
+	public function getAnnualBaseFeePerEmpPayRunVal()
 	{
 		$base_fee = (integer) DB::table('accountant_pay_runs')
 					->where('accountant_id', $this->client->accountant_id)
+					->where('type', 'employee')
 					->pluck('value');
 
-		return $base_fee * $this->pricing->payroll_run_frequency;
+		return $base_fee * $this->pricing->employee_pay_run_frequency;
 	}
 
-	public function getAnnualBaseFeePerEmployeePerPayrollRunVal()
+	public function getAnnualBaseFeePerEmpPerPayrollRunVal()
 	{
 		$rate = DB::table('accountant_pay_runs')
 				->where('accountant_id', $this->client->accountant_id)
 				->where('based_on', 'all_clients')
+				->where('type', 'employee')
 				->pluck('allclients_base_fee');
 		if ( ! $rate) {
 			$rate = (int) DB::table('accountant_turnover_ranges')
 					->join('accountant_payroll_runs', 'accountant_turnover_ranges.id', '=', 'accountant_payroll_runs.accountant_turnover_range_id')
 					->where('accountant_payroll_runs.accountant_id', $this->client->accountant_id)
+					->where('type', 'employee')
 					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
 					->pluck('accountant_payroll_runs.value');
 		}
 	
-		return $rate * $this->pricing->payroll_run_frequency * $this->pricing->no_of_employees;
+		return $rate * $this->pricing->employee_pay_run_frequency * $this->pricing->no_of_employees;
 	}
 
-	public function getTotalAnnualEmployeePayrollVal()
+	public function getAnnualBaseFeePerSubPayRunVal()
 	{
-		return $this->annual_base_fee_per_pay_run + $this->annual_base_fee_per_employee_per_payroll_run;
+		$base_fee = (integer) DB::table('accountant_pay_runs')
+					->where('accountant_id', $this->client->accountant_id)
+					->where('type', 'subcontractor')
+					->pluck('value');
+
+		return $base_fee * $this->pricing->subcontractor_pay_run_frequency;
+	}
+
+	public function getAnnualBaseFeePerSubPerPayrollRunVal()
+	{
+		$rate = DB::table('accountant_pay_runs')
+				->where('accountant_id', $this->client->accountant_id)
+				->where('based_on', 'all_clients')
+				->where('type', 'subcontractor')
+				->pluck('allclients_base_fee');
+		if ( ! $rate) {
+			$rate = (int) DB::table('accountant_turnover_ranges')
+					->join('accountant_payroll_runs', 'accountant_turnover_ranges.id', '=', 'accountant_payroll_runs.accountant_turnover_range_id')
+					->where('accountant_payroll_runs.accountant_id', $this->client->accountant_id)
+					->where('type', 'subcontractor')
+					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+					->pluck('accountant_payroll_runs.value');
+		}
+	
+		return $rate * $this->pricing->subcontractor_pay_run_frequency * $this->pricing->no_of_subcontractors;
+	}
+
+	public function getTotalAnnualPayrollVal()
+	{
+		return $this->annual_base_fee_per_emp_pay_run + $this->annual_base_fee_per_emp_per_payroll_run;
+			+ $this->annual_base_fee_per_sub_pay_run + $this->annual_base_fee_per_sub_per_payroll_run;
 	}
 
 }

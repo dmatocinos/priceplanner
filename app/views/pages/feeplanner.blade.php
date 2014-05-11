@@ -294,8 +294,19 @@ Fee Planner
 
 			<table class="table">
 				<tr>
+					<td class="text-right col-legend emphasize">
+						Pay Run - Employees
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
 					<td class="text-right col-legend">
-						Number of Employees/Subcontractors
+						Number of Employees
 					</td>
 					<td class="col-extra">
 					</td>
@@ -324,7 +335,60 @@ Fee Planner
 					<td class="col-val">
 						{{   
 							
-							Form::select("pricing[payroll_run_frequency]", $periods, $pricing['payroll_run_frequency'], array(
+							Form::select("pricing[employee_pay_run_frequency]", $periods, $pricing['employee_pay_run_frequency'], array(
+								'class' => 'form-control input-sm', 
+							));
+						
+						}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+			</table>
+			<table class="table">
+				<tr>
+					<td class="text-right col-legend emphasize">
+						Pay Run - Subcontractors
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend">
+						Number of Subcontractors
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+						{{   
+							Form::text('pricing[no_of_subcontractors]',$pricing['no_of_subcontractors'], array(
+								'class' => 'form-control input-sm', 
+								'ng-model' 	=> 'C27', 
+								'ng-init' 	=> "C27='{$pricing['no_of_subcontractors']}'", 
+								'numbers-only'	=> 'numbers-only',
+								'placeholder'   => 'number',
+								'required'	=> 'required',
+							));
+							
+						}}
+					</td>
+					<td class="col-total">
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right col-legend">
+						Payroll Run Frequency
+					</td>
+					<td class="col-extra">
+					</td>
+					<td class="col-val">
+						{{   
+							
+							Form::select("pricing[subcontractor_pay_run_frequency]", $periods, $pricing['subcontractor_pay_run_frequency'], array(
 								'class' => 'form-control input-sm', 
 							));
 						

@@ -17,7 +17,9 @@ class Pricing extends \Eloquent {
 		'bookkeeping_days',
 		'discount',
 		'no_of_employees',
-		'payroll_run_frequency'
+		'no_of_subcontractors',
+		'employee_pay_run_frequency',
+		'subcontractor_pay_run_frequency',
 	];
 
 	public static $rules = array(
@@ -30,7 +32,9 @@ class Pricing extends \Eloquent {
 		'bookkeeping_days' => 'required|numeric',
 		'discount' => 'required|numeric',  
 		'no_of_employees' => 'required|numeric',  
-		'payroll_run_frequency' => 'required|numeric',  
+		'employee_pay_run_frequency' => 'required|numeric',  
+		'no_of_subcontractors' => 'required|numeric',  
+		'subcontractor_pay_run_frequency' => 'required|numeric',  
 	);
 
 	public function client()

@@ -11,27 +11,31 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 		$accountant = $this->user->accountant;
 		
 		if ($accountant->accountant_pay_run) {
-			$payrun = $accountant->accountant_pay_run->getAttributes();
+			$payruns = AccountantPayrun::getPayruns($accountant);
 			$edit = TRUE;
 			$route = 'update';
-			$all_clients_display = ($payrun['based_on'] == 'all_clients');
-			$turnover_ranges_display = ($payrun['based_on'] == 'turnover_ranges');
+			$all_clients_employee_display = isset($payruns['employee']) ? ($payruns['employee']['based_on'] == 'all_clients') : false;
+			$turnover_ranges_employee_display = isset($payruns['employee']) ? ($payruns['employee']['based_on'] == 'turnover_ranges') : false;
+			$all_clients_subcontractor_display = isset($payruns['subcontractor']) ? ($payruns['subcontractor']['based_on'] == 'all_clients') : false;
+			$turnover_ranges_subcontractor_display = isset($payruns['subcontractor']) ? ($payruns['subcontractor']['based_on'] == 'turnover_ranges') : false;
 		}
 		else {
-			$payrun = null;
+			$payruns = null;
 			$edit = FALSE;
 			$route = 'store';
-			$all_clients_display = $turnover_ranges_display = false; 
+			$all_clients_employee_display = $turnover_ranges_employee_display = $all_clients_subcontractor_display = $turnover_ranges_subcontractor_display = false; 
 		}
 		
 		$form_data = [
 				'turnover_ranges' => AccountantTurnoverRange::getAccountantTurnoverRanges($accountant->id),
-				'payrun' => $payrun,
+				'payruns' => $payruns,
 				'payroll_runs' => AccountantPayrollRun::getPayrollRunTurnoverRanges($accountant->id),
 				'edit'	=> $edit,
 				'route' => 'practicedetails.payrolls.' . $route,
-				'all_clients_display' => $all_clients_display,
-				'turnover_ranges_display' => $turnover_ranges_display,
+				'all_clients_employee_display' => $all_clients_employee_display,
+				'turnover_ranges_employee_display' => $turnover_ranges_employee_display,
+				'all_clients_subcontractor_display' => $all_clients_subcontractor_display,
+				'turnover_ranges_subcontractor_display' => $turnover_ranges_subcontractor_display,
 				'accountant_id' => $accountant->id
 		];
 
@@ -61,26 +65,35 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 	protected function save($accountant, $input, $msg) 
 	{
 		// saving accountant_payroll_run
-		$data = $input['payrun'];
-		$data['accountant_id'] = $accountant->id;
-		$accountant_pay_run = new AccountantPayRun;
-		$accountant_pay_run->create($data);
+		$payruns = $input['payruns'];
+		foreach($payruns as $type => $data) {
+			$data['accountant_id'] = $accountant->id;
+			$data['type'] = $type;
+			$accountant_pay_run = new AccountantPayRun;
+			$accountant_pay_run->create($data);
+
+			if ($payruns[$type]['based_on'] == 'turnover_ranges') {
+				$accountant_pay_run->allclients_base_fee = 0;
+				$accountant_pay_run->save();
+			}
+		}
 		
 		// saving accountant_pay_run
-		if ($data['based_on'] == 'turnover_ranges') {
 			
-			foreach ($input['payroll_turnover_ranges'] as $id => $val) {
-				$data = [
-					'value' => $val,
-					'accountant_id' => $accountant->id,
-					'accountant_turnover_range_id' => $id
-				];
-				$model = new AccountantPayrollRun;
-				$model->create($data);
-			}
+		foreach ($input['payroll_turnover_ranges'] as $type => $payroll) {
+			if ($payruns[$type]['based_on'] == 'turnover_ranges') {
+				foreach($payroll as $id => $val) {
+					$data = [
+						'value' => $val,
+						'accountant_id' => $accountant->id,
+						'accountant_turnover_range_id' => $id,
+						'type' => $type
+					];
+					$model = new AccountantPayrollRun;
+					$model->create($data);
+				}
 
-			$accountant_pay_run->allclients_base_fee = 0;
-			$accountant_pay_run->save();
+			}
 		}
 		
 		$route = isset($input['save_next_page']) ? 'practicedetails/services' : 'practicedetails/payrolls';

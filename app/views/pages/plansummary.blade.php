@@ -232,7 +232,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend">
-					Number of Employees/Subcontractors
+					Number of Employees
 				</td>
 				<td class="col-extra">
 				</td>
@@ -240,20 +240,49 @@ Plan Summary
 					<div>{{ $pricing['no_of_employees'] }}</div>
 				</td>
 				<td class="col-total">
-					<div>{{ $calc->annual_base_fee_per_pay_run }}</div>
+					<div>{{ $calc->annual_base_fee_per_emp_pay_run }}</div>
 				</td>
 			</tr>
 			<tr>
 				<td class="text-right col-legend">
-					Payroll Run Frequency
+					Employee Payroll Run Frequency
 				</td>
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
-					<div>{{ $pricing['payroll_run_frequency'] }}</div>
+					<div>{{ $pricing['employee_pay_run_frequency'] }}</div>
 				</td>
 				<td class="col-total">
-					<div>{{ $calc->annual_base_fee_per_employee_per_payroll_run }}</div>
+					<div>{{ $calc->annual_base_fee_per_emp_per_payroll_run }}</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"> </td>
+			</tr>
+			<tr>
+				<td class="text-right col-legend">
+					Number of Subcontractors
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+					<div>{{ $pricing['no_of_subcontractors'] }}</div>
+				</td>
+				<td class="col-total">
+					<div>{{ $calc->annual_base_fee_per_sub_pay_run }}</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right col-legend">
+					Subcontractor Payroll Run Frequency
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+					<div>{{ $pricing['subcontractor_pay_run_frequency'] }}</div>
+				</td>
+				<td class="col-total">
+					<div>{{ $calc->annual_base_fee_per_sub_per_payroll_run }}</div>
 				</td>
 			</tr>
 			<!--

@@ -70,7 +70,7 @@ class Accountant extends \Eloquent {
 
 	public function accountantPayRun() 
 	{
-		return $this->hasOne('AccountantPayRun');
+		return $this->hasMany('AccountantPayRun');
 	}
 
 	public function accountantPayrollRun() 
