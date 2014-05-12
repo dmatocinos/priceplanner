@@ -84,6 +84,18 @@
 				<tr>
 					<td style="width: 80%;" class="text-left">Bookkeeping (hourly rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g24, '£') }}</td>
 				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Employee Base Fee per Pay Run</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_base_fee_per_emp_pay_run, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Base Fee per Employee per Payroll Run</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_base_fee_per_emp_per_payroll_run, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Subcontractor Base Fee per Pay Run</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_base_fee_per_sub_pay_run, '£') }}</td>
+				</tr>
+				<tr>
+					<td style="width: 80%;" class="text-left">Base Fee per Subcontractor per Payroll Run</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_base_fee_per_sub_per_payroll_run, '£') }}</td>
+				</tr>
 				@foreach ($calc->other_services as $other_service)
 					@if ($other_service->value)
 					<tr>
