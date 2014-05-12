@@ -76,7 +76,7 @@
 					<td style="width: 80%;" class="text-left">Partnership Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g19, '£') }}</td>
 				</tr>
 				<tr>
-					<td style="width: 80%;" class="text-left">Self-Assessment Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g19, '£') }}</td>
+					<td style="width: 80%;" class="text-left">Self-Assessment Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g20, '£') }}</td>
 				</tr>
 				<tr>
 					<td style="width: 80%;" class="text-left">Bookkeeping (daily rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g25, '£') }}</td>
