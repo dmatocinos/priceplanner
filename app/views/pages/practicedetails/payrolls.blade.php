@@ -19,7 +19,6 @@ Payroll | Employee & Subcontractor
 			  <legend>Payroll Run - Employees</legend>
 			  <p class="help-block">Please enter the base fee (if any) you charge clients per payroll run regardless of the number of employees.</p>
 			  <br>
-			  <legend><h4>Pay Run Base Fee</h4></legend>
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
 			    <div class="col-lg-2 text-center"></div>
@@ -134,7 +133,6 @@ Payroll | Employee & Subcontractor
 			  <legend>Payroll Run - Subcontractor</legend>
 			  <p class="help-block">Please enter the base fee (if any) you charge clients per payroll run regardless of the number of subcontractor.</p>
 			  <br>
-			  <legend><h4>Pay Run Base Fee</h4></legend>
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
 			    <div class="col-lg-2 text-center"></div>
