@@ -19,12 +19,13 @@ Payroll | Employee & Subcontractor
 			  <legend>Payroll Run - Employees</legend>
 			  <p class="help-block">Please enter the base fee (if any) you charge clients per payroll run regardless of the number of employees.</p>
 			  <br>
+			  <legend><h4>Pay Run Base Fee</h4></legend>
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
-			    <div class="col-lg-2 text-center"><b>Base Fee</b></div>
+			    <div class="col-lg-2 text-center"></div>
 			  </div>
 			  <div class="form-group">
-			    <label for="" class="col-lg-2 control-label">Per Pay Run</label>
+			    <label for="" class="col-lg-2 control-label">Base Fee Per Pay Run</label>
 			    <div class="col-lg-2">
 					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['value'] : null ?>
 					{{ 
@@ -39,13 +40,15 @@ Payroll | Employee & Subcontractor
 					}}
 			    </div>
 			  </div>
-			 <legend>&nbsp;</legend>
+			 <br>
+			 <legend><h4>Employee Pay Run Processing Charges</h4></legend>
+			  <p class="help-block">Please enter the fee that you charge per employee processed per pay run.</p>
 			  <div class="form-group">
 				    <?php
 					$ac_checked = $all_clients_employee_display ? 'checked' : '';
 					$to_checked = $turnover_ranges_employee_display ? 'checked' : '';
 				    ?>
-				    <label for="" class="col-lg-2 control-label">Enter base fee based on:</label>
+				    <label for="" class="col-lg-2 control-label">Enter processing based on:</label>
 				    <div class="col-lg-2">
 					<div class="radio">
 					  <label>
@@ -61,7 +64,6 @@ Payroll | Employee & Subcontractor
 					</div>
 				    </div>
 			  </div>
-			 <legend>&nbsp;</legend>
 			  <br>
 			    <?php
 				$ac_display = $all_clients_employee_display ? 'inline' : 'none';
@@ -70,7 +72,7 @@ Payroll | Employee & Subcontractor
 			  <div class="all_clients_employee base_fees_employee" style="display:{{ $ac_display }};">
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
-			    <div class="col-lg-2 text-center"><b>Base Fee</b></div>
+			    <div class="col-lg-2 text-center"></div>
 			  </div>
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">All Clients</label>
@@ -132,12 +134,14 @@ Payroll | Employee & Subcontractor
 			  <legend>Payroll Run - Subcontractor</legend>
 			  <p class="help-block">Please enter the base fee (if any) you charge clients per payroll run regardless of the number of subcontractor.</p>
 			  <br>
+			  <legend><h4>Pay Run Base Fee</h4></legend>
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
-			    <div class="col-lg-2 text-center"><b>Base Fee</b></div>
+			    <div class="col-lg-2 text-center"></div>
 			  </div>
+
 			  <div class="form-group">
-			    <label for="" class="col-lg-2 control-label">Per Pay Run</label>
+			    <label for="" class="col-lg-2 control-label">Base Fee Per Pay Run</label>
 			    <div class="col-lg-2">
 					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] : null ?>
 					{{ 
@@ -152,13 +156,16 @@ Payroll | Employee & Subcontractor
 					}}
 			    </div>
 			  </div>
-			 <legend>&nbsp;</legend>
+			  
+			  <br>	 	
+			  <legend><h4>Subcontractor Pay Run Processing Charges</h4></legend>
+			  <p class="help-block">Please enter the fee that you charge per subcontractor processed per pay run.</p>
 			  <div class="form-group">
 				    <?php
 					$ac_checked = $all_clients_subcontractor_display ? 'checked' : '';
 					$to_checked = $turnover_ranges_subcontractor_display ? 'checked' : '';
 				    ?>
-				    <label for="" class="col-lg-2 control-label">Enter base fee based on:</label>
+				    <label for="" class="col-lg-2 control-label">Enter processing based on:</label>
 				    <div class="col-lg-2">
 					<div class="radio">
 					  <label>
@@ -183,7 +190,7 @@ Payroll | Employee & Subcontractor
 			  <div class="all_clients_subcontractor base_fees_subcontractor" style="display:{{ $ac_display }};">
 			  <div class="form-group">
 			    <div class="col-lg-2 control-label"></div>
-			    <div class="col-lg-2 text-center"><b>Base Fee</b></div>
+			    <div class="col-lg-2 text-center"></div>
 			  </div>
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">All Clients</label>
