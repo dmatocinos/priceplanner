@@ -238,7 +238,7 @@ class PlanSummaryCalculator {
 
 	public function getDiscountVal()
 	{
-		return $this->pricing->discount / 100;
+		return (int) $this->pricing->discount / 100;
 	}
 
 	public function getTotalAnnualFeeVal()
@@ -320,13 +320,13 @@ class PlanSummaryCalculator {
 					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
 					->pluck('accountant_payroll_runs.value');
 		}
-	
+
 		return $rate * $this->pricing->subcontractor_pay_run_frequency * $this->pricing->no_of_subcontractors;
 	}
 
 	public function getTotalAnnualPayrollVal()
 	{
-		return $this->annual_base_fee_per_emp_pay_run + $this->annual_base_fee_per_emp_per_payroll_run;
+		return $this->annual_base_fee_per_emp_pay_run + $this->annual_base_fee_per_emp_per_payroll_run
 			+ $this->annual_base_fee_per_sub_pay_run + $this->annual_base_fee_per_sub_per_payroll_run;
 	}
 

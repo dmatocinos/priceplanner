@@ -79,6 +79,9 @@
 					<td style="width: 80%;" class="text-left">Self-Assessment Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g20, '£') }}</td>
 				</tr>
 				<tr>
+					<td style="width: 80%;" class="text-left">VAT Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g22, '£') }}</td>
+				</tr>
+				<tr>
 					<td style="width: 80%;" class="text-left">Bookkeeping (daily rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g25, '£') }}</td>
 				</tr>
 				<tr>
