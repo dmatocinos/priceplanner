@@ -203,5 +203,7 @@ Route::group(array(), function() {
 
 	Route::get('paid{user_id}', array('as' => 'paid', 'uses' => 'AuthController@paid'));
 	Route::get('cancel_payment/{user_id}', array('as' => 'cancel_payment', 'uses' => 'AuthController@cancelPayment'));
+
+	Route::post('email_support', array('as' => 'email_support', 'uses' => 'BaseController@sendEmailSupport'));
 });
 

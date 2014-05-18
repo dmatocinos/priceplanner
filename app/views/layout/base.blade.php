@@ -30,6 +30,11 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-comments-o fa-fw"></i> Support 
+                    </a>
+		</li>
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>{{ $user->email }}&nbsp;<i class="fa fa-caret-down"></i>
                     </a>
@@ -129,6 +134,43 @@
 			</div>
 	    </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      {{ Form::open(array('route' => 'email_support')) }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Contact Support</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="span12" style="padding: 15px;">
+				<h4>We aim to make you feel comfortable with our service, please let us know how we can help you further.</h4>
+				<br>
+				<fieldset>
+					{{ Form::token() }}
+					<div class="form-group">
+						<label for="msg_subject">Subject</label>
+						<input name="subject" type="text" class="form-control" id="msg_subject" placeholder="What is it about?" required="required">
+					</div>
+					<div class="form-group">
+						<label for="msg_message">Message</label>
+						<textarea name="msg" class="form-control" row="3" style="height: 120px;" id="msg_message" placeholder="Please provide more details." required="required"></textarea>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
 
     {{ Asset::container('footer')->scripts() }}
 

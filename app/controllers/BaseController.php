@@ -83,4 +83,25 @@ class BaseController extends Controller {
 		$result = DB::select("SELECT country_id FROM countries WHERE iso2='GB'");
 		return $result[0]->country_id;
 	}
+
+	public function sendEmailSupport()
+	{
+		$data = Input::all();
+		$user = $this->user->practiceProUser();
+		$subject = $data['subject'];
+		Mail::send('emails.support', ['msg' => $data['msg']], function($message) use ($user, $subject)
+		{
+			$from = $user->email;
+			$message->to(
+				//'dixie.atay@gmail.com', 
+				'support@practicepro.co.uk', 
+				'Support Team'
+			)->subject('Price Planner Pro - ' . $subject);
+
+			$message->from($user->mh2_email, sprintf("%s %s", $user->mh2_fname, $user->mh2_lname));
+		});
+		
+		return Redirect::back()->with(['msg', 'You have successfully sent your message to support team.']);
+	}
+
 }
