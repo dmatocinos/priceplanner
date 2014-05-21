@@ -162,12 +162,17 @@ Route::group(array('before' => 'subscribe', 'before' => 'auth'), function() {
 		# plan summary 
 		Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
 
-		# report 
-		Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
-		Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
-		Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
-		Route::get("report/plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'ReportController@planSummary'));
+		Route::group(array('before' => 'paid'), function() {
+			# report 
+			Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
+			Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
+			Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
+			Route::get("report/plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'ReportController@planSummary'));
+		});
+
+		Route::get("restrictdownloads/{pricing_id}", array('as' => 'restrictdownloads', 'uses' => 'PlanSummaryController@restrictDownloads'));
 	});
+
 });
 
 /*

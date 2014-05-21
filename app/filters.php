@@ -62,6 +62,15 @@ Route::filter('practicedetailscompleted', function()
 	}
 });
 
+Route::filter('paid', function($route)
+{
+	$user = Sentry::getUser();
+	
+	if ( $user->email == 'demo@test.com') {
+		return Redirect::to('restrictdownloads/' . $route->getParameter('pricing_id'));
+	}
+});
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

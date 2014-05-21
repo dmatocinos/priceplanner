@@ -27,5 +27,10 @@ class PlanSummaryController extends BaseController
 		$this->layout->content = View::make("pages.plansummary", $tpl_data);
 	}
 
+	public function restrictDownloads($pricing_id)
+	{
+		return Redirect::to('plansummary/' . $pricing_id)
+			->with('message', 'Sorry test accounnt cannot download a report. You may want to ' . link_to('http://registration.practicepro.co.uk/', 'register') . ' in one of our packages to fully use this application.');
+	}
 }
 
