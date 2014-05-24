@@ -65,6 +65,7 @@ class Client extends \Eloquent {
 				SELECT *
 				FROM clients c
 				WHERE c.accountant_id = :accountant_id
+				AND deleted_at IS NULL
 			", 
 			array('accountant_id' => $accountant_id)
 		);
