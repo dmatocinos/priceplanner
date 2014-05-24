@@ -30,7 +30,7 @@ class PlanSummaryController extends BaseController
 	public function restrictDownloads($pricing_id)
 	{
 		return Redirect::to('plansummary/' . $pricing_id)
-			->with('message', 'Sorry test accounnt cannot download a report. You may want to ' . link_to('http://registration.practicepro.co.uk/', 'register') . ' in one of our packages to fully use this application.');
+			->with('message', "Sorry, valuation report is not downloadable for Free Trial membership. You may want to upgrade to other packages to fully use this application.");
 	}
 }
 

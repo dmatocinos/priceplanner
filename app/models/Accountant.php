@@ -22,6 +22,11 @@ class Accountant extends \Eloquent {
 		'city_address'	=> 'required',
 		'logo_filename'	=> 'image|max:1500'
 	);
+
+	public function clients ()
+	{
+		return $this->hasMany('Client');
+	}
 	
 	public function accountantBusinessTypes ()
 	{
@@ -77,5 +82,4 @@ class Accountant extends \Eloquent {
 	{
 		return $this->hasMany('AccountantPayrollRun');
 	}
-
 }

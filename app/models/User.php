@@ -131,6 +131,17 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return $is_free || $is_subscription_valid;
 	}
 
+	public function getMembershipLevelDisplayAttribute()
+	{
+		$result = DB::connection($this->connection)
+			->select(DB::raw("SELECT display FROM membership_levels WHERE membership_level_id = :membership_level_id LIMIT 1"), array(
+				'membership_level_id' => $this->membership_level
+			));
+		
+		return $result[0]->display;
+	}
+
+
 	/**
 	 * User - PracticeProUser one-to-one relationship
 	 *
@@ -148,8 +159,12 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	public function isSubscribed() 
 	{
 		$pp_user = $this->practiceProUser();
+		if ($pp_user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
+			return true;
+		}
+
 		$is_free = $pp_user->app_pricing->is_free;
-		
+
 		if ($this->valid_until) {
 			$now = Carbon::now();
 			$is_subscription_valid = $this->valid_until->gte($now);

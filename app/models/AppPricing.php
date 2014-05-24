@@ -33,11 +33,12 @@ class AppPricing extends Eloquent {
 	/**
 	 * L4.1.x version only
 	 *
+	 */
 	public function practiceProUsers()
 	{
 		return $this->hasMany('PracticeProUser', 'mh2_membership_level', 'membership_level');
 	}
-	 */
+
 	public function getPracticeProUsersAttribute()
 	{
 		return PracticeProUser::where('mh2_membership_level', '=', $this->membership_level)->get();
@@ -62,7 +63,7 @@ class AppPricing extends Eloquent {
 	 */
 	public function getIsFreeAttribute()
 	{
-		return $this->discount == 1;
+		return $this->discount == 1 || $this->discount == 0;
 	}
 
 	/**

@@ -4,6 +4,8 @@ use Carbon\Carbon;
 
 class Client extends \Eloquent {
 
+	protected $softDelete = true;
+
 	protected $fillable = [
 		'client_name',
 		'business_name',

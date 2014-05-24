@@ -73,24 +73,22 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 		return $this->hasOne('User', 'username', 'mh2_id');
 	}
 	
-	/**
-	 * L4 needs to be updated to 4.1.x for this to work. For now, let's use accessor
-	 *
 	public function pricing()
 	{
-		return $this->belongsTo('Pricing', 'membership_level', 'mh2_membership_level');
+		return $this->belongsTo('AppPricing', 'mh2_membership_level', 'membership_level_id');
 	}
-	*/
+
 	public function getAppPricingAttribute()
 	{
 		return AppPricing::where('membership_level_id', '=', $this->membership_level)
 			->where('application_id', '=', function($query)
 				{
 					$query->select(DB::raw('application_id'))
-                      ->from('applications')
-                      ->where('application_key', '=', Config::get('app.application_key'));
+					      ->from('applications')
+					      ->where('application_key', '=', Config::get('app.application_key'));
 				})
 			->first();
+		//dd(get_class_methods($p), get_class_methods($p->getQuery()) , $p->getQuery()->toSql());
 	}
 
 	/**

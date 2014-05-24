@@ -98,7 +98,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
 });
 
-Route::group(array('before' => 'subscribe', 'before' => 'auth'), function() {
+Route::group(array('after' => 'subscribe', 'before' => 'auth'), function() {
 	# practice details setup
 	Route::get("practicedetails/setup", array('as' => 'practicedetails.setup', 'uses' => 'PracticeDetailsSetupController@index'));
 	Route::put("practicedetails/setup/store", array('as' => 'practicedetails.setup.store', 'uses' => 'PracticeDetailsSetupController@store'));
@@ -162,7 +162,7 @@ Route::group(array('before' => 'subscribe', 'before' => 'auth'), function() {
 		# plan summary 
 		Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
 
-		Route::group(array('before' => 'paid'), function() {
+		Route::group(array('before' => 'free_trial'), function() {
 			# report 
 			Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
 			Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));

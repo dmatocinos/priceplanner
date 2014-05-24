@@ -62,11 +62,10 @@ Route::filter('practicedetailscompleted', function()
 	}
 });
 
-Route::filter('paid', function($route)
+Route::filter('free_trial', function($route)
 {
-	$user = Sentry::getUser();
-	
-	if ( $user->email == 'demo@test.com') {
+	$user = Sentry::getUser()->practiceProUser();
+	if ( $user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
 		return Redirect::to('restrictdownloads/' . $route->getParameter('pricing_id'));
 	}
 });
