@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-class Client extends \Eloquent {
+class Client extends Eloquent {
 
 	protected $softDelete = true;
 

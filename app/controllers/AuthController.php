@@ -71,7 +71,7 @@ class AuthController extends BaseController {
 
 				if ($date_14th < time()) {
 					Sentry::logout();
-					$user->accountant->clients->delete();
+					$user->accountant->clients()->delete();
 					$this->messageBag->add('email', 'Your free trial membership has now expired. Please upgrade your membership to use the software in its entirety.');
 					return Redirect::back()->withInput()->withErrors($this->messageBag);
 				}
