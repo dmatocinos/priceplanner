@@ -88,7 +88,6 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 					      ->where('application_key', '=', Config::get('app.application_key'));
 				})
 			->first();
-		//dd(get_class_methods($p), get_class_methods($p->getQuery()) , $p->getQuery()->toSql());
 	}
 
 	/**
