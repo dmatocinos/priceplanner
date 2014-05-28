@@ -37,7 +37,7 @@ Route::get('install/{key?}',  array('as' => 'install', function($key = null)
        }
 }));
 
-Route::get('migrate/{key?}',  array('as' => 'install', function($key = null)
+Route::get('migrate/{key?}',  array('as' => 'migrate', function($key = null)
 {
        if($key == "where_are_the_cranberries"){
                try {
@@ -56,7 +56,7 @@ Route::get('migrate/{key?}',  array('as' => 'install', function($key = null)
        }
 }));
 
-Route::get('pull/{key?}',  array('as' => 'install', function($key = null)
+Route::get('pull/{key?}',  array('as' => 'pull', function($key = null)
 {
        if($key == "where_are_the_cranberries"){
                try {
