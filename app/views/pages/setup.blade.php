@@ -30,7 +30,7 @@ Client Details
              <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
              @endif
 	     @if(isset($client_data['pricing_id']))
-             <li><a href="{{ url('plansummary/' . $client['pricing_id']) }}">Plan Summary</a></li>
+             <li><a href="{{ url('plansummary/' . $client_data['pricing_id']) }}">Plan Summary</a></li>
              @else
              <li><a href="#" style="color: #000000;">Plan Summary</a></li>
              @endif
