@@ -20,7 +20,7 @@ Fee Levels
 	  <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-	      <li class=""><a href="{{ url('setup/edit/' . $client_id) }}">Setup</a></li>
+	      <li class=""><a href="{{ url('setup/edit/' . $client_id) }}">Client Details</a></li>
 	      <li class="active"><a href="{{ url('feelevels/' . $client_id) }}">Fee Levels</a></li>
 	      @if(isset($pricing_id))
 	      <li class=""><a href="{{ url('feeplanner/edit/' . $pricing_id) }}">Fee Planner</a></li>

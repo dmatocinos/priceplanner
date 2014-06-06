@@ -1,3 +1,10 @@
+@section('title')
+Client Details
+@stop
+
+@section('page_title')
+Client Details
+@stop
 
 @section('client')
 @if(isset($client_data['client_id']))
@@ -12,7 +19,7 @@
          <!-- Collect the nav links, forms, and other content for toggling -->
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
-             <li class="active"><a href="#">Setup</a></li>
+             <li class="active"><a href="#">Client Details</a></li>
              @if($edit == true)
 	     		 @if(isset($client_data['pricing_id']))
                          <li class=""><a href="{{ url('feeplanner/edit/' . $client_data['pricing_id']) }}">Fee Planner</a></li>
