@@ -17,6 +17,7 @@ class Client extends Eloquent {
 		'period_start_date',
 		'period_end_date',
 		'accountant_id',
+		'client_id'
 	];
 
 	public static $rules = array(

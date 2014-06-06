@@ -1,38 +1,3 @@
-
-@section('client')
-@if(isset($client_data['client_id']))
-    <li>
-	<a href="#"><i class="fa fa-male fa-fw"></i>{{ $client_data['contact_name'] }}</a>
-    </li>
-@endif
-@stop
-
-@section('app_nav')
-       <nav id="app-nav" class="navbar navbar-default" role="navigation">
-         <!-- Collect the nav links, forms, and other content for toggling -->
-         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-           <ul class="nav navbar-nav">
-             <li class="active"><a href="#">Setup</a></li>
-             @if($edit == true)
-	     		 @if(isset($client_data['pricing_id']))
-                         <li class=""><a href="{{ url('feeplanner/edit/' . $client_data['pricing_id']) }}">Fee Planner</a></li>
-                         @else
-                         <li class=""><a href="{{ url('feeplanner/' . $client_data['client_id']) }}">Fee Planner</a></li>
-                         @endif
-             @else
-             <li class=""><a href="#" style="color: #000000;">Fee Planner</a></li>
-             @endif
-	     @if(isset($client_data['pricing_id']))
-             <li><a href="{{ url('plansummary/' . $client['pricing_id']) }}">Plan Summary</a></li>
-             @else
-             <li><a href="#" style="color: #000000;">Plan Summary</a></li>
-             @endif
-           </ul>
-         </div><!-- /.navbar-collapse -->
-       </nav>
-@stop
-
-
 @section('content')
 	<?php 
 		if (isset($client_data['id'])) {
@@ -47,10 +12,78 @@
 		}
 		
 	?>
-	
-	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'form-horizontal', 'ng-controller' => 'PPCtrl', 'files' => true)) }}
 
             <div class="row">
+                <div class="col-lg-12">
+		    @if (Session::get('message'))
+			<div class="alert alert-error alert-block">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<b>{{ Session::get('message') }}</b>
+			</div>
+		    @endif
+                </div>
+            </div>
+	
+	{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'form-horizontal', 'ng-controller' => 'BvCtrl', 'files' => true)) }}
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-home fa-fw"></i> Valuation Details
+                        </div>
+                        <div class="panel-body">
+				
+			    <fieldset>
+				  <div class="form-group">
+				    <label for="valuation_name" class="col-lg-2 control-label">Valuation Name</label>
+				    <div class="col-lg-5">
+					{{ $view_provider->valuation_name }}
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="periods" class="col-lg-2 control-label">Periods</label>
+				    <div class="col-lg-10">
+					<div class="period-lined-field-container">{{ $view_provider->period_1 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->period_2 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->period_3 }}</div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="period_lengths" class="col-lg-2 control-label">Period Length</label>
+				    <div class="col-lg-6">
+					<div class="period-lined-field-container">{{ $view_provider->period_length_1 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->period_length_2 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->period_length_3 }}</div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="weighting_factors" class="col-lg-2 control-label">Weighting Factor</label>
+				    <div class="col-lg-6">
+					<div class="period-lined-field-container">{{ $view_provider->weighting_factor_1 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->weighting_factor_2 }}</div>
+					<div class="period-lined-field-container">{{ $view_provider->weighting_factor_3 }}</div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="valuation_date" class="col-lg-2 control-label">Valuation Date</label>
+				    <div class="col-lg-2">
+					{{ $view_provider->valuation_date }}
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="final_period_type" class="col-lg-2 control-label">Final Period Type</label>
+				    <div class="col-lg-3">
+					{{ $view_provider->final_period_type }}
+				    </div>
+				  </div>
+				</fieldset>
+
+				</div>
+			    </div>
+
+                </div>
 
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -64,12 +97,6 @@
 				    <div class="form-group">
 					@if(isset($client_data['id']))
 					<input type="hidden" name="id" value="{{ $client_data['id'] }}">
-					@endif
-					@if(isset($client_data['pp_client_id']))
-					<input type="hidden" name="pp_client_id" value="{{ $client_data['pp_client_id'] }}">
-					@endif
-					@if(isset($client_data['client_id']))
-					<input type="hidden" name="client_id" value="{{ $client_data['client_id'] }}">
 					@endif
 				    	<label for="business_name" class="col-sm-2 control-label">Business Name</label>
 					<div class="col-sm-4">
@@ -452,8 +479,11 @@
 
 		<div class="col-lg-12 pull-right well">
 			<div class="pull-right">
-				<button  class="btn btn-primary btn-save" type="submit" name="save_next_page" id="save_next_page" >&nbsp;<i class="fa fa-save"></i> Save & Next </button>
-				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">&nbsp;<i class="fa fa-save"></i> Save </button>
+				<button  class="btn btn-primary btn-save" type="submit" name="save_next_page" id="save_next_page" {{ $disabled }}>&nbsp;<i class="fa fa-save"></i> Save & Next </button>
+				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page" {{ $disabled }}>&nbsp;<i class="fa fa-save"></i> Save </button>
+				@if ($tabs_completed >= 1)
+				<a href="{{ url($current_page . '/export/pdf/' . $valuation_id) }}" class="btn btn-default">&nbsp;<i class="fa fa-download"></i> Export </a>
+				@endif
 			</div>
 		</div>
 

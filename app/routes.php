@@ -149,9 +149,15 @@ Route::group(array('after' => 'subscribe', 'before' => 'auth'), function() {
 
 		# setup  
 		Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));
-		Route::get("setup/edit/{client_id}", array('as' => 'setup.edit', 'uses' => 'SetupController@edit'));
+		Route::get("setup/edit/{id}", array('as' => 'setup.edit', 'uses' => 'SetupController@editClient'));
 		Route::put("setup/create", array('as' => 'setup.store', 'uses' => 'SetupController@store'));
 		Route::put("setup/edit", array('as' => 'setup.update', 'uses' => 'SetupController@update'));
+
+		Route::get('client_details/new', 'SetupController@newClient');
+		Route::get('client_details/existing/{client_id}', 'SetupController@existingClient');
+		Route::post('client_details/add', array('as' => 'add_client', 'uses' => 'SetupController@addClient'));
+		Route::put('client_details/create', array('as' => 'create_client', 'uses' => 'SetupController@createClient'));
+		Route::put('client_details/update', array('as' => 'update_client', 'uses' => 'SetupController@updateClient'));
 
 		# fee planner 
 		Route::get("feeplanner/{client_id}", array('as' => 'feeplanner.create', 'uses' => 'FeePlannerController@create'));
@@ -210,5 +216,6 @@ Route::group(array(), function() {
 	Route::get('cancel_payment/{user_id}', array('as' => 'cancel_payment', 'uses' => 'AuthController@cancelPayment'));
 
 	Route::post('email_support', array('as' => 'email_support', 'uses' => 'BaseController@sendEmailSupport'));
+
 });
 

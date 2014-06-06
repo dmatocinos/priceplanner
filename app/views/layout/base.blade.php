@@ -62,7 +62,7 @@
 		            @if ($user->accountant && $user->accountant->last_tab == 'completed')
 						@yield('client')
 						<li>
-							<a href="{{ url('setup') }}"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+							<a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
 						</li>
 						<li>
 							<a href="{{ route('practicedetails.setup') }}"><i class="fa fa-leaf fa-fw"></i> Practice Details</a>
@@ -171,6 +171,62 @@
     </div>
   </div>
 </div>
+
+<!-- Client Select Modal -->
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      {{ Form::open(array('route' => 'add_client')) }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add Client Details</h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+		<div class="col-lg-12" style="padding: 15px;">
+		<fieldset>
+			{{ Form::token() }}
+			  <div class="form-group">
+				    <label for="" class="col-lg-12 control-label">Add client details for the new price plan. Choose which one you prefer to retrieve client details.</label>
+				    <div class="col-lg-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="select_by" id="existing" value="existing" checked>
+						From Existing Clients		
+						{{ 
+							Form::select(
+								'client_id', $current_clients, 
+								null,
+								array(
+									'class' => 'form-control', 
+							)) 
+						}}
+					  </label>
+					</div>
+				    </div>
+				    <br>
+				    <div class="col-lg-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="select_by" id="new_client" value="new_client">
+						Add New Client
+					  </label>
+					</div>
+				    </div>
+			  </div>
+		</fieldset>
+		</div>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
+<!-- Modal -->
 
     {{ Asset::container('footer')->scripts() }}
 

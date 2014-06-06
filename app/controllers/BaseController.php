@@ -73,6 +73,10 @@ class BaseController extends Controller {
 		}
 		/** End adding javascripts  **/
 
+		if (Sentry::check()) {
+			View::share('current_clients', PracticeProClient::getAllCurrentClients());
+		}
+
 		View::share('user', $this->user);
 
 		$this->layout = View::make($this->layout);
