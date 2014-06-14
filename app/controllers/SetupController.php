@@ -89,7 +89,7 @@ class SetupController extends BaseController {
 
 		}
 		else {
-			return Redirect::to('client_details/existing/' . $input['id'])
+			return Redirect::to('client_details/new');
 				->withInput()
 				->withErrors($validator)
 				->with('message', 'There were validation errors.');
