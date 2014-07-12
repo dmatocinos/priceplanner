@@ -182,5 +182,8 @@ return array(
 	),
 	
 	'application_key' => 'price_planner',
+	
+	'portal_url' => 'localhost/practicepro_regis/public/index.php/',
+
 
 );
