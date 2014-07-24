@@ -48,8 +48,11 @@ Route::filter('auth', function()
 
 Route::filter('subscribe', function()
 {
-	if ( ! Sentry::getUser()->isSubscribed()) {
-		return Redirect::route('subscribe');
+	// Check if the user is logged in
+	if ( Sentry::check()) {
+		if ( ! Sentry::getUser()->isSubscribed()) {
+			return Redirect::route('subscribe');
+		}
 	}
 });
 
@@ -88,7 +91,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Sentry::check()) return Redirect::to('/');
 });
 
 /*
