@@ -11,7 +11,7 @@ class HomeController extends BaseController {
 		$form_data = array(
 			'clients' => $accountant ? Client::getAll($accountant->id) : []
 		);
-		
+
 		$this->layout->content = View::make("pages.list", $form_data);
 	}
 

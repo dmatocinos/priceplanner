@@ -93,15 +93,10 @@ class Client extends Eloquent {
 
 	public static function getAll($accountant_id) 
 	{
-		return DB::select(
-			"
-				SELECT *
-				FROM clients c
-				WHERE c.accountant_id = :accountant_id
-				AND deleted_at IS NULL
-			", 
-			array('accountant_id' => $accountant_id)
-		);
+		return Client::where('accountant_id', '=', $accountant_id)
+				->whereRaw('deleted_at IS NULL')
+				->where('client_id', '<>', 0)
+				->get();
 	}
 
 	public function getClient()
