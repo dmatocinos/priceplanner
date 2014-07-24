@@ -49,6 +49,8 @@ Client Details
 			$country = $client_data['country'];
 		}
 		else {
+			$client_data['period_start_date'] = '';
+			$client_data['period_end_date'] = '';
 			$route = 'create_client';
 			$country = 'United Kingdom';
 		}

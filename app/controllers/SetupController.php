@@ -43,7 +43,6 @@ class SetupController extends BaseController {
 				'pricing_id' =>  $pricing ? $pricing->id : NULL,
 				'pp_client_id' => $pp_client->id
 		];
-
 		$this->setupData($pp_client->getAttributes() + $data, true);
 	}
 

@@ -6,16 +6,9 @@ class Client extends Eloquent {
 
 	protected $softDelete = true;
 
+	protected $client;
+
 	protected $fillable = [
-		'client_name',
-		'business_name',
-		'street_address',
-		'city_address',
-		'state_address',
-		'country_address',
-		'zip_address',
-		'period_start_date',
-		'period_end_date',
 		'accountant_id',
 		'client_id'
 	];
@@ -34,6 +27,7 @@ class Client extends Eloquent {
 		return $this->belongsTo('Accountant');
 	}
 
+
 	public function user()
 	{
 		return $this->belongsTo('User');
@@ -46,12 +40,50 @@ class Client extends Eloquent {
 
 	public function getPeriodStartDateAttribute()
 	{
-		return $this->asDateTime($this->attributes['period_start_date']);
+		$client = $this->getClient();
+		return $this->asDateTime($client->period_start_date);
 	}
 
 	public function getPeriodEndDateAttribute()
 	{
-		return $this->asDateTime($this->attributes['period_end_date']);
+		$client = $this->getClient();
+		return $this->asDateTime($client->period_end_date);
+	}
+
+	public function getClientNameAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->contact_name;
+	}
+
+	public function getBusinessNameAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->business_name;
+	}
+
+	public function getStreetAddressAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->address_1;
+	}
+
+	public function getCityAddressAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->county;
+	}
+
+	public function getCountryAddressAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->country;
+	}
+
+	public function getZipAdressAttribute($value)
+	{
+		$client = $this->getClient();
+		return $client->postcode;
 	}
 
 	public function getAccountingPeriodAttribute()
@@ -70,6 +102,11 @@ class Client extends Eloquent {
 			", 
 			array('accountant_id' => $accountant_id)
 		);
+	}
+
+	public function getClient()
+	{
+		return PracticeProClient::find($this->client_id);
 	}
 	
 }
