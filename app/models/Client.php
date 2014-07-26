@@ -40,50 +40,66 @@ class Client extends Eloquent {
 
 	public function getPeriodStartDateAttribute()
 	{
-		$client = $this->getClient();
-		return $this->asDateTime($client->period_start_date);
+		if($client = $this->getClient()) {
+			return $this->asDateTime($client->period_start_date);
+		}
+		return null;
 	}
 
 	public function getPeriodEndDateAttribute()
 	{
-		$client = $this->getClient();
-		return $this->asDateTime($client->period_end_date);
+		if($client = $this->getClient()) {
+			return $this->asDateTime($client->period_end_date);
+		}
+		return null;
 	}
 
 	public function getClientNameAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->contact_name;
+		if($client = $this->getClient()) {
+			return $client->contact_name;
+		}
+		return null;
 	}
 
 	public function getBusinessNameAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->business_name;
+		if($client = $this->getClient()) {
+			return $client->business_name;
+		}
+		return null;
 	}
 
 	public function getStreetAddressAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->address_1;
+		if($client = $this->getClient()) {
+			return $client->address_1;
+		}
+		return null;
 	}
 
 	public function getCityAddressAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->county;
+		if($client = $this->getClient()) {
+			return $client->county;
+		}
+		return null;
 	}
 
 	public function getCountryAddressAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->country;
+		if($client = $this->getClient()) {
+			return $client->country;
+		}
+		return null;
 	}
 
 	public function getZipAdressAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->postcode;
+		if($client = $this->getClient()) {
+			return $client->postcode;
+		}
+		return null;
 	}
 
 	public function getAccountingPeriodAttribute()
