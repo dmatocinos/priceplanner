@@ -115,9 +115,9 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="contact_name" class="col-sm-2 control-label">Accounting Period</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 					    <div class="row">
-						<span class="col-sm-5">
+						<span class="col-sm-4">
 							{{ 
 								Form::text('period_start_date', $client_data['period_start_date'], array(
 									'class' => 'form-control', 
@@ -129,7 +129,7 @@ Client Details
 						<span class="col-md-1">
 							<b>&nbsp;_</b>
 						</span>
-						<span class="col-sm-5">
+						<span class="col-sm-4">
 							{{ 
 								Form::text('period_end_date', $client_data['period_end_date'], array(
 									'class' => 'form-control', 

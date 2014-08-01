@@ -9,10 +9,16 @@ class SetupController extends BaseController {
 		$data = Input::get();
 
 		$db = DB::connection('practicepro_users');
+		$countries = $db->table('countries')->orderBy('country_name', 'asc')->lists('country_name', 'country_name');
+
+		unset($countries['United Kingdom']);
+		
+		$countries = ['' => '', 'United Kingdom' => 'United Kingdom'] + $countries;
+
 		$data = [
 			'currencies'    => $db->table('currencies')->lists('name', 'id'),
 			'counties'      => ['' => ''] + $db->table('counties')->lists('county', 'county'),
-			'countries'     => ['' => ''] + $db->table('countries')->lists('country_name', 'country_name'),
+			'countries'     => $countries,
 			'client_data'	=> $client_data,
 			'edit'	=> $is_edit,
 		];
