@@ -24,7 +24,7 @@ Payroll | Employee & Subcontractor
 			    <div class="col-lg-2 text-center"></div>
 			  </div>
 			  <div class="form-group">
-			    <label for="" class="col-lg-2 control-label">Base Fee Per Pay Run</label>
+			    <label for="" class="col-lg-2 control-label">Standing Charge Per Pay Run</label>
 			    <div class="col-lg-2">
 					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['value'] : null ?>
 					{{ 
@@ -139,7 +139,7 @@ Payroll | Employee & Subcontractor
 			  </div>
 
 			  <div class="form-group">
-			    <label for="" class="col-lg-2 control-label">Base Fee Per Pay Run</label>
+			    <label for="" class="col-lg-2 control-label">Standing Charge Per Pay Run</label>
 			    <div class="col-lg-2">
 					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] : null ?>
 					{{ 

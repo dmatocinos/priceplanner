@@ -143,10 +143,13 @@ class ReportPdfGenerator extends TCPDF {
 		// add a page
 		$this->AddPage();
 
+		// setting the template to a certain member is temporary
+		$tpl = $this->user->mh2_email == 'dwnetton@keyaccountingservices.co.uk' ? 'report.report_modified' : 'report.report';
+
 		$params = compact('pricing', 'client', 'accountant', 'calc');
 		$html = View::make("report.pdf_styles")->render();
 		$html .= View::make(
-			"report.report", 
+			$tpl, 
 			$params
 		)->render();
 

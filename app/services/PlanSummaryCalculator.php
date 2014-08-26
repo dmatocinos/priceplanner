@@ -45,6 +45,7 @@ class PlanSummaryCalculator {
 		'annual_base_fee_per_emp_per_payroll_run' => null,
 		'annual_base_fee_per_sub_per_payroll_run' => null,
 		'total_annual_payroll' => null,
+		'payment_frequency' => null,
 
 	];
 
@@ -328,6 +329,11 @@ class PlanSummaryCalculator {
 	{
 		return $this->annual_base_fee_per_emp_pay_run + $this->annual_base_fee_per_emp_per_payroll_run
 			+ $this->annual_base_fee_per_sub_pay_run + $this->annual_base_fee_per_sub_per_payroll_run;
+	}
+
+	public function getPaymentFrequencyVal()
+	{
+		return $this->pricing->employee_pay_run_frequency;
 	}
 
 }
