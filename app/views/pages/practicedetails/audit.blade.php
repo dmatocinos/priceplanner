@@ -22,12 +22,11 @@ Audit Risks
 		  <br>
 		  <div class="form-group">
 		    <div class="col-lg-2 control-label"></div>
-		    <div class="col-lg-2 text-center">Base Fee</div>
 		  </div>
 		  @foreach($audit_requirements as $id => $name)
 		  @if ($name == 'Yes')
 		  <div class="form-group">
-		    <label for="fee_levels[audit_requirements][{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
+		    <label for="fee_levels[audit_requirements][{{ $id }}]" class="col-lg-2 control-label">Base Fee</label>
 		    <div class="col-lg-2">
 				<?php $val = isset($accountant_audit_requirements[$id]) ? $accountant_audit_requirements[$id] : ''; ?>
 				{{ 
