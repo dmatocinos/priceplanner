@@ -39,7 +39,7 @@
 	<div>
 		<p></p>
 		<p>
-			To provide any misunderstanding, this Itemised Fixed Price Fee Quotation defines the services <span class="emphasize">{{ $accountant->accountancy_name }}</span> will perform for you.
+			To prevent any misunderstanding, this Itemised Fixed Price Fee Quotation defines the services <span class="emphasize">{{ $accountant->accountancy_name }}</span> will perform for you.
 			Your current service level will be <span class="num-val">{{ NumFormatter::money($calc->total_monthly_cost, '£') }} + VAT per month</span>.
 			This includes:
 			<ol>
