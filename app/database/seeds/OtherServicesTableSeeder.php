@@ -37,6 +37,10 @@ class OtherServicesTableSeeder extends Seeder {
 				'name' => 'Management Account',
 				'description' => 'Description of service availabe for final report'
 			],
+			[
+				'name' => 'Annual Return Submission',
+				'description' => 'Description of service availabe for final report'
+			],
 		);
 
 		DB::table('other_services')->insert($data);

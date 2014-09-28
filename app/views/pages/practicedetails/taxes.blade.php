@@ -27,7 +27,7 @@ Tax and VAT Returns
 		  <div class="form-group">
 		    <label for="tax_returns[{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_tax_returns[$id]) ? $accountant_tax_returns[$id] : ''; ?>
+				<?php $val = isset($accountant_tax_returns[$id]) ? $accountant_tax_returns[$id] : $defaults['tax_returns'][$name]; ?>
 				{{ 
 					Form::text("tax_returns[{$id}]", $val, array(
 						'class' => 'form-control', 
@@ -48,15 +48,30 @@ Tax and VAT Returns
 		  <p class="help-block">Please enter the base fee you charge clients per VAT return.</p>
 		  <br>
 		  <div class="form-group">
-		    <label for="vat_returns" class="col-lg-2 control-label">Per Return</label>
+		    <label for="standard_rate" class="col-lg-2 control-label">Standard Rate</label>
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_vat_returns) ? $accountant_vat_returns : ''; ?>
+				<?php $val = isset($accountant_vat_returns) ? $accountant_vat_returns->std_rate : $defaults['vat_returns']['standard_rate']; ?>
 				{{ 
-					Form::text("vat_returns", $val, array(
+					Form::text("std_rate", $val, array(
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
-						'ng-model' 	=> 'vat_returns', 
-						'ng-init' 	=> "vat_returns='{$val}'", 
+						'ng-model' 	=> 'std_rate', 
+						'ng-init' 	=> "std_rate='{$val}'", 
+						'numbers-only'	=> 'numbers-only',
+					)) 
+				}}
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="flat_rate" class="col-lg-2 control-label">Flat Rate</label>
+		    <div class="col-lg-2">
+				<?php $val = isset($accountant_vat_returns) ? $accountant_vat_returns->flat_rate : $defaults['vat_returns']['flat_rate']; ?>
+				{{ 
+					Form::text("flat_rate", $val, array(
+						'class' => 'form-control', 
+						'placeholder' => 'amount',
+						'ng-model' 	=> 'flat_rate', 
+						'ng-init' 	=> "flat_rate='{$val}'", 
 						'numbers-only'	=> 'numbers-only',
 					)) 
 				}}
@@ -65,6 +80,9 @@ Tax and VAT Returns
 		</fieldset>
 	</div>
 		<div class="col-lg-12 pull-right well">
+			<div class="pull-left">
+				<a class="btn btn-primary btn-reset" id="reset" href="{{ route('practicedetails.taxes.reset', [$accountant_id]) }}">Reset</a>
+			</div>
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

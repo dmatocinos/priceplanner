@@ -32,4 +32,10 @@ class Module extends \Eloquent {
 		return $data;
 	}
 
+	public static function getId($name)
+	{
+		return DB::table('modules')->where('name', $name)->pluck('id');
+	}
+
+
 }

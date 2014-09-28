@@ -227,6 +227,13 @@ Fee Planner
 				<td class="col-extra">
 				</td>
 				<td class="col-val">
+				<small class="help-block">Scheme</small>
+				{{   
+					Form::select('pricing[vat_rate_type]', ['std_rate' => 'Standard', 'flat_rate' => 'Flat'], $pricing['vat_rate_type'], array(
+						'class' => 'form-control input-sm', 
+					));
+				}}
+				<small class="help-block">No. of Returns</small>
 				{{   
 					Form::select('pricing[vat_return]', [0 => 0, 4 => 4, 12 => 12], $pricing['vat_return'], array(
 						'class' => 'form-control input-sm', 
@@ -437,11 +444,12 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
+					<?php $val = isset($other_service_pricings[$id]) ? $other_service_pricings[$id] : ''; ?>
 					{{   
-						Form::text("other_service_pricings[{$id}]", $other_service_pricings[$id], array(
+						Form::text("other_service_pricings[{$id}]", $val, array(
 							'class' => 'form-control input-sm', 
 							'ng-model' 	=> 'other_services' . $id, 
-							'ng-init' 	=> "other_services{$id}='{$other_service_pricings[$id]}'", 
+							'ng-init' 	=> "other_services{$id}='{$val}'", 
 							'numbers-only'	=> 'numbers-only',
 							'placeholder'	=> 'qty',
 

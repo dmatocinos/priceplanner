@@ -3,7 +3,8 @@
 class AccountantVatReturn extends \Eloquent {
 	protected $fillable = [
 		'accountant_id',
-		'value'
+		'std_rate',
+		'flat_rate',
 	];
 
 	public $timestamps = false;

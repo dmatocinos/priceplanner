@@ -46,6 +46,8 @@ class PlanSummaryCalculator {
 		'annual_base_fee_per_sub_per_payroll_run' => null,
 		'total_annual_payroll' => null,
 		'payment_frequency' => null,
+		'amount_to_pay' => null,
+		'vat' => null,
 
 	];
 
@@ -70,7 +72,7 @@ class PlanSummaryCalculator {
 	{
 		return DB::table('accountant_turnover_ranges')
 				->where('accountant_id', $this->client->accountant_id)
-				->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+				->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND upper")
 				->pluck('modifier') / 100;
 	}
 
@@ -167,8 +169,8 @@ class PlanSummaryCalculator {
 	{
 		$vat_val = (integer) DB::table('accountant_vat_returns')
 					->where('accountant_id', $this->client->accountant_id)
-					->pluck('value');
-		return $this->pricing->vat_return * $vat_val;;
+					->pluck($this->pricing->vat_rate_type);
+		return $this->pricing->vat_return * $vat_val;
 	}
 
 	public function getG24Val()
@@ -232,6 +234,11 @@ class PlanSummaryCalculator {
 		return $val;
 	}
 
+	public function getVatVal()
+	{
+		return  $this->annual_fee * self::VAT;
+	}
+
 	public function getMonthlyCostVal()
 	{
 		return $this->annual_fee / 12;
@@ -289,7 +296,7 @@ class PlanSummaryCalculator {
 					->join('accountant_payroll_runs', 'accountant_turnover_ranges.id', '=', 'accountant_payroll_runs.accountant_turnover_range_id')
 					->where('accountant_payroll_runs.accountant_id', $this->client->accountant_id)
 					->where('type', 'employee')
-					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND upper")
 					->pluck('accountant_payroll_runs.value');
 		}
 	
@@ -318,7 +325,7 @@ class PlanSummaryCalculator {
 					->join('accountant_payroll_runs', 'accountant_turnover_ranges.id', '=', 'accountant_payroll_runs.accountant_turnover_range_id')
 					->where('accountant_payroll_runs.accountant_id', $this->client->accountant_id)
 					->where('type', 'subcontractor')
-					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND UPPER")
+					->whereRaw("{$this->pricing->turnovers} BETWEEN lower AND upper")
 					->pluck('accountant_payroll_runs.value');
 		}
 
@@ -333,7 +340,19 @@ class PlanSummaryCalculator {
 
 	public function getPaymentFrequencyVal()
 	{
-		return $this->pricing->employee_pay_run_frequency;
+		$freq = [
+			'52' => 'weekly',
+			'26' => 'fortnightly',
+			'13' => 'four-weekly',
+			'12' => 'monthly',
+			'1' => 'annually',
+		];
+		return $freq[$this->pricing->employee_pay_run_frequency];
+	}
+
+	public function getAmountToPay()
+	{
+		return $this->annual_fee / (int) $this->pricing->employee_pay_run_frequency;
 	}
 
 }

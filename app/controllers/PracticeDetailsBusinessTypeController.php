@@ -16,7 +16,8 @@ class PracticeDetailsBusinessTypeController extends PracticeDetailsController {
 									->lists('base_fee', 'business_type_id'),
 					'edit'	=> TRUE,
 					'route' => 'practicedetails.businesstypes.update',
-					'accountant_id' => $accountant->id
+					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 		else {
@@ -25,6 +26,7 @@ class PracticeDetailsBusinessTypeController extends PracticeDetailsController {
 					'edit'	=> FALSE,
 					'route' => 'practicedetails.businesstypes.store',
 					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 			
@@ -79,6 +81,27 @@ class PracticeDetailsBusinessTypeController extends PracticeDetailsController {
 		return Redirect::to($route)
 			->withInput()
 			->with('message', 'Successfully saved Types of Business.');
+	}
+
+	public function reset($accountant_id)
+	{
+		AccountantBusinessType::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		// saving accountant business_types
+		foreach ($defaults['business_types'] as $id => $val) {
+			$data = [
+				'base_fee' => $val,
+				'accountant_id' => $accountant_id,
+				'business_type_id' => $id
+			];
+			$model = new AccountantBusinessType;
+			$model->create($data);
+		}
+		
+		return Redirect::to('practicedetails/businesstypes')
+			->withInput()
+			->with('message', 'Types of Business were reset.');
 	}
 
 }

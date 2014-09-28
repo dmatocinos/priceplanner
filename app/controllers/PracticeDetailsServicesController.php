@@ -36,7 +36,8 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 				'accountant_other_services' => $accountant_other_services,
 				'edit'	=> $edit,
 				'route' => 'practicedetails.services.' . $route,
-				'accountant_id' => $accountant->id
+				'accountant_id' => $accountant->id,
+				'defaults' => $this->getDefaultValues()
 		];
 
 		$this->layout->content = View::make("pages.practicedetails.services", $form_data);
@@ -90,7 +91,6 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 			$model->create($data);
 		}
 
-
 		// saving client other services	
 		foreach ($input['other_services'] as $os_id => $mod) {
 			$data = [
@@ -112,4 +112,37 @@ class PracticeDetailsServicesController extends PracticeDetailsController {
 			->withInput()
 			->with('message', 'Successfully saved Modules & Services.');
 	}
+
+	public function reset($accountant_id)
+	{
+		AccountantModule::where('accountant_id', $accountant_id)->delete();
+		AccountantOtherService::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		foreach ($defaults['modules'] as $name => $val) {
+			$data = [
+				'module_id' => Module::getId($name),
+				'accountant_id' => $accountant_id,
+				'value' => $val,	
+			];
+			$model = new AccountantModule;
+			$model->create($data);
+		}
+
+		foreach ($defaults['other_services'] as $name => $val) {
+			$data = [
+				'other_service_id' => OtherService::getId($name),
+				'accountant_id' => $accountant_id,
+				'value' => $val,	
+			];
+
+			$model = new AccountantOtherService;
+			$model->create($data);
+		}
+		
+		return Redirect::to('practicedetails/services')
+			->withInput()
+			->with('message', 'Services were reset.');
+	}
+
 }

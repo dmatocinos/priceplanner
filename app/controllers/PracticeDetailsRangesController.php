@@ -14,7 +14,8 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 					'turnover_ranges' => AccountantTurnoverRange::getAccountantTurnoverRanges($accountant->id),
 					'edit'	=> TRUE,
 					'route' => 'practicedetails.ranges.update',
-					'accountant_id' => $accountant->id
+					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 		else {
@@ -23,6 +24,7 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 					'edit'	=> FALSE,
 					'route' => 'practicedetails.ranges.store',
 					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 			
@@ -60,6 +62,7 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 		$input = Input::all();
 		$accountant = $this->user->accountant;
 
+
 		// saving accountant turnover_ranges
 		foreach ($input['turnover_ranges'] as $id => $input_val) {
 			$data = [
@@ -68,8 +71,8 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 
 			$data = $data + $input_val;
 			DB::table('accountant_turnover_ranges')
-			    ->where('id', $id)
-			    ->update($data);
+				->where('id', $id)
+				->update($data);
 		}
 		
 		$route = isset($input['save_next_page']) ? 'practicedetails/qualities' : 'practicedetails/ranges';
@@ -78,4 +81,21 @@ class PracticeDetailsRangesController extends PracticeDetailsController {
 			->withInput()
 			->with('message', 'Successfully saved Turnover Ranges.');
 	}
+
+	public function reset($accountant_id)
+	{
+		AccountantTurnoverRange::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		foreach ($defaults['turnover_ranges'] as $data) {
+			$data['accountant_id'] = $accountant_id;
+			$model = new AccountantTurnoverRange;
+			$model->create($data);
+		}
+		
+		return Redirect::to('practicedetails/ranges')
+			->withInput()
+			->with('message', 'Turnover Ranges were reset.');
+	}
+
 }

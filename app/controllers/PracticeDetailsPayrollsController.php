@@ -36,7 +36,8 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 				'turnover_ranges_employee_display' => $turnover_ranges_employee_display,
 				'all_clients_subcontractor_display' => $all_clients_subcontractor_display,
 				'turnover_ranges_subcontractor_display' => $turnover_ranges_subcontractor_display,
-				'accountant_id' => $accountant->id
+				'accountant_id' => $accountant->id,
+				'defaults' => $this->getDefaultValues()
 		];
 
 		$this->layout->content = View::make("pages.practicedetails.payrolls", $form_data);
@@ -101,5 +102,27 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 		return Redirect::to($route)
 			->withInput()
 			->with('message', 'Successfully saved Payrolls.');
+	}
+
+	public function reset($accountant_id)
+	{
+		AccountantPayRun::where('accountant_id', $accountant_id)->delete();
+		AccountantPayrollRun::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		foreach (['employee', 'subcontractor'] as $type) { 
+			$data = [
+				'accountant_id' => $accountant_id,
+				'type' => $type,
+				'value' => $defaults['payroll']['charge_per_pay_run'],
+				'based_on' => 'all_clients',
+				'allclients_base_fee' => $defaults['payroll']['processing_charge']
+			];
+			AccountantPayRun::create($data);
+		}
+		
+		return Redirect::to('practicedetails/payrolls')
+			->withInput()
+			->with('message', 'Payrolls were reset.');
 	}
 }

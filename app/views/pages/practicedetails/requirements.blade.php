@@ -41,6 +41,9 @@ Audit Requirements
 		</fieldset>
 	</div>
 		<div class="col-lg-12 pull-right well">
+			<div class="pull-left">
+				<button  class="btn btn-primary btn-reset" type="submit" name="reset" id="reset">Reset</button>
+			</div>
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

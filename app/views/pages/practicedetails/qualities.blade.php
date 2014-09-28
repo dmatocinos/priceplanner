@@ -30,7 +30,7 @@ Record Qualities
 				  <div class="form-group">
 						<label class="col-lg-4 control-label">{{ $name }}</label>
 					@foreach([1,2] as $ac_id)
-						<?php $val = isset($accountant_record_qualities[$ac_id][$id]) ? $accountant_record_qualities[$ac_id][$id] : '' ?>
+						<?php $val = isset($accountant_record_qualities[$ac_id][$id]) ? $accountant_record_qualities[$ac_id][$id] : $defaults['accounting_types'][$name][$ac_id]; ?>
 						<?php 
 							$attrs = [
 								'class' => 'form-control', 
@@ -58,6 +58,9 @@ Record Qualities
 		</fieldset>
 	</div>
 		<div class="col-lg-12 pull-right well">
+			<div class="pull-left">
+				<a class="btn btn-primary btn-reset" id="reset" href="{{ route('practicedetails.taxes.reset', [$accountant_id]) }}">Reset</a>
+			</div>
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

@@ -21,4 +21,9 @@ class TaxReturn extends \Eloquent {
 
 		return $data;
 	}
+
+	public static function getId($name)
+	{
+		return DB::table('tax_returns')->where('name', $name)->pluck('id');
+	}
 }

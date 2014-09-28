@@ -8,6 +8,7 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 		Asset::container('footer')->add('pages-feeplanner-js', 'js/pages/feeplanner.js');
 		
 		$accountant = $this->user->accountant;
+		$defaults = $this->getDefaultValues();
 		
 		if ($accountant->accountant_bookkeeping->count()) {
 			$hour_val = DB::table('accountant_bookkeepings')
@@ -21,7 +22,8 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 			$route = 'update';
 		}
 		else {
-			$hour_val = $day_val = NULL;
+			$hour_val = $defaults['bookkeeping']['hour'];
+			$day_val = $defaults['bookkeeping']['day'];
 			$edit = FALSE;
 			$route = 'store';
 		}
@@ -31,7 +33,7 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 				'day_val' => $day_val,
 				'edit'	=> $edit,
 				'route' => 'practicedetails.bookkeeping.' . $route,
-				'accountant_id' => $accountant->id
+				'accountant_id' => $accountant->id,
 		];
 			
 		$this->layout->content = View::make("pages.practicedetails.bookkeeping", $form_data);
@@ -52,7 +54,6 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 		$accountant = $this->user->accountant;
 
 		AccountantBookkeeping::where('accountant_id', $accountant->id)->delete();
-		AccountantBookkeeping::where('accountant_id', $accountant->id)->delete();
 		
 		return $this->save($accountant, $input, 'updated');
 	}
@@ -68,5 +69,18 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 		return Redirect::to($route)
 			->withInput()
 			->with('message', 'You have successfully ' . $msg . ' bookkeeping practice details.');
+	}
+
+	public function reset($accountant_id)
+	{
+		$defaults = $this->getDefaultValues();
+
+		AccountantBookkeeping::where('accountant_id', $accountant_id)->delete();
+		$defaults['bookkeeping']['accountant_id'] = $accountant_id;
+		AccountantBookkeeping::create($defaults['bookkeeping']);
+
+		return Redirect::to('practicedetails/bookkeeping')
+			->withInput()
+			->with('message', 'Bookkeeping was reset.');
 	}
 }

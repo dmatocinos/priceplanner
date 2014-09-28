@@ -108,41 +108,49 @@ Route::group(array('after' => 'subscribe', 'before' => 'auth'), function() {
 	Route::get("practicedetails/businesstypes", array('as' => 'practicedetails.businesstypes', 'uses' => 'PracticeDetailsBusinessTypeController@index'));
 	Route::put("practicedetails/businesstypes/store", array('as' => 'practicedetails.businesstypes.store', 'uses' => 'PracticeDetailsBusinessTypeController@store'));
 	Route::put("practicedetails/businesstypes/update", array('as' => 'practicedetails.businesstypes.update', 'uses' => 'PracticeDetailsBusinessTypeController@update'));
+	Route::get("practicedetails/businesstypes/reset/{accountant_id}", array('as' => 'practicedetails.businesstypes.reset', 'uses' => 'PracticeDetailsBusinessTypeController@reset'));
 	
 	# practice details turnover ranges
 	Route::get("practicedetails/ranges", array('as' => 'practicedetails.ranges', 'uses' => 'PracticeDetailsRangesController@index'));
 	Route::put("practicedetails/ranges/store", array('as' => 'practicedetails.ranges.store', 'uses' => 'PracticeDetailsRangesController@store'));
 	Route::put("practicedetails/ranges/update", array('as' => 'practicedetails.ranges.update', 'uses' => 'PracticeDetailsRangesController@update'));
+	Route::get("practicedetails/ranges/reset/{accountant_id}", array('as' => 'practicedetails.ranges.reset', 'uses' => 'PracticeDetailsRangesController@reset'));
 	
 	# practice details record qualities
 	Route::get("practicedetails/qualities", array('as' => 'practicedetails.qualities', 'uses' => 'PracticeDetailsQualitiesController@index'));
 	Route::put("practicedetails/qualities/store", array('as' => 'practicedetails.qualities.store', 'uses' => 'PracticeDetailsQualitiesController@store'));
 	Route::put("practicedetails/qualities/update", array('as' => 'practicedetails.qualities.update', 'uses' => 'PracticeDetailsQualitiesController@update'));
+	Route::get("practicedetails/qualities/reset/{accountant_id}", array('as' => 'practicedetails.qualities.reset', 'uses' => 'PracticeDetailsQualitiesController@reset'));
 	
 	# practice details audit risks
 	Route::get("practicedetails/audit", array('as' => 'practicedetails.audit', 'uses' => 'PracticeDetailsAuditController@index'));
 	Route::put("practicedetails/audit/store", array('as' => 'practicedetails.audit.store', 'uses' => 'PracticeDetailsAuditController@store'));
 	Route::put("practicedetails/audit/update", array('as' => 'practicedetails.audit.update', 'uses' => 'PracticeDetailsAuditController@update'));
+	Route::get("practicedetails/audit/reset/{accountant_id}", array('as' => 'practicedetails.audit.reset', 'uses' => 'PracticeDetailsAuditController@reset'));
 	
 	# practice details taxes
 	Route::get("practicedetails/taxes", array('as' => 'practicedetails.taxes', 'uses' => 'PracticeDetailsTaxesController@index'));
 	Route::put("practicedetails/taxes/store", array('as' => 'practicedetails.taxes.store', 'uses' => 'PracticeDetailsTaxesController@store'));
 	Route::put("practicedetails/taxes/update", array('as' => 'practicedetails.taxes.update', 'uses' => 'PracticeDetailsTaxesController@update'));
+	Route::get("practicedetails/taxes/reset/{accountant_id}", array('as' => 'practicedetails.taxes.reset', 'uses' => 'PracticeDetailsTaxesController@reset'));
 	
 	# practice details bookeeping
 	Route::get("practicedetails/bookkeeping", array('as' => 'practicedetails.bookkeeping', 'uses' => 'PracticeDetailsBookkeepingController@index'));
 	Route::put("practicedetails/bookkeeping/store", array('as' => 'practicedetails.bookkeeping.store', 'uses' => 'PracticeDetailsBookkeepingController@store'));
 	Route::put("practicedetails/bookkeeping/update", array('as' => 'practicedetails.bookkeeping.update', 'uses' => 'PracticeDetailsBookkeepingController@update'));
+	Route::get("practicedetails/bookkeeping/reset/{accountant_id}", array('as' => 'practicedetails.bookkeeping.reset', 'uses' => 'PracticeDetailsBookkeepingController@reset'));
 
 	# practice details payrolls
 	Route::get("practicedetails/payrolls", array('as' => 'practicedetails.payrolls', 'uses' => 'PracticeDetailsPayrollsController@index'));
 	Route::put("practicedetails/payrolls/store", array('as' => 'practicedetails.payrolls.store', 'uses' => 'PracticeDetailsPayrollsController@store'));
 	Route::put("practicedetails/payrolls/update", array('as' => 'practicedetails.payrolls.update', 'uses' => 'PracticeDetailsPayrollsController@update'));
+	Route::get("practicedetails/payrolls/reset/{accountant_id}", array('as' => 'practicedetails.payrolls.reset', 'uses' => 'PracticeDetailsPayrollsController@reset'));
 	
 	# practice details services
 	Route::get("practicedetails/services", array('as' => 'practicedetails.services', 'uses' => 'PracticeDetailsServicesController@index'));
 	Route::put("practicedetails/services/store", array('as' => 'practicedetails.services.store', 'uses' => 'PracticeDetailsServicesController@store'));
 	Route::put("practicedetails/services/update", array('as' => 'practicedetails.services.update', 'uses' => 'PracticeDetailsServicesController@update'));
+	Route::get("practicedetails/services/reset/{accountant_id}", array('as' => 'practicedetails.services.reset', 'uses' => 'PracticeDetailsServicesController@reset'));
 	
 	Route::group(array('before' => 'practicedetailscompleted'), function() {
 		Route::get("home", "HomeController@index");

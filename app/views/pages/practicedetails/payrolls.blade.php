@@ -26,7 +26,7 @@ Payroll | Employee & Subcontractor
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">Standing Charge Per Pay Run</label>
 			    <div class="col-lg-2">
-					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['value'] : null ?>
+					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['value'] : $defaults['payroll']['charge_per_pay_run']; ?>
 					{{ 
 						Form::text("payruns[employee][value]", $val, array(
 							'class' => 'form-control', 
@@ -76,7 +76,7 @@ Payroll | Employee & Subcontractor
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">All Clients</label>
 			    <div class="col-lg-2">
-					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['allclients_base_fee'] : null ?>
+					<?php $val =  isset($payruns['employee']) ? $payruns['employee']['allclients_base_fee'] : $defaults['payroll']['processing_charge']; ?>
 					{{ 
 						Form::text("payruns[employee][allclients_base_fee]", $val, array(
 							'class' => 'form-control', 
@@ -141,7 +141,7 @@ Payroll | Employee & Subcontractor
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">Standing Charge Per Pay Run</label>
 			    <div class="col-lg-2">
-					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] : null ?>
+					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['value'] :  $defaults['payroll']['charge_per_pay_run']; ?>
 					{{ 
 						Form::text("payruns[subcontractor][value]", $val, array(
 							'class' => 'form-control', 
@@ -193,7 +193,7 @@ Payroll | Employee & Subcontractor
 			  <div class="form-group">
 			    <label for="" class="col-lg-2 control-label">All Clients</label>
 			    <div class="col-lg-2">
-					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['allclients_base_fee'] : 0 ?>
+					<?php $val =  isset($payruns['subcontractor']) ? $payruns['subcontractor']['allclients_base_fee'] :  $defaults['payroll']['processing_charge']; ?>
 					{{ 
 						Form::text("payruns[subcontractor][allclients_base_fee]", $val, array(
 							'class' => 'form-control', 
@@ -247,6 +247,9 @@ Payroll | Employee & Subcontractor
 		</div>
 
 		<div class="col-lg-12 pull-right well">
+			<div class="pull-left">
+				<a class="btn btn-primary btn-reset" id="reset" href="{{ route('practicedetails.payrolls.reset', [$accountant_id]) }}">Reset</a>
+			</div>
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

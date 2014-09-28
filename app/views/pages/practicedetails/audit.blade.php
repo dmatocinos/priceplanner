@@ -28,7 +28,7 @@ Audit Risks
 		  <div class="form-group">
 		    <label for="fee_levels[audit_requirements][{{ $id }}]" class="col-lg-2 control-label">Base Fee</label>
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_audit_requirements[$id]) ? $accountant_audit_requirements[$id] : ''; ?>
+				<?php $val = isset($accountant_audit_requirements[$id]) ? $accountant_audit_requirements[$id] : $defaults['audit_requirement']; ?>
 				{{ 
 					Form::text("audit_requirements[{$id}]", $val, array(
 						'class' => 'form-control', 
@@ -62,7 +62,7 @@ Audit Risks
 		  <div class="form-group">
 		    <label for="audit_risks[{{ $id }}]" class="col-lg-2 control-label">{{ $name }}</label>
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_audit_risks[$id]) ? $accountant_audit_risks[$id] : ''; ?>
+				<?php $val = isset($accountant_audit_risks[$id]) ? $accountant_audit_risks[$id] : $defaults['audit_risk'][strtolower($name)]; ?>
 				{{ 
 					Form::text("audit_risks[{$id}]", $val, array(
 						'class' => 'form-control', 
@@ -79,6 +79,9 @@ Audit Risks
 		</div>
 
 		<div class="col-lg-12 pull-right well">
+			<div class="pull-left">
+				<a class="btn btn-primary btn-reset" id="reset" href="{{ route('practicedetails.audit.reset', [$accountant_id]) }}">Reset</a>
+			</div>
 			<div class="pull-right">
 				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
 				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>

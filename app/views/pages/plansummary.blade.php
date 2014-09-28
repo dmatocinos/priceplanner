@@ -387,6 +387,18 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
+					VAT @ 20%
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				</td>
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->vat, '£') }}
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right col-legend emphasize">
 					Monthly Cost
 				</td>
 				<td class="col-extra">

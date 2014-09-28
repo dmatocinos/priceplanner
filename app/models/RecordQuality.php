@@ -22,4 +22,9 @@ class RecordQuality extends \Eloquent {
 		return $data;
 	}
 
+	public static function getId($name)
+	{
+		return DB::table('record_qualities')->where('name', $name)->pluck('id');
+	}
+
 }

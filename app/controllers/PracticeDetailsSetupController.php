@@ -57,6 +57,8 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 				$input['logo_filename']->move(public_path() . '/uploads', $filename);
 				$accountant->update(['logo_filename' => $filename]);
 			}
+
+			$this->saveDefaults($accountant);
 		}
 		else {
 			return Redirect::route('practicedetails.setup')

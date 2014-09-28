@@ -26,6 +26,9 @@ Turnover Ranges
 			    <div class="col-lg-3 text-center">Modifier - % Increase</div>
 			</div>
 		  </div>
+		  
+		  @if ( ! empty($turnover_ranges))
+
 		  @foreach (range(1,15) as $num)
 		  <?php 
 			if ( isset($turnover_ranges[$num]) && is_array($turnover_ranges[$num]) && ! is_null($turnover_ranges[$num])) {
@@ -77,14 +80,65 @@ Turnover Ranges
 		    </div>
 		  </div>
 		  @endforeach
+
+		  @else
+
+		  @foreach (range(1,15) as $num)
+		  <div class="form-group">
+		    <div class="col-md-8">
+			    <div class="col-lg-3">
+				<?php $lower = isset($defaults['turnover_ranges'][$num]['lower']) ? $defaults['turnover_ranges'][$num]['lower'] : ''; ?>
+					{{ 
+						Form::text("turnover_ranges[{$num}][lower]", $lower, array(
+							'class' => 'form-control', 
+							'placeholder'  => 'amount',
+							'ng-model'     => 'turnover_range_lower' . $num, 
+							'ng-init'      => "turnover_range_lower{$num}='{$lower}'", 
+							'numbers-only' => 'numbers-only',
+						)) 
+					}}
+			    </div>
+			    <div class="col-lg-3">
+				<?php $upper = isset($defaults['turnover_ranges'][$num]['upper']) ? $defaults['turnover_ranges'][$num]['upper'] : ''; ?>
+					{{ 
+						Form::text("turnover_ranges[{$num}][upper]", $upper, array(
+							'class' => 'form-control', 
+							'placeholder'  => 'amount',
+							'ng-model'     => 'turnover_range_upper' . $num, 
+							'ng-init'      => "turnover_range_upper{$num}='{$upper}'", 
+							'numbers-only' => 'numbers-only',
+						)) 
+					}}
+			    </div>
+			    <div class="col-lg-3">
+				<?php $val = isset($defaults['turnover_ranges'][$num]['modifier']) ? $defaults['turnover_ranges'][$num]['modifier'] : ''; ?>
+					{{ 
+						Form::text("turnover_ranges[{$num}][modifier]", $val, array(
+							'class' => 'form-control', 
+							'placeholder' => 'percentage',
+							'ng-model' 	=> 'turnover_range_mod' . $num, 
+							'ng-init' 	=> "turnover_range_mod{$num}='{$val}'", 
+							'numbers-only'	=> 'numbers-only',
+						)) 
+					}}
+			    </div>
+		    </div>
+		  </div>
+		  @endforeach
+
+		  @endif
+
 		</fieldset>
 	</div>
-		<div class="col-lg-12 pull-right well">
-			<div class="pull-right">
-				<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
-				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>
-			</div>
+	<div class="col-lg-12 pull-right well">
+		<div class="pull-left">
+			<a class="btn btn-primary btn-reset" id="reset" href="{{ route('practicedetails.ranges.reset', [$accountant_id]) }}">Reset</a>
 		</div>
+		<div class="pull-right">
+			<button  class="btn btn-info btn-save" type="submit" name="save_next_page" id="save_next_page">Save & Next </button>
+			<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">Save </button>
+		</div>
+	</div>
 	{{ Form::close() }}
 	</div>
 	

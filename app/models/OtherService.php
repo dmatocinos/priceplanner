@@ -19,7 +19,8 @@ class OtherService extends \Eloquent {
 		
 		if (! is_null($accountant_id)) {
 			$table
-				->join('accountant_other_services', 'accountant_other_services.other_service_id', '=', 'other_services.id')
+				->leftjoin('accountant_other_services', 'accountant_other_services.other_service_id', '=', 'other_services.id')
+				->select('accountant_other_services.other_service_id as id', 'name', 'description', 'user_defined', 'value', 'accountant_id', 'other_services.id as other_service_id')
 				->where('accountant_id', $accountant_id);
 		}
 
@@ -39,12 +40,12 @@ class OtherService extends \Eloquent {
 
 		$res = $table->get();	
 		$data = [];
+
 		foreach ($res as $row)
 		{
 			$id = isset($row->other_service_id) ? $row->other_service_id : $row->id; 
 			$data[$id] = $row->name; 
 		}
-
 		return $data;
 	}
 
@@ -53,6 +54,10 @@ class OtherService extends \Eloquent {
 		return $this->hasOne('AccountantOtherService');
 	}
 
+	public static function getId($name)
+	{
+		return DB::table('other_services')->where('name', $name)->pluck('id');
+	}
 	
 
 }

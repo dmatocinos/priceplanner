@@ -12,7 +12,7 @@ $(document).ready(function () {
 			var str = arr[0];
 			var arr = str.split("-");
 
-			$('td:eq(2)', nRow).html($.datepicker.formatDate( "M dd, yy", new Date(arr[0], arr[1] - 1, arr[2])));
+			$('td:eq(2)', nRow).html($.datepicker.formatDate( "dd M, yy", new Date(arr[0], arr[1] - 1, arr[2])));
 
 			$(nRow).show();
 		},

@@ -25,9 +25,10 @@ class OtherServicePricing extends \Eloquent {
 			$ospricings = DB::select("
 				SELECT os.id as other_service_id, osp.*
 				FROM other_services os
-				LEFT JOIN other_service_pricings osp ON osp.other_service_id = os.id 		
+				LEFT JOIN other_service_pricings osp ON os.id = osp.other_service_id
 				WHERE osp.pricing_id = :pricing_id
 			", array('pricing_id' => $pricing_id));
+
 			foreach ($ospricings as $row) {
 				$data[$row->other_service_id] = $row->qty;
 			}

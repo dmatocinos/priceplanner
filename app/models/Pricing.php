@@ -20,6 +20,7 @@ class Pricing extends \Eloquent {
 		'no_of_subcontractors',
 		'employee_pay_run_frequency',
 		'subcontractor_pay_run_frequency',
+		'vat_rate_type',
 	];
 
 	public static $rules = array(

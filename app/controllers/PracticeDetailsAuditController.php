@@ -21,7 +21,8 @@ class PracticeDetailsAuditController extends PracticeDetailsController {
 						->lists('percentage', 'audit_risk_id'),
 					'edit'	=> TRUE,
 					'route' => 'practicedetails.audit.update',
-					'accountant_id' => $accountant->id
+					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 		else {
@@ -31,6 +32,7 @@ class PracticeDetailsAuditController extends PracticeDetailsController {
 					'edit'	=> FALSE,
 					'route' => 'practicedetails.audit.store',
 					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 			
@@ -108,5 +110,38 @@ class PracticeDetailsAuditController extends PracticeDetailsController {
 		return Redirect::to($route)
 			->withInput()
 			->with('message', 'Successfully saved Audit details.');
+	}
+
+	public function reset($accountant_id)
+	{
+		AccountantAuditRequirement::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		$audit_requirements = [1 => $defaults['audit_requirement'], 2 => 0];
+		foreach ($audit_requirements as $id => $val) {
+			$data = [
+				'value' => $val,
+				'accountant_id' => $accountant_id,
+				'audit_requirement_id' => $id
+			];
+			$model = new AccountantAuditRequirement;
+			$model->create($data);
+		}
+
+		AccountantAuditRisk::where('accountant_id', $accountant_id)->delete();
+
+		foreach ($defaults['audit_risk'] as $name => $val) {
+			$data = [
+				'percentage' => $val,
+				'accountant_id' => $accountant_id,
+				'audit_risk_id' => AuditRisk::getId($name)
+			];
+			$model = new AccountantAuditRisk;
+			$model->create($data);
+		}
+
+		return Redirect::to('practicedetails/audit')
+			->withInput()
+			->with('message', 'Audit was reset.');
 	}
 }

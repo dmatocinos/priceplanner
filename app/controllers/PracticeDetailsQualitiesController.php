@@ -24,7 +24,8 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 					],
 					'edit'	=> TRUE,
 					'route' => 'practicedetails.qualities.update',
-					'accountant_id' => $accountant->id
+					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 		else {
@@ -33,6 +34,7 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 					'edit'	=> FALSE,
 					'route' => 'practicedetails.qualities.store',
 					'accountant_id' => $accountant->id,
+					'defaults' => $this->getDefaultValues()
 			];
 		}
 			
@@ -94,6 +96,30 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 		return Redirect::to($route)
 			->withInput()
 			->with('message', 'Successfully saved Record Qualities.');
+	}
+
+	public function reset($accountant_id)
+	{
+		AccountantRecordQuality::where('accountant_id', $accountant_id)->delete();
+		$defaults = $this->getDefaultValues();
+
+		foreach ($defaults['accounting_types'] as $name => $rq) {
+			foreach ($rq as $id => $val) {
+				$data = [
+						'accountant_id' => $accountant_id,
+						'record_quality_id' => RecordQuality::getId($name),
+						'accounting_type_id' => $id,
+						'percentage' => $val
+				];
+
+				$model = new AccountantRecordQuality;
+				$model->create($data);
+			}
+		}
+		
+		return Redirect::to('practicedetails/qualities')
+			->withInput()
+			->with('message', 'Accounting System Qualities were reset.');
 	}
 
 }
