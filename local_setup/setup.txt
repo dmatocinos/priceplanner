@@ -1,0 +1,12 @@
+Copy the files in this directory to the following location:
+database.php - app/config/
+paypal.php   - app/config/
+.htaccess    - public
+
+Changes the values of the following in database.php to the correct ones:
+1. host
+2. database
+3. username
+4. password
+
+DO NOT COMMIT THESE CHANGES!!!!
