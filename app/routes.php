@@ -154,6 +154,7 @@ Route::group(array('after' => 'subscribe', 'before' => 'auth'), function() {
 	
 	Route::group(array('before' => 'practicedetailscompleted'), function() {
 		Route::get("home", "HomeController@index");
+		Route::get("delete_client/{id}", "HomeController@deleteClient");
 
 		# setup  
 		Route::get("setup", array('as' => 'setup.create', 'uses' => "SetupController@create"));

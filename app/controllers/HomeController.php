@@ -15,4 +15,13 @@ class HomeController extends BaseController {
 		$this->layout->content = View::make("pages.list", $form_data);
 	}
 
+	public function deleteClient($id) 
+	{
+		Client::find($id)->delete();
+
+		return Redirect::to('home')
+			->withInput()
+			->with('message', 'Successfully deleted a client.');
+	}
+	
 }

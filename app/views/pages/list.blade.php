@@ -14,7 +14,8 @@ Clients
 					<tr>
 						<th>Client</th>
 						<th>Business Name</th>
-						<th>Date Created</th>
+						<th width="300">Date Created</th>
+						<th width="100"><span style="padding-right: 10px">Delete</span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +24,7 @@ Clients
 							<td>{{ $item->client_name . ':::' . url('setup/edit/' . $item->id) }}</td>
 							<td>{{ $item->business_name }}</td>
 							<td>{{ $item->created_at }}</td>
+							<td style="text-align: right; padding-right: 25px"><a href="{{ url('delete_client', array($item->id)) }}" class="delete-client-btn btn btn-danger btn-sm"><i class="fa fa-times"></i></a></td>
 						</tr>
 					@endforeach
 				</tbody>

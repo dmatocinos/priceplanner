@@ -62,7 +62,11 @@
 		            @if ($user->accountant && $user->accountant->last_tab == 'completed')
 						@yield('client')
 						<li>
-							<a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+							@if (empty($current_clients))
+								<a href="{{ url('client_details/new') }}" data-toggle="modal"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+							@else
+								<a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-briefcase fa-fw"></i> Start Planning</a>
+							@endif
 						</li>
 						<li>
 							<a href="{{ route('practicedetails.setup') }}"><i class="fa fa-leaf fa-fw"></i> Practice Details</a>

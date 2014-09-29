@@ -1,6 +1,12 @@
 $(document).ready(function () {
 	$("#clients-list").dataTable({
 		"aaSorting": [[ 0, "asc" ]],
+		 "aoColumns": [
+		      null,
+		      null,
+		      null,
+		      { "bSortable": false }
+		 ],
 		"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
 			/* Append the grade to the default row class name */
 			var str = aData[0];
@@ -24,4 +30,8 @@ $(document).ready(function () {
 				$("#clients-list").show();
 			}
 		});
+});
+
+$('.delete-client-btn').click(function() {
+	confirm('Are you sure to delete this client?');
 });
