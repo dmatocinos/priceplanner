@@ -32,6 +32,7 @@ class PlanSummaryCalculator {
 		'g25' => null,
 		'modules' => [],
 		'other_services' => [],
+		'tax_returns' => [],
 		'annual_fee' => null,
 		'monthly_cost' => null,
 		'discount' => null,
@@ -168,7 +169,6 @@ class PlanSummaryCalculator {
 	public function getG22Val()
 	{
 		$vat_val = (integer) DB::table('accountant_vat_returns')
-                    ->select('value')
 					->where('accountant_id', $this->client->accountant_id)
 					->pluck($this->pricing->vat_rate_type);
 		return $this->pricing->vat_return * $vat_val;
@@ -220,6 +220,20 @@ class PlanSummaryCalculator {
 		return $osp;
 	}
 
+	public function getTaxReturnsVal()
+	{
+		$trp = DB::table('tax_return_pricings')
+				->join('tax_returns', 'tax_returns.id', '=', 'tax_return_pricings.tax_return_id')
+				->join('accountant_tax_returns', 'tax_returns.id', '=', 'accountant_tax_returns.tax_return_id')
+            			->select(DB::raw('tax_returns.name, qty, qty * value AS value'))
+				->where( 'pricing_id', $this->pricing->id)
+				->where('accountant_tax_returns.accountant_id', $this->client->accountant_id)
+				->orderBy('tax_returns.id')
+				->get();
+
+		return $trp;
+	}
+
 	public function getAnnualFeeVal()
 	{
 		$val = $this->i11 + $this->g15 + $this->g18 + $this->g19 + $this->g20 + $this->g22 + $this->g24 + $this->g25 + $this->total_annual_payroll;
@@ -230,6 +244,10 @@ class PlanSummaryCalculator {
 
 		foreach($this->other_services as $os) {
 			$val += $os->value; 
+		}
+
+		foreach($this->tax_returns as $tr) {
+			$val += $tr->value; 
 		}
 
 		return $val;

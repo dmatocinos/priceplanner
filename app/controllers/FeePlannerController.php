@@ -8,11 +8,6 @@ class FeePlannerController extends BaseController {
 		$pricing = new Pricing;
 		$client = Client::find($client_id);
 		
-		//echo "<pre>";
-		//var_dump($client_id);
-		//echo "</pre>";
-		//die;
-
 		$form_data = [
 			'select_data' => [
 				'business_types' => BusinessType::getBusinessTypes(),
@@ -27,6 +22,8 @@ class FeePlannerController extends BaseController {
 			'other_services' => OtherService::getOtherServices($client->accountant_id),	
 			'module_pricings' => ModulePricing::getModulePricings(),	
 			'other_service_pricings' => OtherServicePricing::getOtherServicePricings(),	
+			'tax_returns' => TaxReturn::getOtherTaxReturns($client->accountant_id, true),	
+			'tax_return_pricings' => TaxReturnPricing::getTaxReturnPricings($client->accountant_id),	
 			'edit'	=> FALSE,
 			'client_id' => $client_id,
 			'client_name' => $client->client_name,
@@ -57,6 +54,8 @@ class FeePlannerController extends BaseController {
 			'other_services' => OtherService::getOtherServices($client->accountant_id),	
 			'module_pricings' => ModulePricing::getModulePricings($pricing_id),	
 			'other_service_pricings' => OtherServicePricing::getOtherServicePricings($pricing_id),	
+			'tax_returns' => TaxReturn::getOtherTaxReturns($client->accountant_id, true),	
+			'tax_return_pricings' => TaxReturnPricing::getTaxReturnPricings($client->accountant_id, $pricing_id),	
 			'edit'	=> TRUE,
 			'client_id' => $pricing->client_id,
 			'pricing_id' => $pricing->id,
@@ -73,6 +72,7 @@ class FeePlannerController extends BaseController {
 		$p_data = $input['pricing'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
+		$trp_data = $input['tax_return_pricings'];
 
 		$p_validation = Validator::make($p_data, Pricing::$rules);
 		if ($p_validation->passes()) {
@@ -108,6 +108,17 @@ class FeePlannerController extends BaseController {
 			$other_service_pricing->create($data);
 		}
 
+		// saving tax returns pricings	
+		foreach ($trp_data as $tr_id => $qty) {
+			$data = [
+				'tax_return_id' => $tr_id,
+				'pricing_id' => $pricing->id,
+				'qty' => $qty,	
+			];
+			$tax_return_pricing = new TaxReturnPricing;
+			$tax_return_pricing->create($data);
+		}
+
 		$route = isset($input['save_next_page']) 
 		       ? 'plansummary/' 
 		       : 'feeplanner/edit/';
@@ -123,6 +134,7 @@ class FeePlannerController extends BaseController {
 		$p_data = $input['pricing'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
+		$trp_data = $input['tax_return_pricings'];
 
 		$p_validation = Validator::make($p_data, Pricing::$rules);
 		if ($p_validation->passes()) {
@@ -158,6 +170,18 @@ class FeePlannerController extends BaseController {
 			];
 			$other_service_pricing = new OtherServicePricing;
 			$other_service_pricing->create($data);
+		}
+
+		// saving other services pricings	
+		TaxReturnPricing::where('pricing_id', $pricing->id)->delete();
+		foreach ($trp_data as $tr_id => $qty) {
+			$data = [
+				'tax_return_id' => $tr_id,
+				'pricing_id' => $pricing->id,
+				'qty' => $qty,	
+			];
+			$tax_return_pricing = new TaxReturnPricing;
+			$tax_return_pricing->create($data);
 		}
 
 		$route = isset($input['save_next_page']) 

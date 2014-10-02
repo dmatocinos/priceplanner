@@ -4,6 +4,11 @@ use Carbon\Carbon;
 
 class Client extends Eloquent {
 
+	protected function getDateFormat()
+	{
+		return 'M j Y';
+	}
+
 	protected $softDelete = true;
 
 	protected $client;
@@ -104,7 +109,7 @@ class Client extends Eloquent {
 
 	public function getAccountingPeriodAttribute()
 	{
-		return "{$this->period_start_date->toFormattedDateString()} - {$this->period_end_date->toFormattedDateString()}";
+		return $this->period_start_date->setTimezone("Europe/London")->format("j M Y") . " - " . $this->period_end_date->setTimezone("Europe/London")->format("j M Y");
 	}
 
 	public static function getAll($accountant_id) 

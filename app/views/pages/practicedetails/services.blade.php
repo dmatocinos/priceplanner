@@ -77,7 +77,7 @@ Modules & Other Services
 			}}
 		    @endif	
 		    <div class="col-lg-2">
-				<?php $val = isset($accountant_other_services[$id]) ? $accountant_other_services[$id] : $defaults['other_services'][$name]; ?>
+				<?php $val = isset($accountant_other_serivices[$id]) ? $accountant_other_serivices[$id] : (isset($defaults['other_services'][$name]) ? $defaults['other_services'][$name] : 0); ?>
 
 				{{ 
 					Form::text("other_services[{$id}][value]", $val, array(

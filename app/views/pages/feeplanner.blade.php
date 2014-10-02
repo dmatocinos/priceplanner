@@ -220,6 +220,30 @@ Fee Planner
 				<td class="col-total">
 				</td>
 			</tr>
+			@foreach ($tax_returns as $id => $name) 
+			<tr>
+				<td class="text-right col-legend ">
+					{{ $name }}
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				<?php $val = isset($tax_return_pricings[$id]) ? $tax_return_pricings[$id] : ''; ?>
+					{{   
+						Form::text("tax_return_pricings[{$id}]", $val, array(
+							'class' => 'form-control input-sm', 
+							'ng-model' 	=> 'tax_returns' . $id, 
+							'ng-init' 	=> "tax_returns{$id}='{$val}'", 
+							'numbers-only'	=> 'numbers-only',
+							'placeholder'	=> 'qty',
+
+						));
+					}}
+				</td>
+				<td class="col-total">
+				</td>
+			</tr>
+			@endforeach
 			<tr>
 				<td class="text-right col-legend ">
 					VAT Returns

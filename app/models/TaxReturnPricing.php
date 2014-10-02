@@ -5,40 +5,45 @@ class TaxReturnPricing extends \Eloquent {
 	protected $fillable = [
 		'qty',
 		'tax_return_id',
-		'pricing_id'
+		'pricing_id',
 	];
 
 	public static $rules = [
-		'qty' => 'required|numeric',
+		'qty'	=> 'required|numeric',
 	];
 
-	public function pricings() 
+	public $timestamps = false;
+
+	public function otherService()
 	{
-		return $this->hasMany('Pricing');
+		return $this->belongsTo('TaxReturn');
 	}
 
-	public static function getTaxReturnPricing($pricing_id = null)
+	public static function getTaxReturnPricings($accountant_id, $pricing_id = NULL)
 	{
-		$trs = DB::table('tax_returns')->get();	
-
+		$pricing = Pricing::find($pricing_id);
 		$data = [];
-		foreach($trs as $tr) {
-			$data[$tr->id] = NULL;
-		}
-		
-		if ($pricing_id) {
-			$res = DB::table('tax_return_pricings')->where('pricing_id', $pricing_id)->get();	
+		if ($pricing) {
+			$trpricings = DB::select("
+				SELECT tr.id as tax_return_id, trp.*
+				FROM tax_returns tr
+				LEFT JOIN tax_return_pricings trp ON tr.id = trp.tax_return_id
+				WHERE trp.pricing_id = :pricing_id
+			", array('pricing_id' => $pricing_id));
 
-			$data = [];
-			foreach ($res as $tax_return) {
-				$data[$tax_return['id']] = $tax_return['name'];
+			foreach ($trpricings as $row) {
+				$data[$row->tax_return_id] = $row->qty;
 			}
+		}
+		else {
+			$tax_returns = TaxReturn::getOtherTaxReturn($accountan_id);
+			foreach ($tax_returns as $id => $val) {
+				$data[$id] = NULL;
+			}
+
 		}
 
 		return $data;
-		
 	}
-
-	
 
 }

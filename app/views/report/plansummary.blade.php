@@ -63,30 +63,53 @@
 		</p>
 		<table class="table" style="line-height: 20.4333px">
 			<tbody>
+				@if ($calc->i11)
 				<tr>
 					<td style="width: 80%;" class="text-left">Base Fee (*)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->i11, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g15)
 				<tr>
 					<td style="width: 80%;" class="text-left">Audit</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g15, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g18)
 				<tr>
 					<td style="width: 80%;" class="text-left">Corporation Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g18, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g19)
 				<tr>
 					<td style="width: 80%;" class="text-left">Partnership Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g19, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g20)
 				<tr>
 					<td style="width: 80%;" class="text-left">Self-Assessment Tax Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g20, '£') }}</td>
 				</tr>
+				@endif
+				@foreach ($calc->tax_returns as $tr)
+				@if ($tr->value)
+				<tr>
+					<td style="width: 80%;" class="text-left">{{ $tr->name }}</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($tr->value, '£') }}</td>
+				</tr>
+				@endif
+				@endforeach
+				@if ($calc->g22)
 				<tr>
 					<td style="width: 80%;" class="text-left">VAT Returns</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g22, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g25)
 				<tr>
 					<td style="width: 80%;" class="text-left">Bookkeeping (daily rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g25, '£') }}</td>
 				</tr>
+				@endif
+				@if ($calc->g24)
 				<tr>
 					<td style="width: 80%;" class="text-left">Bookkeeping (hourly rate)</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->g24, '£') }}</td>
 				</tr>
+				@endif
 				<tr>
 					<td style="width: 80%;" class="text-left">Employee Base Fee per Pay Run</td><td style="width:20%;" class="text-left">{{ NumFormatter::money($calc->annual_base_fee_per_emp_pay_run, '£') }}</td>
 				</tr>

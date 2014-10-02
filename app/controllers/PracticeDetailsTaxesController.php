@@ -26,9 +26,13 @@ class PracticeDetailsTaxesController extends PracticeDetailsController {
 			$route = 'store';
 		}
 
+		$edit_services = $accountant->accountant_tax_returns->count();		
+
 		$form_data = [
 				'tax_returns' => TaxReturn::getTaxReturns(),
+				'other_services' => $edit_services ? TaxReturn::getTaxReturns($accountant->id, null) : TaxReturn::getTaxReturns(),	
 				'accountant_tax_returns' => $accountant_tax_returns,
+				'tax_returns_extra' => TaxReturn::getOtherTaxReturns($accountant->id, true),	
 				'accountant_vat_returns' => $accountant_vat_returns,
 				'edit'	=> $edit,
 				'route' => 'practicedetails.taxes.' . $route,
@@ -61,13 +65,33 @@ class PracticeDetailsTaxesController extends PracticeDetailsController {
 	
 	protected function save($accountant, $input, $msg) 
 	{
+		foreach ($input['new_tax_returns'] as $mod) {
+			if ($mod['name'] != '' && $mod['value'] != '') {
+				$tax_return = new TaxReturn;
+				$tax_return = $tax_return->create(['name' => $mod['name'], 'user_defined' => true]);
+
+				$data = [
+					'tax_return_id' => $tax_return->id,
+					'accountant_id' => $accountant->id,
+					'value' => $mod['value'],	
+				];
+				$model = new AccountantTaxReturn;
+				$model->create($data);
+			}
+		}
+
 		// saving accountant tax returns
-		foreach ($input['tax_returns'] as $id => $val) {
+		foreach ($input['tax_returns'] as $id => $mod) {
 			$data = [
-				'value' => $val,
+				'value' => $mod['value'],	
 				'accountant_id' => $accountant->id,
 				'tax_return_id' => $id
 			];
+
+			$tr = TaxReturn::find($id);
+			$tr->name = $mod['name'];			
+			$tr->save();
+
 			$model = new AccountantTaxReturn;
 			$model->create($data);
 		}

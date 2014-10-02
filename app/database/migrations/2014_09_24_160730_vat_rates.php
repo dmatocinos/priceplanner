@@ -14,7 +14,7 @@ class VatRates extends Migration {
 	{
 		Schema::table('pricings', function(Blueprint $table)
 		{
-			$table->double('vat_rate_type');
+	//		$table->double('vat_rate_type');
 		
 		});
 

@@ -183,6 +183,21 @@ Plan Summary
 					{{ $calc->g20 }}
 				</td>
 			</tr>
+			@foreach($calc->tax_returns as $tr)
+			<tr>
+				<td class="text-right col-legend">
+					{{ $tr->name }}
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+					{{ $tr->qty }}
+				</td>
+				<td class="col-total">
+					{{ $tr->value }}
+				</td>
+			</tr>
+			@endforeach
 			<tr>
 				<td class="text-right col-legend emphasize">
 					VAT Returns
