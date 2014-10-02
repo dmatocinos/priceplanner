@@ -4,11 +4,6 @@ use Carbon\Carbon;
 
 class Client extends Eloquent {
 
-	protected function getDateFormat()
-	{
-		return 'M j Y';
-	}
-
 	protected $softDelete = true;
 
 	protected $client;

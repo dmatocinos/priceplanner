@@ -168,9 +168,10 @@ class PlanSummaryCalculator {
 
 	public function getG22Val()
 	{
+        $type = $this->pricing->vat_rate_type ? $this->pricing->vat_rate_type : 'std_rate';
 		$vat_val = (integer) DB::table('accountant_vat_returns')
 					->where('accountant_id', $this->client->accountant_id)
-					->pluck($this->pricing->vat_rate_type);
+					->pluck($type);
 		return $this->pricing->vat_return * $vat_val;
 	}
 

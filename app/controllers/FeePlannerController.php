@@ -72,7 +72,7 @@ class FeePlannerController extends BaseController {
 		$p_data = $input['pricing'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
-		$trp_data = $input['tax_return_pricings'];
+		$trp_data = isset($input['tax_return_pricings']) ? $input['tax_return_pricings'] : [];
 
 		$p_validation = Validator::make($p_data, Pricing::$rules);
 		if ($p_validation->passes()) {
@@ -134,7 +134,7 @@ class FeePlannerController extends BaseController {
 		$p_data = $input['pricing'];
 		$mp_data = $input['module_pricings'];
 		$osp_data = $input['other_service_pricings'];
-		$trp_data = $input['tax_return_pricings'];
+		$trp_data = isset($input['tax_return_pricings']) ? $input['tax_return_pricings'] : [];
 
 		$p_validation = Validator::make($p_data, Pricing::$rules);
 		if ($p_validation->passes()) {
