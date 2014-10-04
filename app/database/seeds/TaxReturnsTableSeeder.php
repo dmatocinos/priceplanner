@@ -6,7 +6,7 @@ class TaxReturnsTableSeeder extends Seeder {
 	{
 		$data = array (
 			[
-				'name' => 'Coporation Tax Return',
+				'name' => 'Corporation Tax Return',
 			],
 			[
 				'name' => 'Partnership Tax Return',
