@@ -73,7 +73,7 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 			$accountant_pay_run = new AccountantPayRun;
 			$accountant_pay_run->create($data);
 
-			if ($payruns[$type]['based_on'] == 'turnover_ranges') {
+			if (isset($payruns[$type]['based_on']) && $payruns[$type]['based_on'] == 'turnover_ranges') {
 				$accountant_pay_run->allclients_base_fee = 0;
 				$accountant_pay_run->save();
 			}
@@ -82,7 +82,7 @@ class PracticeDetailsPayrollsController extends PracticeDetailsController {
 		// saving accountant_pay_run
 			
 		foreach ($input['payroll_turnover_ranges'] as $type => $payroll) {
-			if ($payruns[$type]['based_on'] == 'turnover_ranges') {
+			if (isset($payruns[$type]['based_on']) && $payruns[$type]['based_on'] == 'turnover_ranges') {
 				foreach($payroll as $id => $val) {
 					$data = [
 						'value' => $val,

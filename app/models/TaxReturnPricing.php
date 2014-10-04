@@ -36,7 +36,7 @@ class TaxReturnPricing extends \Eloquent {
 			}
 		}
 		else {
-			$tax_returns = TaxReturn::getOtherTaxReturn($accountan_id);
+			$tax_returns = TaxReturn::getOtherTaxReturns($accountant_id);
 			foreach ($tax_returns as $id => $val) {
 				$data[$id] = NULL;
 			}

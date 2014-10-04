@@ -9,7 +9,7 @@
 				->where('other_service_id', $other_service_pricing->other_service_id)
 				->pluck('value');
 		?>
-		<b>{{ $other_service_pricing->other_service->name }} - &pound;{{ $other_service_pricing->qty * $val }}</b><br>
+		<b>{{ $other_service_pricing->other_service->name }} - {{ NumFormatter::money(($other_service_pricing->qty * $val), '&pound;') }}</b><br>
 		{{ $other_service_pricing->other_service->description }}
 	</p>
 	<?php $i++; ?>

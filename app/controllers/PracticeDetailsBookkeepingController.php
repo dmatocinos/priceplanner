@@ -22,8 +22,8 @@ class PracticeDetailsBookkeepingController extends PracticeDetailsController {
 			$route = 'update';
 		}
 		else {
-			$hour_val = $defaults['bookkeeping']['hour'];
-			$day_val = $defaults['bookkeeping']['day'];
+			$hour_val = $defaults['bookkeeping']['hour_val'];
+			$day_val = $defaults['bookkeeping']['day_val'];
 			$edit = FALSE;
 			$route = 'store';
 		}

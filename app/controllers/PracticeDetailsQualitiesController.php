@@ -48,19 +48,21 @@ class PracticeDetailsQualitiesController extends PracticeDetailsController {
 		$accountant->update(array('last_tab' => $this->current_tab));
 		
 		// saving client record_qualities
-		foreach ($input['record_qualities'] as $atid => $rq) {
-			foreach ($rq as $id => $val) {
-				$data = [
-					'percentage' => $val,
-					'accountant_id' => $accountant->id,
-					'record_quality_id' => $id,
-					'accounting_type_id' => $atid
-				];
+        if (isset($input['record_qualities'])) {
+            foreach ($input['record_qualities'] as $atid => $rq) {
+                foreach ($rq as $id => $val) {
+                    $data = [
+                        'percentage' => $val,
+                        'accountant_id' => $accountant->id,
+                        'record_quality_id' => $id,
+                        'accounting_type_id' => $atid
+                    ];
 
-				$model = new AccountantRecordQuality;
-				$model->create($data);
-			}
-		}
+                    $model = new AccountantRecordQuality;
+                    $model->create($data);
+                }
+            }
+        }
 		
 		$route = isset($input['save_next_page']) ? 'practicedetails/audit' : ('practicedetails/' . $this->current_tab);
 

@@ -1,4 +1,4 @@
-<h4>Business Module - &pound;{{ $value }}</h4>
+<h4>Business Module - {{ NumFormatter::money($value, '&pound;') }}</h4>
 
 <p>
 <b>Tax PlannerPro</b><br>

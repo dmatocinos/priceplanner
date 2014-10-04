@@ -33,5 +33,7 @@ $(document).ready(function () {
 });
 
 $('.delete-client-btn').click(function() {
-	confirm('Are you sure to delete this client?');
+	if (! confirm('Are you sure to delete this client?')) {
+        return false;
+    }
 });
