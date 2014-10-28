@@ -261,7 +261,7 @@ class PlanSummaryCalculator {
 
 	public function getMonthlyCostVal()
 	{
-		return $this->annual_fee / 12;
+		return ($this->annual_fee / 12) * (1 + self::VAT);
 	}
 
 	public function getDiscountVal()
