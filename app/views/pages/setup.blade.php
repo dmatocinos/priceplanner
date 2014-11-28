@@ -44,8 +44,8 @@ Client Details
 	<?php 
 		if (isset($client_data['id'])) {
 			$route = 'update_client';
-			$client_data['period_start_date'] =  $client_data['period_start_date'] ? date('m/d/Y', strtotime($client_data['period_start_date'])) : '';
-			$client_data['period_end_date'] =  $client_data['period_end_date'] ? date('m/d/Y', strtotime($client_data['period_end_date'])) : '';
+			$client_data['period_start_date'] =  $client_data['period_start_date'] ? date('d/m/Y', strtotime($client_data['period_start_date'])) : '';
+			$client_data['period_end_date'] =  $client_data['period_end_date'] ? date('d/m/Y', strtotime($client_data['period_end_date'])) : '';
 			$country = $client_data['country'];
 		}
 		else {
@@ -81,10 +81,10 @@ Client Details
 					<input type="hidden" name="client_id" value="{{ $client_data['client_id'] }}">
 					@endif
 				    	<label for="business_name" class="col-sm-2 control-label">Business Name</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('business_name', $client_data['business_name'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -98,10 +98,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="contact_name" class="col-sm-2 control-label">Contact Name</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('contact_name', $client_data['contact_name'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -117,22 +117,22 @@ Client Details
 				    	<label for="contact_name" class="col-sm-2 control-label">Accounting Period</label>
 					<div class="col-sm-6">
 					    <div class="row">
-						<span class="col-sm-4">
+						<span class="col-sm-6">
 							{{ 
 								Form::text('period_start_date', $client_data['period_start_date'], array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 									'id' => 'period_start_date',
 									'placeholder' => 'Period Start'
 								)) 
 							}}
 						</span>
-						<span class="col-md-1">
-							<b>&nbsp;_</b>
+						<span style="position: absolute;">
+							<b>_</b>
 						</span>
-						<span class="col-sm-4">
+						<span class="col-sm-6">
 							{{ 
 								Form::text('period_end_date', $client_data['period_end_date'], array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 									'id' => 'period_end_date',
 									'placeholder' => 'Period End'
 								)) 
@@ -159,10 +159,10 @@ Client Details
 
 				  <div class="form-group">
 				    	<label for="year_end" class="col-sm-2 control-label">Year End</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('year_end', $client_data['year_end'], array(
-								'class' => 'form-control input-sm', 
+								'class' => 'form-control input-sm input-sm', 
 								'id' => 'year_end', 
 								'placeholder' => 'day, Month',
 							))
@@ -177,13 +177,13 @@ Client Details
 
 				  <div class="form-group">
 				    	<label for="business_status" class="col-sm-2 control-label">Business Status</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'business_status', ['' => '', 'Trading' => 'Trading', 'Investment' => 'Investment'], 
 								$client_data['business_status'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -196,7 +196,7 @@ Client Details
 
 				  <div class="form-group">
 				    	<label for="business_type" class="col-sm-2 control-label">Business Type</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'business_type', 
@@ -209,7 +209,7 @@ Client Details
 								], 
 								$client_data['business_type'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -222,7 +222,7 @@ Client Details
 
 				  <div class="form-group">
 				    	<label for="industry_sector" class="col-sm-2 control-label">Industry Sector</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'industry_sector', 
@@ -252,7 +252,7 @@ Client Details
 								],
 								$client_data['industry_sector'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -265,13 +265,13 @@ Client Details
 
 				  <div class="form-group">
 				    	<label for="currency" class="col-sm-2 control-label">Currency</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'currency', $currencies, 
 								$client_data['currency'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("currency"))
@@ -300,10 +300,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="address_1" class="col-sm-2 control-label">Street Address</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('address_1', $client_data['address_1'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -317,11 +317,11 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="city" class="col-sm-2 control-label">Town/City</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('city', $client_data['city'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("city"))
@@ -334,12 +334,12 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="countty" class="col-sm-2 control-label">County</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select('county', $counties,
 								$client_data['county'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("county"))
@@ -352,12 +352,12 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="country" class="col-sm-2 control-label">Country</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::select('country', $countries,
 								$country,
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("country"))
@@ -370,10 +370,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="postcode" class="col-sm-2 control-label">Postcode</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('postcode', $client_data['postcode'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("postcode"))
@@ -386,10 +386,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('phone_number', $client_data['phone_number'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -403,10 +403,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="mobile_number" class="col-sm-2 control-label">Mobile Number</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('mobile_number', $client_data['mobile_number'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("mobile_number"))
@@ -419,10 +419,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('email', $client_data['email'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -436,10 +436,10 @@ Client Details
 
 				    <div class="form-group">
 				    	<label for="website" class="col-sm-2 control-label">Website</label>
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						{{ 
 							Form::text('website', $client_data['website'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("website"))

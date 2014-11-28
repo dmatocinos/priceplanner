@@ -71,27 +71,7 @@ class SetupController extends BaseController {
 		
 		$validator = Validator::make($input, PracticeProClient::$rules);
 		if ($validator->passes()) {
-			
-			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
-			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
-
-			$client = PracticeProClient::create($input);
-			$accountant = $this->user->accountant;
-
-			// save to existing app data
-			$data = $input + [
-				'client_name'    => $input['contact_name'],
-				'business_name'    => $input['business_name'],
-				'street_address'   => $input['address_1'],
-				'city_address'	   => $input['city'],
-				'state_address'	   => $input['county'],
-				'country_address'  => $input['country'],
-				'zip_address'	   => $input['postcode'],
-				'pp_client_id'	   => $client->id,
-				'accountant_id'    => $accountant->id
-			];
-			return $this->save($data);
-
+			return $this->save(null, $input);
 		}
 		else {
 			return Redirect::to('client_details/new')
@@ -107,28 +87,7 @@ class SetupController extends BaseController {
 		
 		$validator = Validator::make($input, PracticeProClient::$rules);
 		if ($validator->passes()) {
-			
-			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
-			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
-			$client = PracticeProClient::find($input['id']);
-			$client->update($input);
-
-			$accountant = $this->user->accountant;
-
-			// save to existing app data
-			$data = $input + [
-				'client_name'    => $input['contact_name'],
-				'business_name'    => $input['business_name'],
-				'street_address'   => $input['address_1'],
-				'city_address'	   => $input['city'],
-				'state_address'	   => $input['county'],
-				'country_address'  => $input['country'],
-				'zip_address'	   => $input['postcode'],
-				'pp_client_id'	   => $client->id,
-				'accountant_id'    => $accountant->id
-			];
-			return $this->save($data);
-
+			return $this->save($input['id'], $input);
 		}
 		else {
 			return Redirect::to('client_details/existing/' . $input['id'])
@@ -139,8 +98,45 @@ class SetupController extends BaseController {
 		
 	}
 
-	private function save($data)
+	private function save($practicepro_client_id, $practicepro_client_data)
 	{
+        $start_date = $practicepro_client_data['period_start_date'];
+        $end_date   = $practicepro_client_data['period_end_date'];
+
+        if (! empty($start_date)) {
+            $start_date = date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $start_date)));
+        }
+        
+        if (! empty($end_date)) {
+            $end_date = date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $end_date)));
+        }
+
+        $practicepro_client_data['period_start_date'] = $start_date;
+        $practicepro_client_data['period_end_date']   = $end_date;
+        
+        if ($practicepro_client_id) {
+            $practicepro_client = PracticeProClient::find($practicepro_client_id);
+			$practicepro_client->update($practicepro_client_data);
+        }
+        else {
+            $practicepro_client = PracticeProClient::create($practicepro_client_data);
+        }
+
+        $accountant = $this->user->accountant;
+
+        // save to existing app data
+        $data = $practicepro_client_data + [
+            'client_name'      => $practicepro_client_data['contact_name'],
+            'business_name'    => $practicepro_client_data['business_name'],
+            'street_address'   => $practicepro_client_data['address_1'],
+            'city_address'	   => $practicepro_client_data['city'],
+            'state_address'	   => $practicepro_client_data['county'],
+            'country_address'  => $practicepro_client_data['country'],
+            'zip_address'	   => $practicepro_client_data['postcode'],
+            'pp_client_id'	   => $practicepro_client->id,
+            'accountant_id'    => $accountant->id
+        ];
+
 		if (isset($data['client_id'])) {
 			$client = Client::find($data['client_id']);
 			$data['client_id'] = $data['pp_client_id'];

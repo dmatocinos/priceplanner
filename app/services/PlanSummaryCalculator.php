@@ -293,7 +293,7 @@ class PlanSummaryCalculator {
 	{
 		return $this->taxed_total_annual_fee / 12;
 	}
-
+    
 	public function getAnnualBaseFeePerEmpPayRunVal()
 	{
 		$base_fee = (integer) DB::table('accountant_pay_runs')
@@ -301,7 +301,7 @@ class PlanSummaryCalculator {
 					->where('type', 'employee')
 					->pluck('value');
 
-		return $base_fee * $this->pricing->employee_pay_run_frequency;
+		return $base_fee * $this->pricing->employee_pay_run_frequency * $this->pricing->no_of_employees;
 	}
 
 	public function getAnnualBaseFeePerEmpPerPayrollRunVal()
@@ -330,7 +330,7 @@ class PlanSummaryCalculator {
 					->where('type', 'subcontractor')
 					->pluck('value');
 
-		return $base_fee * $this->pricing->subcontractor_pay_run_frequency;
+		return $base_fee * $this->pricing->subcontractor_pay_run_frequency * $this->pricing->no_of_subcontractors;
 	}
 
 	public function getAnnualBaseFeePerSubPerPayrollRunVal()

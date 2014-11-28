@@ -497,17 +497,22 @@ Fee Planner
 					<td class="col-extra">
 					</td>
 					<td class="col-val">
-					{{   
-						Form::text("pricing[discount]", $pricing['discount'], array(
-							'class' => 'form-control input-sm', 
-							'ng-model' 	=> 'discount', 
-							'ng-init' 	=> "discount='{$pricing['discount']}'", 
-							'numbers-only'	=> 'numbers-only',
-							'placeholder'	=> 'percentage',
-							'required'	=> 'required',
+                        <div class="col-sm-12" style="padding: 0px;">
+                            <div class="col-lg-10" style="padding: 0px;">
+                            {{   
+                                Form::text("pricing[discount]", $pricing['discount'], array(
+                                    'class' => 'form-control input-sm', 
+                                    'ng-model' 	=> 'discount', 
+                                    'ng-init' 	=> "discount='{$pricing['discount']}'", 
+                                    'numbers-only'	=> 'numbers-only',
+                                    'placeholder'	=> 'percentage',
+                                    'required'	=> 'required',
 
-						));
-					}}
+                                ));
+                            }}
+                            </div>
+                            <span class="input-group-addon input-sm">%</span>
+                        </div>
 					</td>
 					<td class="col-total">
 					</td>

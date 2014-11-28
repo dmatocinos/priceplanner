@@ -258,7 +258,7 @@ Plan Summary
 					<div>{{ $calc->annual_base_fee_per_emp_pay_run }}</div>
 				</td>
 			</tr>
-			<tr>
+			<!--tr>
 				<td class="text-right col-legend">
 					Employee Payroll Run Frequency
 				</td>
@@ -270,7 +270,7 @@ Plan Summary
 				<td class="col-total">
 					<div>{{ $calc->annual_base_fee_per_emp_per_payroll_run }}</div>
 				</td>
-			</tr>
+			</tr-->
 			<tr>
 				<td colspan="4"> </td>
 			</tr>
@@ -287,7 +287,7 @@ Plan Summary
 					<div>{{ $calc->annual_base_fee_per_sub_pay_run }}</div>
 				</td>
 			</tr>
-			<tr>
+			<!--tr>
 				<td class="text-right col-legend">
 					Subcontractor Payroll Run Frequency
 				</td>
@@ -299,7 +299,7 @@ Plan Summary
 				<td class="col-total">
 					<div>{{ $calc->annual_base_fee_per_sub_per_payroll_run }}</div>
 				</td>
-			</tr>
+			</tr-->
 			<!--
 			<tr>
 				<td class="text-right col-legend">
@@ -402,7 +402,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					VAT @ 20%
+					Annual Fee + VAT
 				</td>
 				<td class="col-extra">
 				</td>
@@ -414,7 +414,7 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Monthly Cost
+					Sub Total (Including VAT)
 				</td>
 				<td class="col-extra">
 				</td>
@@ -438,18 +438,6 @@ Plan Summary
 			</tr>
 			<tr>
 				<td class="text-right col-legend emphasize">
-					Total Annual Fee
-				</td>
-				<td class="col-extra">
-				</td>
-				<td class="col-val">
-				</td>
-				<td class="col-total emphasize">
-					{{ NumFormatter::money($calc->total_annual_fee, '£') }}
-				</td>
-			</tr>
-			<tr>
-				<td class="text-right col-legend emphasize">
 					Total Monthly Cost
 				</td>
 				<td class="col-extra">
@@ -460,6 +448,19 @@ Plan Summary
 					{{ NumFormatter::money($calc->total_monthly_cost, '£') }}
 				</td>
 			</tr>
+            <tr>
+				<td class="text-right col-legend emphasize">
+					Total Annual Fee
+				</td>
+				<td class="col-extra">
+				</td>
+				<td class="col-val">
+				</td>
+				<td class="col-total emphasize">
+					{{ NumFormatter::money($calc->total_annual_fee, '£') }}
+				</td>
+			</tr>
+			
 		</table>
 	</div>
 @stop
