@@ -1,6 +1,6 @@
 <table style="border: 1px solid white;">
 	<tr>
-		@if ($accountant->logo_filename)
+		@if ($accountant->logo_filename  && file_exists('uploads/' . $accountant->logo_filename))
 		<td width="200px;">
 			<img style="width: 150px; height: 60px; float: left;" src="{{ asset('uploads/' . $accountant->logo_filename) }}"/>
 		</td>

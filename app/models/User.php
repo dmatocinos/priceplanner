@@ -158,8 +158,11 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	
 	public function isSubscribed() 
 	{
-		$pp_user = $this->practiceProUser();
-		if ($pp_user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
+		$pp_user          = $this->practiceProUser();
+        $membership_level = $pp_user->getMembershipLevelKeyAttribute();
+        $free_levels      = ['trial', 'demo'];
+
+        if (in_array($membership_level, $free_levels)) {
 			return true;
 		}
 
