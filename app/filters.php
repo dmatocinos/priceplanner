@@ -65,7 +65,7 @@ Route::filter('practicedetailscompleted', function()
 	}
 });
 
-Route::filter('free_trial', function($route)
+Route::filter('can_download', function($route)
 {
 	$user = Sentry::getUser()->practiceProUser();
 	if ( $user->getMembershipLevelDisplayAttribute() == 'Free Trial') {

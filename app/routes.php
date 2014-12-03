@@ -177,7 +177,7 @@ Route::group(array('after' => 'subscribe', 'before' => 'auth'), function() {
 		# plan summary 
 		Route::get("plansummary/{pricing_id}", array('as' => 'plansummary', 'uses' => 'PlanSummaryController@index'));
 
-		Route::group(array('before' => 'free_trial'), function() {
+		Route::group(array('before' => 'can_download'), function() {
 			# report 
 			Route::get("report/fixedprice/{pricing_id}", array('as' => 'fixedprice', 'uses' => 'ReportController@fixedPrice'));
 			Route::get("report/appendix/{pricing_id}", array('as' => 'appendix', 'uses' => 'ReportController@appendix'));
