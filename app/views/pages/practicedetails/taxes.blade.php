@@ -31,7 +31,6 @@ Tax and VAT Returns
 				Form::text("tax_returns[{$id}][name]", $tax_returns_extra[$id], array(
 					'class' => 'form-control', 
 					'placeholder' => 'Service Name',
-					'ng-model' 	=> 'tax_returns_name' . $id, 
 					'ng-init' 	=> "tax_returns_name{$id}='{$tax_returns_extra[$id]}'", 
 					
 				)) 
@@ -51,7 +50,6 @@ Tax and VAT Returns
 					Form::text("tax_returns[{$id}][value]", $val, array(
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
-						'ng-model' 	=> 'tax_returns' . $id, 
 						'ng-init' 	=> "tax_returns{$id}='{$val}'", 
 						'numbers-only'	=> 'numbers-only',
 					)) 
@@ -66,7 +64,6 @@ Tax and VAT Returns
 					Form::text("new_tax_returns[{$num}][name]", '', array(
 						'class' => 'form-control', 
 						'placeholder' => 'Service Name',
-						'ng-model' 	=> 'tax_returns_name' . $num, 
 						'ng-init' 	=> "tax_returns_name{$num}=''", 
 						
 					)) 
@@ -78,7 +75,6 @@ Tax and VAT Returns
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
 						'numbers-only'	=> 'numbers-only',
-						'ng-model' 	=> 'tax_returns_val' . $num, 
 						'ng-init' 	=> "tax_returns_val{$num}=''", 
 						'numbers-only'	=> 'numbers-only',
 						
@@ -102,7 +98,6 @@ Tax and VAT Returns
 					Form::text("std_rate", $val, array(
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
-						'ng-model' 	=> 'std_rate', 
 						'ng-init' 	=> "std_rate='{$val}'", 
 						'numbers-only'	=> 'numbers-only',
 					)) 
@@ -117,7 +112,6 @@ Tax and VAT Returns
 					Form::text("flat_rate", $val, array(
 						'class' => 'form-control', 
 						'placeholder' => 'amount',
-						'ng-model' 	=> 'flat_rate', 
 						'ng-init' 	=> "flat_rate='{$val}'", 
 						'numbers-only'	=> 'numbers-only',
 					)) 
