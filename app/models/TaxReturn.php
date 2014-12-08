@@ -4,6 +4,7 @@ class TaxReturn extends \Eloquent {
 
 	protected $fillable = [
 		'name',
+		'user_defined',
 	];
 
 	public static $rules = [
