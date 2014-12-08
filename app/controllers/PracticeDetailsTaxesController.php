@@ -68,7 +68,7 @@ class PracticeDetailsTaxesController extends PracticeDetailsController {
 		foreach ($input['new_tax_returns'] as $mod) {
 			if ($mod['name'] != '' && $mod['value'] != '') {
 				$tax_return = new TaxReturn;
-				$tax_return = $tax_return->create(['name' => $mod['name'], 'user_defined' => true]);
+				$tax_return = $tax_return->create(['name' => $mod['name'], 'user_defined' => 1]);
 
 				$data = [
 					'tax_return_id' => $tax_return->id,

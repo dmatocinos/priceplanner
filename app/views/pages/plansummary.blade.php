@@ -462,5 +462,10 @@ Plan Summary
 			</tr>
 			
 		</table>
+		<div class="col-lg-12 pull-right well">
+			<div class="pull-right">
+				<a class="btn btn-info" href="{{ url('feeplanner/edit/' . $pricing_id) }}" name="save_next_page" id="feeplanner_edit">Edit Plan</a>
+			</div>
+		</div>
 	</div>
 @stop
