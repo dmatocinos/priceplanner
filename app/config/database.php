@@ -55,32 +55,12 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'priceplannerpro',
+			'database'  => 'priceplanner',
 			'username'  => 'root',
-			'password'  => 'admin123',
+			'password'  => '*******4321',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		),
-
-		'pgsql' => array(
-			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		),
-
-		'sqlsrv' => array(
-			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'prefix'   => '',
 		),
 
 		'practicepro_users' => array(
@@ -88,25 +68,11 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'practicepro_users',
 			'username'  => 'root',
-			'password'  => 'admin123',
+			'password'  => '*******4321',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-        	),
-
-		'mysql_cc' => array(
-			'driver'    => 'mysql',
-			'host'      => 'mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com',
-			'database'  => 'depcuumb62u',
-			'username'  => 'depcuumb62u',
-			'password'  => 'K8bJuoIjcjyZ',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-			'port'	    => '3306'
-		),
-
-
+     	),
 	),
 
 	/*

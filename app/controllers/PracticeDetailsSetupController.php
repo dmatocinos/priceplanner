@@ -26,7 +26,7 @@ class PracticeDetailsSetupController extends PracticeDetailsController {
 			];
 		}
 		
-		$result    = DB::select("SELECT country_id, short_name FROM countries");
+		$result    = DB::connection('practicepro_users')->select("SELECT id as country_id, country_name as short_name FROM countries");
 		$countries = array('- Select Country -');
 		
 		foreach ($result as $row) {

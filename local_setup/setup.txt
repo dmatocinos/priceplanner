@@ -9,4 +9,6 @@ Changes the values of the following in database.php to the correct ones:
 3. username
 4. password
 
+run: php artisan migrate --package=cartalyst/sentry
+
 DO NOT COMMIT THESE CHANGES!!!!

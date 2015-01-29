@@ -84,7 +84,7 @@ class BaseController extends Controller {
 	
 	protected function getDefaultCountryId() 
 	{
-		$result = DB::select("SELECT country_id FROM countries WHERE iso2='GB'");
+		$result = DB::connection('practicepro_users')->select("SELECT id as country_id FROM countries WHERE country_code='GB'");
 		return $result[0]->country_id;
 	}
 
